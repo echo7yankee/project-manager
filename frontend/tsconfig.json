@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "jsx": "react",
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "preserveSymlinks": true,
+    "pretty": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "stripInternal": true,
+    "target": "es2017",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "exclude": [
+    "**/__mocks__",
+    "./tests"
+  ],
+  "include": [
+    "src"
+  ]
+}
