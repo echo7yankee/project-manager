@@ -1,28 +1,28 @@
-
-import { userDao } from '../databaseStorage/daos';
-import { UserDao } from '../databaseStorage/UserDao';
-const dao: UserDao = userDao;
-
 import {
   loginValidation,
   registerValidation
-} from '../databaseStorage/models/validation'
+} from "../databaseStorage/models/validation";
 
-import { comparePassword, encryptPassword } from '../encoder/bcryptEncoder';
-import { createToken } from '../token/jwt';
+import { comparePassword, encryptPassword } from "../encoder/bcryptEncoder";
+import { createToken } from "../token/jwt";
 
 //ts types
-import { Request, Response } from 'express';
-import { RegisterUser, UserDatabase } from '../TSTypes/User';
+import { Request, Response } from "express";
+import { RegisterUser, UserDatabase } from "../TSTypes/User";
+import { UserDao } from "../databaseStorage/UserDao";
 
 type TokenParams = {
   id: string;
-  userRole: string
-}
+  userRole: string;
+};
 
 export class Authenticate {
+  userDao: UserDao;
+  constructor(userDao) {
+    this.userDao = userDao;
+  }
   //REGISTER USER
-  public async createUser(req: Request, res: Response): Promise<Response> {
+  public createUser = async (req: Request, res: Response) => {
     const { error } = registerValidation(req.body);
 
     //Check if form has errors
@@ -32,9 +32,9 @@ export class Authenticate {
     }
 
     //Check if same users exists
-    const emailExists = await dao.findOne({ email: req.body.email });
+    const emailExists = await this.userDao.findOne({ email: req.body.email });
     if (emailExists) {
-      return res.status(400).json({ error: 'Email already exists' });
+      return res.status(400).json({ error: "Email already exists" });
     }
 
     const { hashedPassword, hashedConfirmPassword } = await encryptPassword(
@@ -46,21 +46,21 @@ export class Authenticate {
     const newUser: RegisterUser = {
       ...req.body,
       confirmPassword: hashedConfirmPassword,
-      password: hashedPassword,
+      password: hashedPassword
     };
 
     try {
-      const user = await dao.add(newUser);
+      const user = await this.userDao.add(newUser);
       return res.status(200).json({
-        message: `User with the id ${user._id} has been created`,
+        message: `User with the id ${user._id} has been created`
       });
     } catch (error) {
-      res.status(500).json({ error: 'Something went wrong' });
+      res.status(500).json({ error: "Something went wrong" });
     }
   };
 
   //LOGIN USER
-  public async loginUser(req: Request, res: Response): Promise<Response> {
+  public loginUser = async (req: Request, res: Response) => {
     const { error } = loginValidation(req.body);
     if (error) {
       const errorMessage: object = error.details.pop().message;
@@ -68,9 +68,11 @@ export class Authenticate {
     }
     try {
       //Check if same users exists
-      const user: UserDatabase = await dao.findOne({ email: req.body.email });
+      const user: UserDatabase = await this.userDao.findOne({
+        email: req.body.email
+      });
       if (!user) {
-        return res.status(400).json({ error: 'Email or password is wrong' });
+        return res.status(400).json({ error: "Email or password is wrong" });
       }
 
       //Check if password is correct
@@ -80,18 +82,18 @@ export class Authenticate {
       );
 
       if (!validPassword) {
-        return res.status(400).json({ error: 'Email or password is wrong' });
+        return res.status(400).json({ error: "Email or password is wrong" });
       }
 
-      const tokenParams: TokenParams = { id: user._id, userRole: user.role }
+      const tokenParams: TokenParams = { id: user._id, userRole: user.role };
 
       //Create and assign a token
       const token: string = await createToken({ params: tokenParams });
-      await res.header('authToken', token);
+      await res.header("authToken", token);
       return res.status(200).json({ token });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: "Something went wrong" });
     }
   };
 }

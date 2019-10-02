@@ -1,9 +1,11 @@
+import { Router } from "express";
 
-import { Router } from 'express';
+import { Authenticate } from "../controllers/auth";
+//Dao
+import { userDao } from "../databaseStorage/daos";
+
 export const authRouter: Router = Router();
+const authenticate: Authenticate = new Authenticate(userDao);
 
-import { Authenticate } from '../controllers/auth';
-const authenticate: Authenticate = new Authenticate();
-
-authRouter.post('/register', authenticate.createUser);
-authRouter.post('/login', authenticate.loginUser);
+authRouter.post("/register", authenticate.createUser);
+authRouter.post("/login", authenticate.loginUser);
