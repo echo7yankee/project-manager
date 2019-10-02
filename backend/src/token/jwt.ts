@@ -1,12 +1,9 @@
-export {};
 
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken';
 
-const createToken = async params => {
+export async function createToken(params) {
   return await jwt.sign(params, process.env.TOKEN_SECRET, {
-    expiresIn: "1h",
-    algorithm: "HS256"
+    algorithm: 'HS256',
+    expiresIn: '1h',
   });
-};
-
-module.exports = { createToken };
+}

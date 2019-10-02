@@ -1,11 +1,8 @@
-import { bar } from "./foo/bar";
 
-console.log(bar("someValue"));
-
-const express = require("express");
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
 const app = express();
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
 //parse json
 app.use(express.json());
@@ -15,22 +12,13 @@ dotenv.config();
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
-  console.log("Connection to mongodb has been established");
+  console.log('Connection to mongodb has been established');
 });
 
 //import routes
-const authRouter = require("./routes/auth");
-const userRouter = require("./routes/user");
-const locationRouter = require("./routes/location");
-const roleRouter = require("./routes/role");
-// const postsRoute = require("./routes/posts");
+import { authRouter } from './routes/auth';
 
-//Route Middlewares
-app.use("/api/user", authRouter);
-app.use("/api/user", userRouter);
-app.use("/api/user", locationRouter);
-app.use("/api/user", roleRouter);
-// app.use("/api/posts", postsRoute);
+app.use('/user', authRouter);
 
 const PORT = 5000 || process.env.PORT;
 

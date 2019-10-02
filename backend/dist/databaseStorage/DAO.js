@@ -1,4 +1,6 @@
-module.exports = class DAO {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class DAO {
     constructor(client) {
         this.client = client;
     }
@@ -20,5 +22,7 @@ module.exports = class DAO {
     async update(id, item) {
         return await this.client.update(id, item);
     }
-};
+}
+exports.DAO = DAO;
+;
 //# sourceMappingURL=DAO.js.map

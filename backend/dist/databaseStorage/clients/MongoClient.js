@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const IClient = require("./client");
-module.exports = class MongoClient extends IClient {
+class MongoClient {
     constructor(model) {
-        super();
         this.model = model;
     }
     async find(params) {
@@ -54,7 +52,7 @@ module.exports = class MongoClient extends IClient {
     }
     async update(id, updatedAttributes) {
         try {
-            let item = await this.model.findById(id);
+            const item = await this.model.findById(id);
             Object.keys(updatedAttributes).forEach(key => {
                 item[key] = updatedAttributes[key];
             });
@@ -65,5 +63,7 @@ module.exports = class MongoClient extends IClient {
             console.log(error);
         }
     }
-};
+}
+exports.MongoClient = MongoClient;
+;
 //# sourceMappingURL=MongoClient.js.map

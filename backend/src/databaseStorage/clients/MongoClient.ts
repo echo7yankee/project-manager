@@ -1,25 +1,21 @@
-export {};
 
-const IClient = require("./client");
-
-module.exports = class MongoClient extends IClient {
+export class MongoClient {
   model: any;
   constructor(model: any) {
-    super();
     this.model = model;
   }
 
-  async find(params) {
+  // tslint:disable-next-line: no-any
+  public async find(params) {
     try {
       const items = await this.model.find(params);
-
       return items;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async findById(id) {
+  public async findById(id: string) {
     try {
       const item = await this.model.findById(id);
       return item;
@@ -28,7 +24,7 @@ module.exports = class MongoClient extends IClient {
     }
   }
 
-  async findOne(params) {
+  public async findOne(params) {
     try {
       const item = await this.model.findOne(params);
       return item;
@@ -37,7 +33,7 @@ module.exports = class MongoClient extends IClient {
     }
   }
 
-  async create(item) {
+  public async create(item) {
     try {
       const newItem = new this.model({ ...item });
       const createdItem = await newItem.save();
@@ -48,7 +44,7 @@ module.exports = class MongoClient extends IClient {
     }
   }
 
-  async remove(id) {
+  public async remove(id: string) {
     try {
       const removedItem = await this.model.findOneAndDelete(id);
       return removedItem;
@@ -57,10 +53,9 @@ module.exports = class MongoClient extends IClient {
     }
   }
 
-  async update(id, updatedAttributes) {
+  public async update(id: string, updatedAttributes) {
     try {
-      let item = await this.model.findById(id);
-
+      const item = await this.model.findById(id);
       Object.keys(updatedAttributes).forEach(key => {
         item[key] = updatedAttributes[key];
       });
