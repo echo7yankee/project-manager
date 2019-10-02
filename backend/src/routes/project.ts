@@ -1,13 +1,9 @@
 
-// import { Router } from 'express';
-// import { User } from '../controllers/user';
+import { Router } from 'express';
+import { projectDao } from '../databaseStorage/daos';
 
-// //Daos
-// import { userDao } from '../databaseStorage/daos';
-// import { roleDao } from '../databaseStorage/daos';
+export const projectRouter: Router = Router();
 
-// export const userRouter: Router = Router();
+const project: Project = new Project(projectDao);
 
-// const user: User = new User(userDao, roleDao);
-
-// userRouter.get('/:id', user.getUserDetails);
+projectRouter.post('/project', project.createProject);
