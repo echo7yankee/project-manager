@@ -17,8 +17,10 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
 
 //import routes
 import { authRouter } from './routes/auth';
+import { userRouter } from './routes/user';
 
 app.use('/user', authRouter);
+app.use('/user', userRouter);
 
 const PORT = 5000 || process.env.PORT;
 

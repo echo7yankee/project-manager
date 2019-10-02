@@ -30,7 +30,6 @@ const userSchema: RegisterUser = new Schema({
         required: true,
         type: String,
     },
-
     role: { type: String, required: true },
     date: {
         default: Date.now,

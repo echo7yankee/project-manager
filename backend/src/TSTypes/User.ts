@@ -20,4 +20,14 @@ export type UserDatabase = {
     lastName: string;
     _id: string;
     role: string;
+    date: Date;
+}
+
+export type UserDetails = {
+    email: string;
+    firstName: string;
+    lastName: string;
+    createdAt: Date
+    id: string;
+    role: string;
 }

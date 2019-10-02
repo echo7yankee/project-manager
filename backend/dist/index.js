@@ -13,7 +13,9 @@ mongoose_1.default.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, ()
     console.log('Connection to mongodb has been established');
 });
 const auth_1 = require("./routes/auth");
+const user_1 = require("./routes/user");
 app.use('/user', auth_1.authRouter);
+app.use('/user', user_1.userRouter);
 const PORT = 5000 || process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server http://localhost:${PORT} is running`);

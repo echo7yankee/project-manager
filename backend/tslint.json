@@ -140,7 +140,7 @@
       false
     ],
     "ordered-imports": [
-      true
+      false
     ],
     "prefer-const": true,
     "prefer-type-cast": false,

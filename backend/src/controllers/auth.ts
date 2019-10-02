@@ -15,6 +15,11 @@ import { createToken } from '../token/jwt';
 import { Request, Response } from 'express';
 import { RegisterUser, UserDatabase } from '../TSTypes/User';
 
+type TokenParams = {
+  id: string;
+  userRole: string
+}
+
 export class Authenticate {
   //REGISTER USER
   public async createUser(req: Request, res: Response): Promise<Response> {
@@ -78,7 +83,7 @@ export class Authenticate {
         return res.status(400).json({ error: 'Email or password is wrong' });
       }
 
-      const tokenParams = { id: user._id, userRole: user.role }
+      const tokenParams: TokenParams = { id: user._id, userRole: user.role }
 
       //Create and assign a token
       const token: string = await createToken({ params: tokenParams });
