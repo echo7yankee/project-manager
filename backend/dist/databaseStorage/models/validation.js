@@ -22,6 +22,7 @@ function registerValidation(data) {
         password: joi_1.default.string()
             .min(6)
             .required(),
+        role: joi_1.default.string().required()
     };
     return joi_1.default.validate(data, schema);
 }

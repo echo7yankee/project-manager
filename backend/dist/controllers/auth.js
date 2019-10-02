@@ -44,8 +44,8 @@ class Authenticate {
             if (!validPassword) {
                 return res.status(400).json({ error: 'Email or password is wrong' });
             }
-            const id = JSON.stringify(user._id);
-            const token = await jwt_1.createToken({ id: id });
+            const tokenParams = { id: user._id, userRole: user.role };
+            const token = await jwt_1.createToken({ params: tokenParams });
             await res.header('authToken', token);
             return res.status(200).json({ token });
         }

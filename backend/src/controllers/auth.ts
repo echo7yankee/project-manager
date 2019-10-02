@@ -13,29 +13,7 @@ import { createToken } from '../token/jwt';
 
 //ts types
 import { Request, Response } from 'express';
-
-export type RegisterUser = {
-  confirmPassword: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-
-export type LoginUser = {
-  email: string;
-  password: string;
-}
-
-export type UserDatabase = {
-  confirmPassword: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  _id: string
-}
-
+import { RegisterUser, UserDatabase } from '../TSTypes/User';
 
 export class Authenticate {
   //REGISTER USER
@@ -100,10 +78,10 @@ export class Authenticate {
         return res.status(400).json({ error: 'Email or password is wrong' });
       }
 
-      const id: string = JSON.stringify(user._id);
+      const tokenParams = { id: user._id, userRole: user.role }
 
       //Create and assign a token
-      const token: string = await createToken({ id: id });
+      const token: string = await createToken({ params: tokenParams });
       await res.header('authToken', token);
       return res.status(200).json({ token });
     } catch (error) {

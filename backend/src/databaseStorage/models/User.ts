@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { RegisterUser } from '../../controllers/auth';
+import { RegisterUser } from '../../TSTypes/User';
 const Schema: Schema = mongoose.Schema;
 
 const userSchema: RegisterUser = new Schema({
@@ -31,6 +31,7 @@ const userSchema: RegisterUser = new Schema({
         type: String,
     },
 
+    role: { type: String, required: true },
     date: {
         default: Date.now,
         type: Date,

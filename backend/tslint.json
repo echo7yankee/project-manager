@@ -125,7 +125,7 @@
       true,
       "as-needed"
     ],
-    "object-literal-sort-keys": true,
+    "object-literal-sort-keys": false,
     "one-line": [
       true,
       "check-open-brace",

@@ -1,6 +1,6 @@
 //Validation
 import Joi from '@hapi/joi';
-import { LoginUser, RegisterUser } from '../../controllers/auth';
+import { LoginUser, RegisterUser } from '../../TSTypes/User';
 
 export function registerValidation(data: RegisterUser) {
     const schema: RegisterUser = {
@@ -20,6 +20,7 @@ export function registerValidation(data: RegisterUser) {
         password: Joi.string()
             .min(6)
             .required(),
+        role: Joi.string().required()
     };
 
     return Joi.validate(data, schema);
