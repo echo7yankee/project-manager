@@ -13,6 +13,9 @@ const projectSchema = new Schema({
     userId: {
         type: String,
         required: true,
+    },
+    projectTasks: {
+        type: Array,
     }
 });
 exports.Project = mongoose_1.default.model('Project', projectSchema);

@@ -46,7 +46,8 @@ export class MongoClient {
 
   public async remove(id: string) {
     try {
-      const removedItem = await this.model.findOneAndDelete(id);
+      const removedItem = await this.model.findByIdAndRemove(id);
+
       return removedItem;
     } catch (error) {
       console.log(error);

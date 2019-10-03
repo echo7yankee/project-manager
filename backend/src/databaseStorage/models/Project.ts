@@ -9,6 +9,9 @@ const projectSchema = new Schema({
     userId: {
         type: String,
         required: true,
+    },
+    projectTasks: {
+        type: Array,
     }
 });
 

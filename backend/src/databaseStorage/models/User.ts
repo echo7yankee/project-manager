@@ -35,6 +35,9 @@ const userSchema: RegisterUser = new Schema({
         default: Date.now,
         type: Date,
     },
+    projectId: {
+        type: Array
+    }
 });
 
 // tslint:disable-next-line: variable-name
