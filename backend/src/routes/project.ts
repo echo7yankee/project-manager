@@ -10,9 +10,5 @@ const projectTask: ProjectTask = new ProjectTask(projectDao);
 
 //projects
 projectRouter.post('/project', project.createProject);
-projectRouter.get('/projects', project.getProjects);
-projectRouter.put('/project/:id', project.editProject)
-projectRouter.delete('/project/:id', project.removeProject);
-
 //project-task
 projectRouter.put('/project/task', projectTask.createProjectTask)
