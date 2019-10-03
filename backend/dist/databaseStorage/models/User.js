@@ -39,7 +39,7 @@ const userSchema = new Schema({
         type: Date,
     },
     projectId: {
-        type: Array
+        type: String
     }
 });
 exports.User = mongoose_1.default.model('User', userSchema);

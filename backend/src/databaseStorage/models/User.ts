@@ -36,7 +36,7 @@ const userSchema: RegisterUser = new Schema({
         type: Date,
     },
     projectId: {
-        type: Array
+        type: String
     }
 });
 
