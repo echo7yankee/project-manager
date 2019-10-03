@@ -7,37 +7,36 @@ import { Response } from 'express-serve-static-core';
 
 //ts types
 import { ProjectReqBody } from '../TSTypes/Project';
-import { UserDao } from '../databaseStorage/UserDao';
 
 export class Project {
   private projectDao: ProjectDao;
-  private userDao: UserDao;
-  constructor(projectDao: ProjectDao, userDao: UserDao) {
+  constructor(projectDao: ProjectDao) {
     this.projectDao = projectDao;
-    this.userDao = userDao;
   }
   public createProject = async (req: Request, res: Response): Promise<Response> => {
     try {
-
       const id: string = req.query.userId;
       const body: ProjectReqBody = req.body;
 
-      const updatedProject = await this.projectDao.findAndUpdate(id, body)
-
-      if (updatedProject === null) {
-        const project = await this.projectDao.add(body);
-        const user = await this.userDao.findById(id);
-        const newUser = {
-          ...user,
-          projectId: project._id
-        }
-
-        await this.userDao.update(id, newUser)
-        return res.status(200).json(project)
+      const newProject = {
+        ...body,
+        userId: id
       }
 
-      return res.status(200).json(updatedProject);
+      const project = await this.projectDao.add(newProject);
+      return res.status(200).json(project);
 
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'Something went wrong' });
+    }
+  }
+
+  public getProjects = async (req: Request, res: Response) => {
+    try {
+      const id: string = req.query.userId;
+      const projects = await this.projectDao.find({ userId: id });
+      return res.status(200).json(projects);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: 'Something went wrong' });

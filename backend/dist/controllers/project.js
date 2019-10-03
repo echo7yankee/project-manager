@@ -1,20 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Project {
-    constructor(projectDao, userDao) {
+    constructor(projectDao) {
         this.createProject = async (req, res) => {
             try {
                 const id = req.query.userId;
                 const body = req.body;
-                const updatedProject = await this.projectDao.findAndUpdate(id, body);
-                if (updatedProject === null) {
-                    const project = await this.projectDao.add(body);
-                    const user = await this.userDao.findById(id);
-                    const newUser = Object.assign({}, user, { projectId: project._id });
-                    await this.userDao.update(id, newUser);
-                    return res.status(200).json(project);
-                }
-                return res.status(200).json(updatedProject);
+                const newProject = Object.assign({}, body, { userId: id });
+                const project = await this.projectDao.add(newProject);
+                return res.status(200).json(project);
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
+        this.getProjects = async (req, res) => {
+            try {
+                const id = req.query.userId;
+                const projects = await this.projectDao.find({ userId: id });
+                return res.status(200).json(projects);
             }
             catch (error) {
                 console.log(error);
@@ -22,7 +27,6 @@ class Project {
             }
         };
         this.projectDao = projectDao;
-        this.userDao = userDao;
     }
 }
 exports.Project = Project;
