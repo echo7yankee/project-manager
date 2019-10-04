@@ -8,7 +8,7 @@
     color: var(--grey-color-3);
     font-size: 2.2rem;
     cursor: pointer;
-    transition: color .3s ease-in-out;
+    transition: color .2s ease-in-out;
 }
 
 .navItems li:hover {

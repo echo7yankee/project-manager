@@ -34,7 +34,7 @@ export class Authenticate {
     //Check if same users exists
     const emailExists = await this.userDao.findOne({ email: req.body.email });
     if (emailExists) {
-      return res.status(400).json({ error: "Email already exists" });
+      return res.status(400).json({ error: 'Email already exists' });
     }
 
     const { hashedPassword, hashedConfirmPassword } = await encryptPassword(

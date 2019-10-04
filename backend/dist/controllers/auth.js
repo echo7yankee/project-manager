@@ -13,7 +13,7 @@ class Authenticate {
             }
             const emailExists = await this.userDao.findOne({ email: req.body.email });
             if (emailExists) {
-                return res.status(400).json({ error: "Email already exists" });
+                return res.status(400).json({ error: 'Email already exists' });
             }
             const { hashedPassword, hashedConfirmPassword } = await bcryptEncoder_1.encryptPassword(req.body.password, req.body.confirmPassword);
             const newUser = Object.assign({}, req.body, { confirmPassword: hashedConfirmPassword, password: hashedPassword });

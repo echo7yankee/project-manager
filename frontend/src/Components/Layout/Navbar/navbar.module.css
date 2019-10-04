@@ -1,6 +1,6 @@
 .navbar {
     background-color: var(--grey-color-2);
-    padding: .8rem 0;
+    padding: .8rem 2rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,54 @@
     text-decoration: none;
 }
 
+
 .logoLink img {
     width: 2.2rem;
     height: 2.2rem;
+    transition: box-shadow .2s ease-in;
+}
+
+.logoLink img:hover {
+    box-shadow: 3px 3px 5px rgba(255,255,255,.3);
+}
+
+.searchBarForm {
+    width: 50%;
+    text-align: center;
+}
+
+.searchBarForm input {
+    width: 100%;
+    padding: .5rem .5rem .5rem 4rem;
+    background: var(--grey-color-4);
+    color: var(--white-color);
+    border: none;
+    transition:  background .2s ease-in;
+    font-size: 1.4rem;
+}
+
+.searchBarForm input:hover {
+    background: var(--grey-color-hover-4);
+}
+
+.searchBarForm input:focus {
+    background: var(--grey-color-4);
+}
+
+
+.searchBarForm input::placeholder {
+    color: var(--white-color);
+    font-size: 1.4rem;
+}
+
+.searchBarForm {
+    position: relative;
+}
+
+.searchBarIcon {
+position: absolute;
+top: 50%;
+left:2rem;
+transform: translate(-50%, -50%);
+color: var(--white-color);
 }

@@ -12,10 +12,14 @@ html {
 }
 
 :root {
+  --white-color:#ffffff;
   --grey-color-1:#282828;
   --grey-color-2:#383838;
   --grey-color-3:#a1a1a1;
   --grey-color-hover-3:#c7c6c6;
+  --grey-color-4:#4d4d4d;
+  --grey-color-hover-4:#757575;
+
 }
 
 body {
@@ -34,6 +38,17 @@ body {
 ul {
   margin: 0;
   padding: 0;
+}
+
+input,input::placeholder {
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+}
+
+
+button {
+  cursor: pointer;
 }
 
 .container {
