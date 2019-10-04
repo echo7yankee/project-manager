@@ -41,7 +41,7 @@ export class Project {
     }
   }
 
-  public getProjects = async (req: Request, res: Response) => {
+  public getProjects = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id: string = req.query.userId;
       const projects: IProject[] = await this.projectDao.find({ userId: id });
@@ -57,7 +57,7 @@ export class Project {
     }
   }
 
-  public updateProject = async (req: Request, res: Response) => {
+  public updateProject = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id: string = req.params.id;
       const body: ProjectReqBody = req.body;
@@ -75,7 +75,7 @@ export class Project {
     }
   }
 
-  public removeProject = async (req: Request, res: Response) => {
+  public removeProject = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id: string = req.params.id;
       const project: IProject = await this.projectDao.remove(id);
@@ -90,6 +90,4 @@ export class Project {
       return res.status(500).json({ error: 'Something went wrong' });
     }
   }
-
-
 }

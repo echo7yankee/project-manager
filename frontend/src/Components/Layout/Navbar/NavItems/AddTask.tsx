@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const AddTask = () => {
+//icons
+import { IoMdAdd } from 'react-icons/io';
+
+export const AddTask = (): JSX.Element => {
     return (
-        <div>
-            Add task
-        </div>
+        <li>
+            <IoMdAdd />
+        </li>
     )
-}
-
-export default AddTask
+};

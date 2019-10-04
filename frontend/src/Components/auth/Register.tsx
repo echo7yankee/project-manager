@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SearchBar = (): JSX.Element => {
+export const Register = (): JSX.Element => {
     return (
         <div>
-            search bar
+            Register component
         </div>
     )
 };

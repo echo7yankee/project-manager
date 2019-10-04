@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Settings = () => {
+import { IoMdSettings } from 'react-icons/io';
+
+export const Settings = (): JSX.Element => {
     return (
-        <div>
-            Settings
-        </div>
+        <li>
+            <IoMdSettings />
+        </li>
     )
-}
-
-export default Settings
+};

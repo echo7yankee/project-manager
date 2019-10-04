@@ -11,6 +11,13 @@ html {
   box-sizing: inherit;
 }
 
+:root {
+  --grey-color-1:#282828;
+  --grey-color-2:#383838;
+  --grey-color-3:#a1a1a1;
+  --grey-color-hover-3:#c7c6c6;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -21,9 +28,40 @@ body {
   font-smooth: always;
   -webkit-font-smoothing: antialised;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1.6rem;
 }
 
 ul {
   margin: 0;
   padding: 0;
+}
+
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+}
+
+.dflex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+.mr-2 {
+  margin-right: 2rem;
+}
+.mr-3 {
+  margin-right: 3rem;
+}
+.mr-4 {
+  margin-right: 4rem;
+}
+.mr-5 {
+  margin-right: 5rem;
 }

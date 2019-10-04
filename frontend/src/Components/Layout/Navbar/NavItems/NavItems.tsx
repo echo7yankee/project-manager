@@ -1,11 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-const NavItems = () => {
+//style
+import style from './navItems.module.css';
+
+//Components
+import { AddTask } from './AddTask';
+import { Notifications } from './Notifications';
+import { Settings } from './Settings';
+
+export const NavItems = (): JSX.Element => {
     return (
-        <div>
-            Nav items
-        </div>
+        <ul className={style.navItems}>
+            <AddTask />
+            <Notifications />
+            <Settings />
+        </ul>
     )
-}
-
-export default NavItems
+};

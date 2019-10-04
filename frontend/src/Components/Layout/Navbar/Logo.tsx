@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const Logo = () => {
+//react router dom
+import { Link } from 'react-router-dom';
+
+//style
+import style from './navbar.module.css'
+
+export const Logo = (): JSX.Element => {
     return (
-        <div>
-            Logo
-        </div>
+        <Link to='/dashboard' className={style.logoLink} >
+            <img src='./images/logo.png' alt='Logo' />
+        </Link>
     )
-}
-
-export default Logo
+};

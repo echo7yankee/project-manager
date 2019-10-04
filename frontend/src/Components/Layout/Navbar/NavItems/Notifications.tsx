@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Notifications = () => {
+import { IoMdNotifications } from 'react-icons/io';
+
+export const Notifications = (): JSX.Element => {
     return (
-        <div>
-            Notifications
-        </div>
+        <li>
+            <IoMdNotifications />
+        </li>
     )
-}
-
-export default Notifications
+};
