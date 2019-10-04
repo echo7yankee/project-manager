@@ -7,4 +7,6 @@ exports.taskRouter = express_1.Router();
 const task = new task_1.Task(daos_1.taskDao);
 exports.taskRouter.post('/task', task.createTask);
 exports.taskRouter.delete('/task/:id', task.removeTask);
+exports.taskRouter.put('/task/:id', task.editTask);
+exports.taskRouter.get('/task', task.getTasks);
 //# sourceMappingURL=task.js.map

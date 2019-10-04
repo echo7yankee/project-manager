@@ -21,6 +21,34 @@ class Task {
                 return res.status(500).json({ error: 'Something went wrong' });
             }
         };
+        this.getTasks = async (req, res) => {
+            try {
+                const projectId = req.query.projectId;
+                const tasks = await this.taskDao.find({ projectId });
+                if (tasks === null) {
+                    return res.status(404).json({ error: "Tasks don't exist" });
+                }
+                return res.status(200).json(tasks);
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
+        this.editTask = async (req, res) => {
+            try {
+                const id = req.params.id;
+                const updatedTask = await this.taskDao.update(id, req.body);
+                if (updatedTask === null) {
+                    return res.status(404).json({ error: `Task with id ${id} does not exist` });
+                }
+                return res.status(200).json(updatedTask);
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
         this.removeTask = async (req, res) => {
             try {
                 const id = req.params.id;
