@@ -8,5 +8,7 @@ const project = new project_1.Project(daos_1.projectDao);
 const projectTask = new project_1.ProjectTask(daos_1.projectDao);
 exports.projectRouter.post('/project', project.createProject);
 exports.projectRouter.get('/project', project.getProjects);
+exports.projectRouter.delete('/project/:id', project.removeProject);
+exports.projectRouter.put('/project/:id', project.updateProject);
 exports.projectRouter.put('/project/task', projectTask.createProjectTask);
 //# sourceMappingURL=project.js.map

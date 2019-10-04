@@ -38,9 +38,6 @@ const userSchema = new Schema({
         default: Date.now,
         type: Date,
     },
-    projectId: {
-        type: String
-    }
 });
 exports.User = mongoose_1.default.model('User', userSchema);
 //# sourceMappingURL=User.js.map
