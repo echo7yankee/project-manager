@@ -7,6 +7,13 @@ class Project {
                 const id = req.query.userId;
                 const body = req.body;
                 const newProject = Object.assign({}, body, { userId: id });
+                const projects = await this.projectDao.find({ userId: id });
+                const isSameProject = projects.some((project) => {
+                    return project.name === newProject.name;
+                });
+                if (isSameProject) {
+                    return res.status(404).json({ error: 'This project already exists' });
+                }
                 const project = await this.projectDao.add(newProject);
                 return res.status(200).json(project);
             }

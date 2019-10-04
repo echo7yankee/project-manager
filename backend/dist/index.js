@@ -15,9 +15,11 @@ mongoose_1.default.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, ()
 const auth_1 = require("./routes/auth");
 const user_1 = require("./routes/user");
 const project_1 = require("./routes/project");
+const task_1 = require("./routes/task");
 app.use('/user', auth_1.authRouter);
 app.use('/user', user_1.userRouter);
 app.use('/', project_1.projectRouter);
+app.use('/', task_1.taskRouter);
 const PORT = 5000 || process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server http://localhost:${PORT} is running`);

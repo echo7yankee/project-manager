@@ -22,6 +22,16 @@ export class Project {
         userId: id,
       };
 
+      const projects: IProject[] = await this.projectDao.find({ userId: id });
+
+      const isSameProject: boolean = projects.some((project: IProject) => {
+        return project.name === newProject.name;
+      })
+
+      if (isSameProject) {
+        return res.status(404).json({ error: 'This project already exists' });
+      }
+
       const project: IProject = await this.projectDao.add(newProject);
       return res.status(200).json(project);
 

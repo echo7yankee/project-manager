@@ -1,16 +1,23 @@
 import mongoose, { Schema } from 'mongoose';
 const Schema: Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
-    name: {
+const taskSchema = new Schema({
+    task: {
         type: String,
         required: true,
     },
-    userId: {
+    projectId: {
         type: String,
         required: true,
     },
+    archived: {
+        type: Boolean,
+        required: true,
+    },
+    date: {
+        type: Date,
+    }
 });
 
 // tslint:disable-next-line: variable-name
-export const Project: string = mongoose.model('Project', projectSchema);
+export const Task: string = mongoose.model('Task', taskSchema);
