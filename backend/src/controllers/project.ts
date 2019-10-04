@@ -48,7 +48,7 @@ export class Project {
       const project: IProject = await this.projectDao.remove(id);
 
       if (project === null) {
-        return res.status(404).json({ error: `Project with id ${id} does not exist` })
+        return res.status(404).json({ error: `Project with id ${id} does not exist` });
       }
 
       return res.status(200).json({ message: `Project with id ${id} has been removed from the collection` });
@@ -66,7 +66,7 @@ export class Project {
       const updatedProject: IProject = await this.projectDao.update(id, body);
 
       if (updatedProject === null) {
-        return res.status(404).json({ error: `Project with id ${id} does not exist` })
+        return res.status(404).json({ error: `Project with id ${id} does not exist` });
       }
       return res.status(200).json(updatedProject);
 
@@ -76,35 +76,4 @@ export class Project {
     }
   }
 
-}
-
-export class ProjectTask {
-  private projectDao: ProjectDao;
-  constructor(projectDao) {
-    this.projectDao = projectDao
-  }
-
-  public createProjectTask = async (req, res) => {
-    try {
-      const { userId } = req.query;
-
-      const project = await this.projectDao.findById(userId);
-      const newProjectTasks = {
-        ...req.body,
-        projectId: project._id,
-      }
-
-      console.log('PROJECT TASKS', newProjectTasks);
-
-
-      const updatedProject = {
-        ...project,
-        projectTasks: [...project.projectTasks, req.body]
-      }
-      console.log('Updated projects', updatedProject);
-
-    } catch (error) {
-      return res.status(500).json({ error: 'Something went wrong' })
-    }
-  }
 }

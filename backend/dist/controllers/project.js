@@ -59,23 +59,4 @@ class Project {
     }
 }
 exports.Project = Project;
-class ProjectTask {
-    constructor(projectDao) {
-        this.createProjectTask = async (req, res) => {
-            try {
-                const { userId } = req.query;
-                const project = await this.projectDao.findById(userId);
-                const newProjectTasks = Object.assign({}, req.body, { projectId: project._id });
-                console.log('PROJECT TASKS', newProjectTasks);
-                const updatedProject = Object.assign({}, project, { projectTasks: [...project.projectTasks, req.body] });
-                console.log('Updated projects', updatedProject);
-            }
-            catch (error) {
-                return res.status(500).json({ error: 'Something went wrong' });
-            }
-        };
-        this.projectDao = projectDao;
-    }
-}
-exports.ProjectTask = ProjectTask;
 //# sourceMappingURL=project.js.map
