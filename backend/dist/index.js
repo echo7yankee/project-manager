@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
+app.use(cors_1.default());
 app.use(express_1.default.json());
 dotenv_1.default.config();
 mongoose_1.default.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {

@@ -18,8 +18,8 @@ export const Login = (): JSX.Element => {
     const { email, password, } = credentials;
 
     const errors = {
-        emailErr: errorActive && !email && "Email can't be empty",
-        passwordErr: errorActive && !password && "password can't be empty",
+        emailErr: errorActive && !email && "Must not be empty",
+        passwordErr: errorActive && !password && "Must not be empty",
     }
 
     const { emailErr, passwordErr } = errors;

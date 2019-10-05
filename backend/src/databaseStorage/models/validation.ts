@@ -20,7 +20,7 @@ export function registerValidation(data: RegisterUser) {
         password: Joi.string()
             .min(6)
             .required(),
-        role: Joi.string().required()
+        role: Joi.string()
     };
 
     return Joi.validate(data, schema);

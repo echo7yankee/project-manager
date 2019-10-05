@@ -51,9 +51,13 @@ export class Authenticate {
 
     try {
       const user = await this.userDao.add(newUser);
-      return res.status(200).json({
-        message: `User with the id ${user._id} has been created`
-      });
+
+      const tokenParams: TokenParams = { id: user._id, userRole: user.role };
+
+      //Create and assign a token
+      const token: string = await createToken({ params: tokenParams });
+      await res.header("authToken", token);
+      return res.status(200).json({ token });
     } catch (error) {
       res.status(500).json({ error: "Something went wrong" });
     }

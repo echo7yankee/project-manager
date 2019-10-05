@@ -33,7 +33,7 @@ const userSchema = new Schema({
         required: true,
         type: String,
     },
-    role: { type: String, required: true },
+    role: { type: String },
     date: {
         default: Date.now,
         type: Date,

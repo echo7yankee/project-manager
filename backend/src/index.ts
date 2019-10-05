@@ -2,7 +2,11 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 const app = express();
+
+//user cors
+app.use(cors());
 
 //parse json
 app.use(express.json());

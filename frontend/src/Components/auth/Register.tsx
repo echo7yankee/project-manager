@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 
+//assets
+import spinner from '../../assets/gifs/spinner.gif';
+
+//redux
+import { registerUser } from '../../Redux/actions/auth';
+import { useDispatch, useSelector } from 'react-redux';
+
 //style
 import style from './auth.module.css'
 
@@ -18,15 +25,25 @@ export const Register = (): JSX.Element => {
     const [credentials, setCredentials] = useState<RegisterCredentials>(initCredentials);
     const [errorActive, setErrorActive] = useState<boolean>(false);
 
+    //redux
+    const dispatch = useDispatch();
+    const authenticated = useSelector(state => state.auth.authenticated);
+    const isLoading = useSelector(state => state.auth.isLoading);
+
+    console.log(isLoading);
+    console.log(authenticated);
+
+
+
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
 
     const errors = {
-        firstNameErr: errorActive && !firstName && "First Name can't be empty",
-        lastNameErr: errorActive && !lastName && "Last Name can't be empty",
-        emailErr: errorActive && !email && "Email can't be empty",
-        passwordErr: errorActive && !password && "password can't be empty",
-        confirmPasswordErr: errorActive && !confirmPassword && "Confirm Password can't be empty",
+        firstNameErr: errorActive && !firstName && "Must not be empty",
+        lastNameErr: errorActive && !lastName && "Must not be empty",
+        emailErr: errorActive && !email && "Must not be empty",
+        passwordErr: errorActive && !password && "Must not be empty",
+        confirmPasswordErr: errorActive && !confirmPassword && "Must not be empty",
     }
 
     const { firstNameErr, lastNameErr, emailErr, passwordErr, confirmPasswordErr } = errors;
@@ -45,6 +62,8 @@ export const Register = (): JSX.Element => {
             setErrorActive(true);
             return;
         };
+
+        dispatch(registerUser(credentials));
     }
 
     return (
@@ -90,7 +109,10 @@ export const Register = (): JSX.Element => {
                     {confirmPasswordErr && <p className='error'>{confirmPasswordErr}</p>}
                 </div>
                 <div className={style.formBtn}>
-                    <button>Register</button>
+                    <button>
+                        <span>Register</span>
+                        {isLoading && <img src={spinner} alt='spinner' className='auth_spinner ml-05' />}
+                    </button>
                 </div>
             </form>
         </div>
