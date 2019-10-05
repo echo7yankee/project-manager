@@ -13,12 +13,15 @@ html {
 
 :root {
   --white-color:#ffffff;
+  --grey-color-0:#202020;
   --grey-color-1:#282828;
   --grey-color-2:#383838;
   --grey-color-3:#a1a1a1;
   --grey-color-hover-3:#c7c6c6;
   --grey-color-4:#4d4d4d;
   --grey-color-hover-4:#757575;
+  --red-color-1:#D8000C;
+  --red-color-2:#FFD2D2;
 
 }
 
@@ -27,8 +30,8 @@ body {
   padding: 0;
   line-height: 1;
   font-family: "Roboto", sans-serif;
-  color: #202020;
-  background-color: #fafafa;
+  color: var(--grey-color-0);
+  background-color: var(--grey-color-1);
   font-smooth: always;
   -webkit-font-smoothing: antialised;
   -moz-osx-font-smoothing: grayscale;
@@ -49,6 +52,9 @@ input,input::placeholder {
 
 button {
   cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: none;
 }
 
 .container {
@@ -63,6 +69,16 @@ button {
 .space-between {
   justify-content: space-between;
   align-items: center;
+}
+
+.error {
+  padding: .4rem .3rem;
+  border-radius: 3px;
+  color: var(--red-color-1);
+  background-color: var(--red-color-2);
+  font-size: 1.3rem;
+  width: max-content;
+  margin:0px;
 }
 
 .mr-1 {
@@ -80,3 +96,4 @@ button {
 .mr-5 {
   margin-right: 5rem;
 }
+

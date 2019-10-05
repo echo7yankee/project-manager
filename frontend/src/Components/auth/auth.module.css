@@ -1,0 +1,56 @@
+.authContainer {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.authForm {
+    padding: 2rem;
+    background-color: var(--grey-color-2);
+    border-radius: 3px;
+    min-width: 30%;
+}
+
+.groupControl input {
+    /* background-color: var(--grey-color-4); */
+    background-color: transparent;
+    margin: .5rem 0;
+    border: none;
+    border-bottom: 1px solid var(--grey-color-4);
+    color: var(--white-color);
+    padding: .8rem .5rem;
+    border-radius: 3px;
+    transition:  background .2s ease-in;
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+
+.groupControl input:hover {
+    background: var(--grey-color-hover-4);
+}
+
+.groupControl input:focus {
+    background: var(--grey-color-4);
+}
+
+
+.groupControl input::placeholder {
+    color: var(--white-color);
+    font-size: 1.4rem;
+}
+
+.formBtn button {
+    margin-top: 1rem;
+    padding: .8rem .8rem;
+    color: var(--white-color);
+    background-color: var(--grey-color-4);
+    border-radius: 3px;
+    font-size: 1.4rem;
+    transition: background-color .2s ease-in-out;
+}
+
+.formBtn button:hover {
+    background-color: var(--grey-color-hover-4);
+}
