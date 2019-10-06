@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+//react router
+import { Link, Redirect } from 'react-router-dom';
+
 //assets
 import spinner from '../../assets/gifs/spinner.gif';
 
 //redux
-import { registerUser } from '../../Redux/actions/auth';
+import { Auth } from '../../Redux/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 //style
@@ -13,7 +16,7 @@ import style from './auth.module.css'
 //TS TYPES
 import { RegisterCredentials } from '../../TSTypes/Credentials';
 
-export const Register = (): JSX.Element => {
+export const Register = ({ history }): JSX.Element => {
 
     const initCredentials: RegisterCredentials = {
         firstName: '',
@@ -29,11 +32,7 @@ export const Register = (): JSX.Element => {
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
-
-    console.log(isLoading);
-    console.log(authenticated);
-
-
+    const auth = new Auth();
 
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
@@ -63,12 +62,17 @@ export const Register = (): JSX.Element => {
             return;
         };
 
-        dispatch(registerUser(credentials));
+        dispatch(auth.registerUser(credentials, history));
     }
+
+    if (authenticated) { return <Redirect to='/dashboard' /> }
 
     return (
         <div className={style.authContainer}>
             <form className={style.authForm} onSubmit={handleSubmit} >
+                <div className={style.formTitleContainer}>
+                    <h1>Register</h1>
+                </div>
                 <div className={style.groupControl}>
                     <input name="firstName"
                         type='text'
@@ -111,8 +115,11 @@ export const Register = (): JSX.Element => {
                 <div className={style.formBtn}>
                     <button>
                         <span>Register</span>
-                        {isLoading && <img src={spinner} alt='spinner' className='auth_spinner ml-05' />}
                     </button>
+                    {isLoading && <img src={spinner} alt='spinner' className='auth_spinner ml-05' />}
+                </div>
+                <div className={style.authInfo}>
+                    <p>Already have an account? Click <Link to="/login">Here</Link> </p>
                 </div>
             </form>
         </div>

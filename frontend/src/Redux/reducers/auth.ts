@@ -1,4 +1,4 @@
-import { SET_AUTH_LOADING, SET_AUTHENTICATED } from '../types'
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types'
 
 const initState = {
     isLoading: false,
@@ -23,6 +23,9 @@ export function authReducer(state, action) {
                 isLoading: false,
                 authenticated: true
             }
+
+        case SET_UNAUTHENTICATED:
+            return initState;
 
         default: return state
     }
