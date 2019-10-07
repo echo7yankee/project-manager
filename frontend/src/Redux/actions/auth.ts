@@ -20,7 +20,7 @@ export class Auth {
 
                 this.setAuthorizationHeader(data.token)
 
-                history.push('/dashboard')
+                history.push('/')
 
                 dispatch({
                     type: SET_AUTHENTICATED
@@ -41,7 +41,7 @@ export class Auth {
 
             try {
                 dispatch({
-                    type: SET_AUTH_LOADING
+                    type: SET_AUTH_LOADING,
                 })
 
                 const response = await axios.post('/user/login', credentials);
@@ -49,17 +49,17 @@ export class Auth {
 
                 this.setAuthorizationHeader(data.token)
 
-                history.push('/dashboard')
+                history.push('/')
 
                 dispatch({
-                    type: SET_AUTHENTICATED
+                    type: SET_AUTHENTICATED,
                 })
 
             } catch (error) {
                 console.log(error.response);
                 dispatch({
                     type: SET_ERRORS,
-                    payload: error.response ? error.response.data : null
+                    payload: error.response ? error.response.data : null,
                 })
             }
         }

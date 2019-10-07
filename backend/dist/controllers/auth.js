@@ -9,7 +9,8 @@ class Authenticate {
             const { error } = validation_1.registerValidation(req.body);
             if (error) {
                 const errorMessage = error.details.pop().message;
-                return res.status(400).json({ error: errorMessage });
+                const pureErrorMessage = errorMessage.replace(/\"/g, "");
+                return res.status(400).json({ error: pureErrorMessage });
             }
             const emailExists = await this.userDao.findOne({ email: req.body.email });
             if (emailExists) {
@@ -32,11 +33,12 @@ class Authenticate {
             const { error } = validation_1.loginValidation(req.body);
             if (error) {
                 const errorMessage = error.details.pop().message;
-                return res.status(400).json({ error: errorMessage });
+                const pureErrorMessage = errorMessage.replace(/\"/g, "");
+                return res.status(400).json({ error: pureErrorMessage });
             }
             try {
                 const user = await this.userDao.findOne({
-                    email: req.body.email
+                    email: req.body.email,
                 });
                 if (!user) {
                     return res.status(400).json({ error: "Email or password is wrong" });

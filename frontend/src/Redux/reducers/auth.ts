@@ -1,8 +1,9 @@
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types'
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_ERRORS } from '../types'
 
 const initState = {
     isLoading: false,
-    authenticated: false
+    authenticated: false,
+    errors: {}
 }
 
 export function authReducer(state, action) {
@@ -21,9 +22,13 @@ export function authReducer(state, action) {
             return {
                 ...state,
                 isLoading: false,
-                authenticated: true
+                authenticated: true,
             }
-
+        case SET_ERRORS:
+            return {
+                ...state,
+                errors: action.payload
+            }
         case SET_UNAUTHENTICATED:
             return initState;
 

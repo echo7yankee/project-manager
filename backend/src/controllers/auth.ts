@@ -27,8 +27,9 @@ export class Authenticate {
 
     //Check if form has errors
     if (error) {
-      const errorMessage: object = error.details.pop().message;
-      return res.status(400).json({ error: errorMessage });
+      const errorMessage: string = error.details.pop().message;
+      const pureErrorMessage: string = errorMessage.replace(/\"/g, "");
+      return res.status(400).json({ error: pureErrorMessage });
     }
 
     //Check if same users exists
@@ -67,13 +68,14 @@ export class Authenticate {
   public loginUser = async (req: Request, res: Response) => {
     const { error } = loginValidation(req.body);
     if (error) {
-      const errorMessage: object = error.details.pop().message;
-      return res.status(400).json({ error: errorMessage });
+      const errorMessage: string = error.details.pop().message;
+      const pureErrorMessage: string = errorMessage.replace(/\"/g, "");
+      return res.status(400).json({ error: pureErrorMessage });
     }
     try {
       //Check if same users exists
       const user: UserDatabase = await this.userDao.findOne({
-        email: req.body.email
+        email: req.body.email,
       });
       if (!user) {
         return res.status(400).json({ error: "Email or password is wrong" });

@@ -5,5 +5,5 @@ const user_1 = require("../controllers/user");
 const daos_1 = require("../databaseStorage/daos");
 exports.userRouter = express_1.Router();
 const user = new user_1.User(daos_1.userDao, daos_1.roleDao);
-exports.userRouter.get("/:id", user.getUserDetails);
+exports.userRouter.get('/:id', user.getUserDetails);
 //# sourceMappingURL=user.js.map

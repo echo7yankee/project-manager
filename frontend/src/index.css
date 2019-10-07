@@ -86,6 +86,11 @@ button {
   height: 3.5rem;
 }
 
+.set-center {
+  display: flex;
+  justify-content: center;
+}
+
 .pos-relative {
   position: relative;
 }

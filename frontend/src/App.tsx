@@ -13,7 +13,7 @@ export function App(): JSX.Element {
     <Switch>
       <Route path='/register' component={Register} />
       <Route path='/login' component={Login} />
-      <Route path='/dashboard' component={Dashboard} />
+      <Route path='/' component={Dashboard} exact />
     </Switch>
   </BrowserRouter>;
 }

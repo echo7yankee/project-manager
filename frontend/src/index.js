@@ -21,7 +21,6 @@ const auth = new Auth();
 
 if (token) {
     const decodedToken = jwt.decode(token);
-    console.log(decodedToken)
     if (decodedToken.exp * 1000 < Date.now()) {
         window.location.href = "/login";
         store.dispatch(auth.logoutUser());

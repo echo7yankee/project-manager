@@ -37,7 +37,7 @@ export const Register = ({ history }): JSX.Element => {
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
 
-    const errors = {
+    const defaultErrors = {
         firstNameErr: errorActive && !firstName && "Must not be empty",
         lastNameErr: errorActive && !lastName && "Must not be empty",
         emailErr: errorActive && !email && "Must not be empty",
@@ -45,7 +45,7 @@ export const Register = ({ history }): JSX.Element => {
         confirmPasswordErr: errorActive && !confirmPassword && "Must not be empty",
     }
 
-    const { firstNameErr, lastNameErr, emailErr, passwordErr, confirmPasswordErr } = errors;
+    const { firstNameErr, lastNameErr, emailErr, passwordErr, confirmPasswordErr } = defaultErrors;
 
     const handleChange = (e: { target: { name: string; value: string; }; }): void => {
         setCredentials({
@@ -65,7 +65,7 @@ export const Register = ({ history }): JSX.Element => {
         dispatch(auth.registerUser(credentials, history));
     }
 
-    if (authenticated) { return <Redirect to='/dashboard' /> }
+    if (authenticated) { return <Redirect to='/' /> }
 
     return (
         <div className={style.authContainer}>

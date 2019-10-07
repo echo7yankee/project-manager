@@ -50,6 +50,14 @@ export class Project {
         return res.status(404).json({ error: "Projects don't exist" })
       }
 
+      const newProjects = projects.map(project => {
+        return {
+          name: project.name,
+          userId: project.userId,
+          id: project._id,
+        }
+      })
+
       return res.status(200).json(projects);
     } catch (error) {
       console.log(error);

@@ -29,17 +29,18 @@ export const Login = ({ history }): JSX.Element => {
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
+    const errors = useSelector(state => state.auth.errors);
     const auth = new Auth();
 
     //destructuring
     const { email, password, } = credentials;
 
-    const errors = {
-        emailErr: errorActive && !email && "Must not be empty",
-        passwordErr: errorActive && !password && "Must not be empty",
+    const defaultErrors = {
+        emailErr: errorActive && !email && 'Must not be empty',
+        passwordErr: errorActive && !password && 'Must not be empty',
     }
 
-    const { emailErr, passwordErr } = errors;
+    const { emailErr, passwordErr } = defaultErrors;
 
     const handleChange = (e: { target: { name: string; value: string; }; }): void => {
         setCredentials({
@@ -59,7 +60,7 @@ export const Login = ({ history }): JSX.Element => {
         dispatch(auth.loginUser(credentials, history))
     }
 
-    if (authenticated) { return <Redirect to='/dashboard' /> }
+    if (authenticated) { return <Redirect to='/' /> }
 
     return (
         <div className={style.authContainer}>
@@ -88,6 +89,7 @@ export const Login = ({ history }): JSX.Element => {
                     </button>
                     {isLoading && <img src={spinner} alt='spinner' className='auth_spinner ml-05' />}
                 </div>
+                {errors.error && <div className='set-center' ><p className='error'>{errors.error}</p></div>}
                 <div className={style.authInfo}>
                     <p>Don't have an account? Click <Link to="/register">Here</Link> </p>
                 </div>
