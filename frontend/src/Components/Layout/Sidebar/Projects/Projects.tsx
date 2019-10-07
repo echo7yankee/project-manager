@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 //redux
-import { useDispatch, useSelector } from 'react-redux';
-import { Project } from '../../../../Redux/actions/project';
+import { useDispatch, useSelector } from "react-redux";
+import { Project } from "../../../../Redux/actions/project";
 
 interface IProjects {
-    userId: string
+  userId: string;
 }
 
 export const Projects = (props: IProjects): JSX.Element => {
+  //redux
+  const dispatch = useDispatch();
+  const projects = useSelector(state => state.project.projects);
+  const project = new Project();
 
-    //redux
-    const dispatch = useDispatch();
-    const projects = useSelector(state => state.project.projects);
-    const project = new Project();
+  useEffect(() => {
+    dispatch(project.getProjects(props.userId));
+  }, [dispatch, props.userId]);
 
-    useEffect(() => {
-        dispatch(project.getProjects(props.userId))
-    }, [dispatch, project, props.userId])
+  console.log(projects);
 
-    console.log(projects);
-
-    return (
-        <div>
-            Projects
-        </div>
-    )
+  return <div>Projects</div>;
 };

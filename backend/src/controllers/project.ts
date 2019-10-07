@@ -1,71 +1,80 @@
-
 //TS TYPES
-import { ProjectDao } from '../databaseStorage/ProjectDao';
-import { Request } from 'express';
-import { Response } from 'express-serve-static-core';
+import { ProjectDao } from "../databaseStorage/ProjectDao";
+import { Request } from "express";
+import { Response } from "express-serve-static-core";
 
 //ts types
-import { ProjectReqBody, IProject } from '../TSTypes/Project';
+import { ProjectReqBody, IProject, IProjectDatabase } from "../TSTypes/Project";
 
 export class Project {
   private projectDao: ProjectDao;
   constructor(projectDao: ProjectDao) {
     this.projectDao = projectDao;
   }
-  public createProject = async (req: Request, res: Response): Promise<Response> => {
+  public createProject = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     try {
       const id: string = req.query.userId;
       const body: ProjectReqBody = req.body;
 
       const newProject: IProject = {
         ...body,
-        userId: id,
+        userId: id
       };
 
       const projects: IProject[] = await this.projectDao.find({ userId: id });
 
       const isSameProject: boolean = projects.some((project: IProject) => {
         return project.name === newProject.name;
-      })
+      });
 
       if (isSameProject) {
-        return res.status(404).json({ error: 'This project already exists' });
+        return res.status(404).json({ error: "This project already exists" });
       }
 
       const project: IProject = await this.projectDao.add(newProject);
       return res.status(200).json(project);
-
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: "Something went wrong" });
     }
-  }
+  };
 
-  public getProjects = async (req: Request, res: Response): Promise<Response> => {
+  public getProjects = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     try {
       const id: string = req.query.userId;
-      const projects: IProject[] = await this.projectDao.find({ userId: id });
+      const projects: IProjectDatabase[] = await this.projectDao.find({
+        userId: id
+      });
 
       if (projects === null) {
-        return res.status(404).json({ error: "Projects don't exist" })
+        return res.status(404).json({ error: "Projects don't exist" });
       }
 
-      const newProjects = projects.map(project => {
+      const newProjects: IProject[] = projects.map(project => {
         return {
           name: project.name,
           userId: project.userId,
-          id: project._id,
-        }
-      })
+          id: project._id
+        };
+      });
 
-      return res.status(200).json(projects);
+      return res.status(200).json(newProjects);
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: "Something went wrong" });
     }
-  }
+  };
 
-  public updateProject = async (req: Request, res: Response): Promise<Response> => {
+  public updateProject = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     try {
       const id: string = req.params.id;
       const body: ProjectReqBody = req.body;
@@ -73,29 +82,37 @@ export class Project {
       const updatedProject: IProject = await this.projectDao.update(id, body);
 
       if (updatedProject === null) {
-        return res.status(404).json({ error: `Project with id ${id} does not exist` });
+        return res
+          .status(404)
+          .json({ error: `Project with id ${id} does not exist` });
       }
       return res.status(200).json(updatedProject);
-
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: "Something went wrong" });
     }
-  }
+  };
 
-  public removeProject = async (req: Request, res: Response): Promise<Response> => {
+  public removeProject = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     try {
       const id: string = req.params.id;
       const project: IProject = await this.projectDao.remove(id);
 
       if (project === null) {
-        return res.status(404).json({ error: `Project with id ${id} does not exist` });
+        return res
+          .status(404)
+          .json({ error: `Project with id ${id} does not exist` });
       }
 
-      return res.status(200).json({ message: `Project with id ${id} has been removed from the collection` });
+      return res.status(200).json({
+        message: `Project with id ${id} has been removed from the collection`
+      });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: "Something went wrong" });
     }
-  }
+  };
 }

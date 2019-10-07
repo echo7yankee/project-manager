@@ -12,20 +12,22 @@ class Project {
                     return project.name === newProject.name;
                 });
                 if (isSameProject) {
-                    return res.status(404).json({ error: 'This project already exists' });
+                    return res.status(404).json({ error: "This project already exists" });
                 }
                 const project = await this.projectDao.add(newProject);
                 return res.status(200).json(project);
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ error: 'Something went wrong' });
+                return res.status(500).json({ error: "Something went wrong" });
             }
         };
         this.getProjects = async (req, res) => {
             try {
                 const id = req.query.userId;
-                const projects = await this.projectDao.find({ userId: id });
+                const projects = await this.projectDao.find({
+                    userId: id
+                });
                 if (projects === null) {
                     return res.status(404).json({ error: "Projects don't exist" });
                 }
@@ -33,14 +35,14 @@ class Project {
                     return {
                         name: project.name,
                         userId: project.userId,
-                        id: project._id,
+                        id: project._id
                     };
                 });
-                return res.status(200).json(projects);
+                return res.status(200).json(newProjects);
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ error: 'Something went wrong' });
+                return res.status(500).json({ error: "Something went wrong" });
             }
         };
         this.updateProject = async (req, res) => {
@@ -49,13 +51,15 @@ class Project {
                 const body = req.body;
                 const updatedProject = await this.projectDao.update(id, body);
                 if (updatedProject === null) {
-                    return res.status(404).json({ error: `Project with id ${id} does not exist` });
+                    return res
+                        .status(404)
+                        .json({ error: `Project with id ${id} does not exist` });
                 }
                 return res.status(200).json(updatedProject);
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ error: 'Something went wrong' });
+                return res.status(500).json({ error: "Something went wrong" });
             }
         };
         this.removeProject = async (req, res) => {
@@ -63,13 +67,17 @@ class Project {
                 const id = req.params.id;
                 const project = await this.projectDao.remove(id);
                 if (project === null) {
-                    return res.status(404).json({ error: `Project with id ${id} does not exist` });
+                    return res
+                        .status(404)
+                        .json({ error: `Project with id ${id} does not exist` });
                 }
-                return res.status(200).json({ message: `Project with id ${id} has been removed from the collection` });
+                return res.status(200).json({
+                    message: `Project with id ${id} has been removed from the collection`
+                });
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ error: 'Something went wrong' });
+                return res.status(500).json({ error: "Something went wrong" });
             }
         };
         this.projectDao = projectDao;
