@@ -5,7 +5,7 @@ import spinner from '../../assets/gifs/spinner.gif';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { Auth } from '../../Redux/actions/auth';
+import { loginUser } from '../../Redux/actions/auth';
 
 //react router
 import { Link, Redirect } from 'react-router-dom';
@@ -30,7 +30,6 @@ export const Login = ({ history }): JSX.Element => {
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
     const errors = useSelector(state => state.auth.errors);
-    const auth = new Auth();
 
     //destructuring
     const { email, password, } = credentials;
@@ -57,7 +56,7 @@ export const Login = ({ history }): JSX.Element => {
             return;
         };
 
-        dispatch(auth.loginUser(credentials, history))
+        dispatch(loginUser(credentials, history))
     }
 
     if (authenticated) { return <Redirect to='/' /> }

@@ -1,0 +1,48 @@
+.projectItem {
+    list-style: none;
+    color: var(--grey-color-hover-4);
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 5px;
+    border-radius: 3px;
+}
+
+.projectItem:hover {
+    background-color: var(--grey-color-4);
+}
+
+.addProjectContainer {
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+}
+
+.addProjectContainer button,.addProjectContainer span {
+    font-size: 1.6rem;
+    color: var(--grey-color-hover-4);
+    margin-top: 2rem;
+    font-weight: 300;
+}
+
+.addProjectContainer span {
+    color: var(--red-color-3);
+    width: 20px;
+    height: 20px;
+    font-size: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addProjectContainer:hover button {
+    color: var(--red-color-3);
+}
+
+.addProjectContainer:hover span {
+    background-color: var(--red-color-3);
+    color: var(--grey-color-4);
+}

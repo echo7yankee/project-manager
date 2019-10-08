@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import spinner from '../../assets/gifs/spinner.gif';
 
 //redux
-import { Auth } from '../../Redux/actions/auth';
+import { registerUser } from '../../Redux/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 //style
@@ -32,7 +32,6 @@ export const Register = ({ history }): JSX.Element => {
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
-    const auth = new Auth();
 
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
@@ -62,7 +61,7 @@ export const Register = ({ history }): JSX.Element => {
             return;
         };
 
-        dispatch(auth.registerUser(credentials, history));
+        dispatch(registerUser(credentials, history));
     }
 
     if (authenticated) { return <Redirect to='/' /> }

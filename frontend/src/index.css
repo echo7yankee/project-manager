@@ -22,6 +22,7 @@ html {
   --grey-color-hover-4:#757575;
   --red-color-1:#D8000C;
   --red-color-2:#FFD2D2;
+  --red-color-3:#DE4C4A;
 
 }
 
@@ -60,6 +61,19 @@ button {
 .container {
   max-width: 114rem;
   margin: 0 auto;
+}
+
+.container-dashboard {
+  margin-top: 10rem;
+}
+
+.dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--grey-color-hover-4);
+  border-radius: 50%;
+  margin-right: 1rem;
 }
 
 .dflex {

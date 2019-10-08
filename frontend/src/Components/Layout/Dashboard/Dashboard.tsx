@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 //Components
-import { Projects } from "../Sidebar/Projects/Projects";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 //jwt
 import jwt from "jsonwebtoken";
@@ -14,14 +14,14 @@ import { Navbar } from "../Navbar/Navbar";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "../../../Redux/actions/user";
+import { getUser } from "../../../Redux/actions/user";
+
 
 export const Dashboard = (): JSX.Element => {
   //redux
   const dispatch = useDispatch();
   const authenticated = useSelector(state => state.auth.authenticated);
   const userDetails = useSelector(state => state.user.user);
-  const user = new User();
 
   //token
   let decodedToken;
@@ -34,7 +34,7 @@ export const Dashboard = (): JSX.Element => {
   }
 
   useEffect(() => {
-    dispatch(user.getUser(userId));
+    dispatch(getUser(userId));
   }, [dispatch, userId]);
 
   console.log(userDetails);
@@ -47,7 +47,7 @@ export const Dashboard = (): JSX.Element => {
     <>
       <div>
         <Navbar />
-        <Projects userId={userId} />
+        <Sidebar userId={userId} />
       </div>
     </>
   );

@@ -4,83 +4,78 @@ import axios from 'axios';
 //ts types
 import { RegisterCredentials, LoginCredentials } from '../../TSTypes/Credentials';
 
-export class Auth {
+export function registerUser(credentials: RegisterCredentials, history) {
+    return async (dispatch) => {
 
+        try {
+            dispatch({
+                type: SET_AUTH_LOADING
+            })
 
-    public registerUser(credentials: RegisterCredentials, history) {
-        return async (dispatch) => {
+            const response = await axios.post('/user/register', credentials);
+            const { data } = response;
 
-            try {
-                dispatch({
-                    type: SET_AUTH_LOADING
-                })
+            setAuthorizationHeader(data.token)
 
-                const response = await axios.post('/user/register', credentials);
-                const { data } = response;
+            history.push('/')
 
-                this.setAuthorizationHeader(data.token)
+            dispatch({
+                type: SET_AUTHENTICATED
+            })
 
-                history.push('/')
-
-                dispatch({
-                    type: SET_AUTHENTICATED
-                })
-
-            } catch (error) {
-                console.log(error.response);
-                dispatch({
-                    type: SET_ERRORS,
-                    payload: error.response ? error.response.data : null
-                })
-            }
+        } catch (error) {
+            console.log(error.response);
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.response ? error.response.data : null
+            })
         }
     }
+}
 
-    public loginUser(credentials: LoginCredentials, history) {
-        return async (dispatch) => {
+export function loginUser(credentials: LoginCredentials, history) {
+    return async (dispatch) => {
 
-            try {
-                dispatch({
-                    type: SET_AUTH_LOADING,
-                })
+        try {
+            dispatch({
+                type: SET_AUTH_LOADING,
+            })
 
-                const response = await axios.post('/user/login', credentials);
-                const { data } = response;
+            const response = await axios.post('/user/login', credentials);
+            const { data } = response;
 
-                this.setAuthorizationHeader(data.token)
+            setAuthorizationHeader(data.token)
 
-                history.push('/')
+            history.push('/')
 
-                dispatch({
-                    type: SET_AUTHENTICATED,
-                })
+            dispatch({
+                type: SET_AUTHENTICATED,
+            })
 
-            } catch (error) {
-                console.log(error.response);
-                dispatch({
-                    type: SET_ERRORS,
-                    payload: error.response ? error.response.data : null,
-                })
-            }
+        } catch (error) {
+            console.log(error.response);
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.response ? error.response.data : null,
+            })
         }
     }
+}
 
-    public logoutUser() {
-        return async (dispatch) => {
-            try {
-                localStorage.removeItem("FBIdToken");
-                delete axios.defaults.headers.common.Authorization;
-                dispatch({ type: SET_UNAUTHENTICATED });
-            } catch (error) {
-                console.log(error);
-            }
+export function logoutUser() {
+    return async (dispatch) => {
+        try {
+            localStorage.removeItem("FBIdToken");
+            delete axios.defaults.headers.common.Authorization;
+            dispatch({ type: SET_UNAUTHENTICATED });
+        } catch (error) {
+            console.log(error);
         }
     }
+}
 
-    private setAuthorizationHeader = token => {
-        const FBIdToken = token;
-        localStorage.setItem('FBIdToken', FBIdToken);
-        axios.defaults.headers.common.Authorization = FBIdToken;
-    }
-
+const setAuthorizationHeader = token => {
+    const FBIdToken = token;
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common.Authorization = FBIdToken;
 }

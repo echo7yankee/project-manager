@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 //redux
 import { useDispatch } from 'react-redux';
-import { Auth } from '../../../../Redux/actions/auth';
+import { logoutUser } from '../../../../Redux/actions/auth';
 
 //style
 import style from './navItems.module.css'
@@ -14,7 +14,6 @@ export const Settings = (): JSX.Element => {
 
     //redux
     const dispatch = useDispatch();
-    const auth = new Auth();
 
     const toggleDropdown = () => {
         setDropdown(!dropdown);
@@ -33,9 +32,9 @@ export const Settings = (): JSX.Element => {
                     <span className={style.dropdownIcon}><IoIosColorPalette /></span>
                     <span>Theme</span>
                 </div>
-                <div className={style.dropdownItemContainer} onClick={() => dispatch(auth.logoutUser())} >
+                <div className={style.dropdownItemContainer} onClick={() => dispatch(logoutUser())} >
                     <span className={style.dropdownIcon}><IoIosLogIn /></span>
-                    <span >Logout</span>
+                    <span>Logout</span>
                 </div>
             </div>
         </li>
