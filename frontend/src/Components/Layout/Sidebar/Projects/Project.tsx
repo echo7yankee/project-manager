@@ -4,7 +4,6 @@ import React from 'react';
 import style from './project.module.css';
 
 export const Project = ({ project }): JSX.Element => {
-    console.log(project);
 
     return (
         <ul className={style.projectItems}>

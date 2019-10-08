@@ -8,3 +8,5 @@ export const GET_USER: string = 'GET_USER';
 
 //project
 export const GET_PROJECTS: string = 'GET_PROJECTS';
+export const SET_PROJECT_LOADING: string = 'SET_PROJECT_LOADING';
+export const UNSET_PROJECT_LOADING: string = 'UNSET_PROJECT_LOADING';
