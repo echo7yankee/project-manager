@@ -1,0 +1,8 @@
+.projectDropdown {
+    position: absolute;
+    background-color: red;
+    left: 95%;
+    top: 2.5rem;
+    width: 20rem;
+    z-index: 5000;
+}
