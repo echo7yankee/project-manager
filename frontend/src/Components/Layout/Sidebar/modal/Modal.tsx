@@ -13,6 +13,7 @@ interface IModalProps {
 }
 
 export const Modal = (props: IModalProps): JSX.Element => {
+
     return (
         <div className='overlay' onClick={props.closeModal}>
             <div className={style.sidebarModal} onClick={(e) => e.stopPropagation()}>

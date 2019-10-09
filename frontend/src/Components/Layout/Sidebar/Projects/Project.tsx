@@ -9,12 +9,16 @@ import { IoIosMore } from 'react-icons/io';
 import { ProjectDropdown } from './ProjectDropdown';
 
 export const Project = ({ project }): JSX.Element => {
-
     const [dropdown, setDropdown] = useState(false);
 
     function openDropdown() {
         setDropdown(!dropdown);
     }
+
+    function closeDropdown() {
+        setDropdown(false)
+    }
+
 
     return (
         <ul className={style.projectItems}>
@@ -24,7 +28,7 @@ export const Project = ({ project }): JSX.Element => {
                     <span>{project.name}</span>
                 </div>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
-                {dropdown && <ProjectDropdown />}
+                {dropdown && <ProjectDropdown closeDropdown={closeDropdown} />}
             </li>
         </ul>
     )

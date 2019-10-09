@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+
+//close dropdown
+import { useOutsideClose } from '../../../CloseDropdown/CloseDropdown';
 
 //redux
 import { useDispatch } from 'react-redux';
@@ -15,15 +18,23 @@ export const Settings = (): JSX.Element => {
     //redux
     const dispatch = useDispatch();
 
-    const toggleDropdown = () => {
+    function toggleDropdown() {
         setDropdown(!dropdown);
     }
+
+    function closeDropdown() {
+        setDropdown(false);
+    }
+
+    //close dropdown
+    const wrapperRef = useRef(null);
+    useOutsideClose(wrapperRef, closeDropdown);
 
     return (
         <li className='pos-relative' onClick={toggleDropdown}>
             <span className={style.navItem}><IoMdSettings /></span>
 
-            <div className={dropdown ? style.dropdownShow : style.dropdown}>
+            <div className={dropdown ? style.dropdownShow : style.dropdown} ref={wrapperRef}>
                 <div className={style.dropdownItemContainer}>
                     <span className={style.dropdownIcon}><IoMdSettings /></span>
                     <span>Settings</span>
