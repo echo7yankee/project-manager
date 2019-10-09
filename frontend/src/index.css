@@ -134,6 +134,10 @@ button {
   margin:1rem 0;
 }
 
+.dropdown__remove:hover {
+  color: var(--red-color-3);
+}
+
 .ml-05 {
   margin-left: .5rem;
 }

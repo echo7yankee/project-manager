@@ -4,12 +4,18 @@ import React, { useState } from 'react';
 import style from './project.module.css';
 import { IoIosMore } from 'react-icons/io';
 
+//redux
+import { useDispatch } from 'react-redux';
+import { removeProject } from '../../../../Redux/actions/project';
 
 //Components
 import { ProjectDropdown } from './ProjectDropdown';
 
-export const Project = ({ project }): JSX.Element => {
+export const Project = ({ project, userId }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
+
+    //redux
+    const dispatch = useDispatch();
 
     function openDropdown() {
         setDropdown(!dropdown);
@@ -17,6 +23,10 @@ export const Project = ({ project }): JSX.Element => {
 
     function closeDropdown() {
         setDropdown(false)
+    }
+
+    function removeSelectedProject() {
+        dispatch(removeProject(userId, project.id));
     }
 
 
@@ -28,7 +38,7 @@ export const Project = ({ project }): JSX.Element => {
                     <span>{project.name}</span>
                 </div>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
-                {dropdown && <ProjectDropdown closeDropdown={closeDropdown} />}
+                {dropdown && <ProjectDropdown closeDropdown={closeDropdown} request={removeSelectedProject} />}
             </li>
         </ul>
     )

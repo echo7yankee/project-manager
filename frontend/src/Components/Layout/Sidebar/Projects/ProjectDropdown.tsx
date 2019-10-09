@@ -7,7 +7,7 @@ import { useOutsideClose } from '../../../CloseDropdown/CloseDropdown';
 import { IoIosTrash, IoMdCreate } from 'react-icons/io';
 import style from './projectDropdown.module.css';
 
-export const ProjectDropdown = ({ closeDropdown }) => {
+export const ProjectDropdown = ({ closeDropdown, request }) => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, closeDropdown);
@@ -19,7 +19,7 @@ export const ProjectDropdown = ({ closeDropdown }) => {
                     <span><IoMdCreate /></span>
                     <span>Edit Project</span>
                 </li>
-                <li>
+                <li className='dropdown__remove' onClick={request}>
                     <span><IoIosTrash /></span>
                     <span>Remove Project</span>
                 </li>

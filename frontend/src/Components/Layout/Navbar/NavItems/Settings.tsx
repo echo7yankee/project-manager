@@ -34,20 +34,20 @@ export const Settings = (): JSX.Element => {
         <li className='pos-relative' onClick={toggleDropdown}>
             <span className={style.navItem}><IoMdSettings /></span>
 
-            <div className={dropdown ? style.dropdownShow : style.dropdown} ref={wrapperRef}>
-                <div className={style.dropdownItemContainer}>
+            <ul className={dropdown ? style.dropdownShow : style.dropdown} ref={wrapperRef}>
+                <li className={style.dropdownItem}>
                     <span className={style.dropdownIcon}><IoMdSettings /></span>
                     <span>Settings</span>
-                </div >
-                <div className={style.dropdownItemContainer}>
+                </li >
+                <li className={style.dropdownItem}>
                     <span className={style.dropdownIcon}><IoIosColorPalette /></span>
                     <span>Theme</span>
-                </div>
-                <div className={style.dropdownItemContainer} onClick={() => dispatch(logoutUser())} >
+                </li>
+                <li className={`${style.dropdownItem} dropdown__remove`} onClick={() => dispatch(logoutUser())} >
                     <span className={style.dropdownIcon}><IoIosLogIn /></span>
                     <span>Logout</span>
-                </div>
-            </div>
+                </li>
+            </ul>
         </li>
     )
 };

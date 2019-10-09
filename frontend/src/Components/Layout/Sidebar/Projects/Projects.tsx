@@ -49,13 +49,10 @@ export const Projects = (props: IProjects): JSX.Element | null => {
     setModal(!modal);
   }
 
-  console.log(isLoading);
-
-
   return <div>
     {projects.length > 0 ? <div>
       {projects.map(project => {
-        return <Project key={project.id} project={project} />
+        return <Project key={project.id} project={project} userId={props.userId} />
       })}
     </div> : null}
     <div className={style.addProjectContainer} onClick={openModal}>

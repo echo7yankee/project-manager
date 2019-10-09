@@ -44,3 +44,20 @@ export const addProject = (name, id) => {
 
     }
 }
+
+export const removeProject = (userId, projectId) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: SET_PROJECT_LOADING
+            })
+            await axios.delete(`/project/${projectId}`)
+            dispatch({
+                type: UNSET_PROJECT_LOADING
+            })
+            dispatch(getProjects(userId))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

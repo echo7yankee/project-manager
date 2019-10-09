@@ -50,17 +50,17 @@
     pointer-events: auto;
 }
 
-.dropdownItemContainer {
+.dropdownItem {
+    margin:0 !important;
     padding: 1rem 0rem;
     padding-left: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.4rem !important;
     cursor: pointer;
-    transition: background-color .1s ease-in-out;
     display: flex;
     align-items: center;
 }
 
-.dropdownItemContainer:hover {
+.dropdownItem:hover {
     background-color: var(--grey-color-4);
 }
 
