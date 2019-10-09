@@ -32,6 +32,7 @@ export const Register = ({ history }): JSX.Element => {
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
+    const errors = useSelector(state => state.auth.errors);
 
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
@@ -89,7 +90,7 @@ export const Register = ({ history }): JSX.Element => {
                     {lastNameErr && <p className='error'>{lastNameErr}</p>}
                 </div>
                 <div className={style.groupControl}>
-                    <input name="email"
+                    <input name='email'
                         type='email'
                         placeholder='Email'
                         value={email}
@@ -104,7 +105,7 @@ export const Register = ({ history }): JSX.Element => {
                     {passwordErr && <p className='error'>{passwordErr}</p>}
                 </div>
                 <div className={style.groupControl}>
-                    <input name="confirmPassword"
+                    <input name='confirmPassword'
                         type='password'
                         placeholder='Confirm Password'
                         value={confirmPassword}
@@ -117,8 +118,9 @@ export const Register = ({ history }): JSX.Element => {
                     </button>
                     {isLoading && <img src={spinner} alt='spinner' className='auth_spinner ml-05' />}
                 </div>
+                {errors.error && <div className='set-center' ><p className='error'>{errors.error}</p></div>}
                 <div className={style.authInfo}>
-                    <p>Already have an account? Click <Link to="/login">Here</Link> </p>
+                    <p>Already have an account? Click <Link to='/login'>Here</Link> </p>
                 </div>
             </form>
         </div>

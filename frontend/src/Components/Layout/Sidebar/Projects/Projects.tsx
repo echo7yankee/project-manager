@@ -45,6 +45,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
   function addNewProject(e) {
     e.preventDefault();
     dispatch(addProject(projectValue, props.userId))
+    setProjectValue('');
     setModal(!modal);
   }
 
