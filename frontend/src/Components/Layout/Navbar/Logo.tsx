@@ -8,7 +8,7 @@ import style from './navbar.module.css'
 
 export const Logo = (): JSX.Element => {
     return (
-        <Link to='/dashboard' className={style.logoLink} >
+        <Link to='/' className={style.logoLink} >
             <img src='./images/logo.png' alt='Logo' />
         </Link>
     )
