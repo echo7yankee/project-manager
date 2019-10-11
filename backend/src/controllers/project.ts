@@ -86,6 +86,7 @@ export class Project {
           .status(404)
           .json({ error: `Project with id ${id} does not exist` });
       }
+
       return res.status(200).json(updatedProject);
     } catch (error) {
       console.log(error);
