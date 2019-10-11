@@ -16,7 +16,6 @@ import style from './auth.module.css';
 //Ts types
 import { LoginCredentials } from '../../TSTypes/Credentials';
 
-
 export const Login = ({ history }): JSX.Element => {
     const initCredentials: LoginCredentials = {
         email: '',
@@ -24,12 +23,15 @@ export const Login = ({ history }): JSX.Element => {
     }
     const [credentials, setCredentials] = useState<LoginCredentials>(initCredentials);
     const [errorActive, setErrorActive] = useState<boolean>(false);
+    const [emailValidError, setEmailValidError] = useState('');
 
     //redux
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
     const errors = useSelector(state => state.auth.errors);
+    const emailReg =
+        /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     //destructuring
     const { email, password, } = credentials;
@@ -39,12 +41,12 @@ export const Login = ({ history }): JSX.Element => {
         passwordErr: errorActive && !password && 'Must not be empty',
     }
 
-    const { emailErr, passwordErr } = defaultErrors;
+    let { emailErr, passwordErr } = defaultErrors;
 
     const handleChange = (e: { target: { name: string; value: string; }; }): void => {
         setCredentials({
             ...credentials,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
@@ -59,6 +61,19 @@ export const Login = ({ history }): JSX.Element => {
         dispatch(loginUser(credentials, history))
     }
 
+    const isEmailValid = () => {
+        if (emailReg.test(email)) {
+            setEmailValidError('');
+            return;
+        }
+        setEmailValidError('Must be a valid email');
+        return;
+    }
+
+    const handleBlur = () => {
+        isEmailValid()
+    }
+
     if (authenticated) { return <Redirect to='/' /> }
 
     return (
@@ -68,19 +83,23 @@ export const Login = ({ history }): JSX.Element => {
                     <h1>Login</h1>
                 </div>
                 <div className={style.groupControl}>
-                    <input name="email"
+                    <input name='email'
                         type='email'
                         placeholder='Email'
                         value={email}
-                        onChange={handleChange} />
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+
                     {emailErr && <p className='error'>{emailErr}</p>}
+                    {emailValidError && <p className='error'>{emailValidError}</p>}
                 </div>
                 <div className={style.groupControl}>
-                    <input name="password"
+                    <input name='password'
                         type='password'
                         placeholder='Password'
                         value={password} onChange={handleChange} />
-                    {passwordErr && <p className='error'>{passwordErr}</p>}
+                    {passwordErr && <p className='error mtb-1'>{passwordErr}</p>}
                 </div>
                 <div className={style.formBtn}>
                     <button>

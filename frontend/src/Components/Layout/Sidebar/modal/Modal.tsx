@@ -23,12 +23,13 @@ export const Modal = (props: IModalProps): JSX.Element => {
                 <form onSubmit={props.request}>
                     <div className={style.modalGroupControl}>
                         <label htmlFor='projectInput'>{props.labelName}</label>
-                        <input id='projectInput' type="text" value={props.inputValue} onChange={props.onChange} />
+                        <input id='projectInput' type='text' value={props.inputValue} onChange={props.onChange} />
                     </div>
-                    <div className='border'></div>
                     <div className={style.modalBtnContainer}>
                         <button type='button' onClick={props.closeModal}>Cancel</button>
-                        <button type='submit'>Add</button>
+                        <button type='submit'
+                            disabled={props.inputValue === ''}
+                            className={props.inputValue === '' ? 'disabled-button' : ''}>Add</button>
                     </div>
                 </form>
             </div>

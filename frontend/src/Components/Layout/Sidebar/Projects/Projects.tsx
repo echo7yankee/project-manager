@@ -52,7 +52,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
   return <div>
     {projects.length > 0 ? <div>
       {projects.map(project => {
-        return <Project key={project.id} project={project} userId={props.userId} />
+        return <Project key={project.id} project={project} userId={props.userId} />;
       })}
     </div> : null}
     <div className={style.addProjectContainer} onClick={openModal}>
@@ -67,7 +67,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       closeModal={closeModal}
       request={addNewProject} />}
     {isLoading && <div className='overlay'>
-      <img src={spinner} alt="spinner" />
+      <img src={spinner} alt='spinner' />
     </div>}
   </div>
 };

@@ -4,6 +4,10 @@ import { GET_PROJECTS, SET_PROJECT_LOADING, UNSET_PROJECT_LOADING } from '../typ
 export const getProjects = (id: string) => {
     return async (dispatch) => {
         try {
+            dispatch({
+                type: SET_PROJECT_LOADING,
+            })
+
             const response = await axios.get('/project', {
                 params: {
                     userId: id,

@@ -27,12 +27,16 @@ export const Register = ({ history }): JSX.Element => {
     }
     const [credentials, setCredentials] = useState<RegisterCredentials>(initCredentials);
     const [errorActive, setErrorActive] = useState<boolean>(false);
+    const [emailValidError, setEmailValidError] = useState('');
 
     //redux
     const dispatch = useDispatch();
     const authenticated = useSelector(state => state.auth.authenticated);
     const isLoading = useSelector(state => state.auth.isLoading);
     const errors = useSelector(state => state.auth.errors);
+    const emailReg =
+        /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
@@ -65,6 +69,20 @@ export const Register = ({ history }): JSX.Element => {
         dispatch(registerUser(credentials, history));
     }
 
+    const isEmailValid = () => {
+        if (emailReg.test(email)) {
+            setEmailValidError('');
+            return;
+        }
+        setEmailValidError('Must be a valid email');
+        return;
+    }
+
+    const handleBlur = () => {
+        isEmailValid()
+    }
+
+
     if (authenticated) { return <Redirect to='/' /> }
 
     return (
@@ -74,7 +92,7 @@ export const Register = ({ history }): JSX.Element => {
                     <h1>Register</h1>
                 </div>
                 <div className={style.groupControl}>
-                    <input name="firstName"
+                    <input name='firstName'
                         type='text'
                         placeholder='First Name'
                         value={firstName}
@@ -82,7 +100,7 @@ export const Register = ({ history }): JSX.Element => {
                     {firstNameErr && <p className='error'>{firstNameErr}</p>}
                 </div>
                 <div className={style.groupControl}>
-                    <input name="lastName"
+                    <input name='lastName'
                         type='text'
                         placeholder='Last Name'
                         value={lastName}
@@ -94,8 +112,10 @@ export const Register = ({ history }): JSX.Element => {
                         type='email'
                         placeholder='Email'
                         value={email}
-                        onChange={handleChange} />
+                        onChange={handleChange}
+                        onBlur={handleBlur} />
                     {emailErr && <p className='error'>{emailErr}</p>}
+                    {emailValidError && <p className='error mtb-1'>{emailValidError}</p>}
                 </div>
                 <div className={style.groupControl}>
                     <input name="password"

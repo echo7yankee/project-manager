@@ -1,6 +1,9 @@
 import { GET_USER } from '../types'
 
-const initState = {
+//ts types
+import { IUser } from '../../TSTypes/reducers/user';
+
+const initState: IUser = {
     user: {},
 }
 

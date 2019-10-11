@@ -1,6 +1,9 @@
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_ERRORS } from '../types'
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED } from '../types'
 
-const initState = {
+//ts types
+import { IAuth } from '../../TSTypes/reducers/auth';
+
+const initState: IAuth = {
     isLoading: false,
     authenticated: false,
     errors: {}

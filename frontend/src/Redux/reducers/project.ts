@@ -1,6 +1,9 @@
 import { GET_PROJECTS, SET_PROJECT_LOADING, UNSET_PROJECT_LOADING } from '../types'
 
-const initState = {
+//ts types
+import { IProject } from '../../TSTypes/reducers/project';
+
+const initState: IProject = {
     projects: [],
     isLoading: false,
 }
@@ -26,7 +29,8 @@ export function projectReducer(state, action) {
         case GET_PROJECTS:
             return {
                 ...state,
-                projects: action.payload
+                projects: action.payload,
+                isLoading: false,
             }
 
         default: return state;
