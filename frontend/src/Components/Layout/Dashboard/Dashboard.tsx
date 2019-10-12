@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../../Redux/actions/user";
 
 
+
 export const Dashboard = (): JSX.Element => {
   //redux
   const dispatch = useDispatch();
@@ -44,11 +45,9 @@ export const Dashboard = (): JSX.Element => {
   }
 
   return (
-    <>
-      <div>
-        <Navbar />
-        <Sidebar userId={userId} />
-      </div>
-    </>
+    <div>
+      <Navbar />
+      <Sidebar userId={userId} />
+    </div>
   );
 };

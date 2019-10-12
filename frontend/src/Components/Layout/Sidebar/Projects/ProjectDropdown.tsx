@@ -9,7 +9,7 @@ import style from './projectDropdown.module.css';
 
 
 
-export const ProjectDropdown = ({ closeDropdown, openModal }) => {
+export const ProjectDropdown = ({ closeDropdown, openModalDropdown, openModal }) => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, closeDropdown);
@@ -18,11 +18,11 @@ export const ProjectDropdown = ({ closeDropdown, openModal }) => {
         <>
             <div className={style.projectDropdown} ref={wrapperRef}>
                 <ul>
-                    <li>
+                    <li onClick={openModal}>
                         <span><IoMdCreate /></span>
                         <span>Edit Project</span>
                     </li>
-                    <li className='dropdown__remove' onClick={openModal}>
+                    <li className='dropdown__remove' onClick={openModalDropdown}>
                         <span><IoIosTrash /></span>
                         <span>Remove Project</span>
                     </li>

@@ -8,10 +8,14 @@
     color: var(--grey-color-3);
     font-size: 2.2rem;
     transition: color .2s ease-in-out;
-    padding: .5rem .8rem;
+    padding: .5rem 0;
     border-radius: 3px;
     display: flex;
     align-items: center;
+}
+
+.navItems li span {
+    padding: .3rem .6rem;
 }
 
 .navItems li:not(:last-child) {
@@ -21,7 +25,6 @@
 .navItem {
     transition: color .2s ease-in-out;
     border-radius: 3px;
-    padding: .5rem .8rem;
     cursor: pointer;
 }
 

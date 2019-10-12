@@ -13,6 +13,7 @@ html {
 
 :root {
   --white-color:#ffffff;
+  --grey-color-dark:#1f1f1f;
   --grey-color-0:#202020;
   --grey-color-1:#282828;
   --grey-color-2:#383838;
@@ -59,12 +60,15 @@ button {
 }
 
 .container {
-  max-width: 114rem;
+  max-width: 100rem;
   margin: 0 auto;
+
 }
 
 .container-dashboard {
-  margin-top: 10rem;
+  margin-top: 0rem;
+  display: flex;
+  align-items: baseline;
 }
 
 .dot {
@@ -142,6 +146,16 @@ button {
 .disabled-button {
   opacity: 0.6;
   cursor: default;
+}
+
+.rotate-90 {
+  transform: rotate(-90deg);
+  transition: transform .2s ease-in-out;
+}
+
+.rotate-0 {
+  transform: rotate(0);
+  transition: transform .2s ease-in-out;
 }
 
 /* mtb */

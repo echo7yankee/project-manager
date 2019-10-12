@@ -6,9 +6,10 @@ import { getProjects, addProject } from "../../../../Redux/actions/project";
 import { Project } from "./Project";
 
 //style
-import { IoMdAdd } from 'react-icons/io';
+import { IoMdAdd, IoIosArrowDown } from 'react-icons/io';
 import style from './project.module.css';
 import spinner from '../../../../assets/gifs/spinner.gif';
+
 
 //components
 import { Modal } from "../modal/Modal";
@@ -20,6 +21,7 @@ interface IProjects {
 
 export const Projects = (props: IProjects): JSX.Element | null => {
   const [modal, setModal] = useState(false);
+  const [toggleProjects, setToggleProjects] = useState(false);
   const [projectValue, setProjectValue] = useState('');
   //redux
   const dispatch = useDispatch();
@@ -49,16 +51,36 @@ export const Projects = (props: IProjects): JSX.Element | null => {
     setModal(!modal);
   }
 
+
   return <div>
     {projects.length > 0 ? <div>
+      <div className={style.projectsTitle}>
+        <div onClick={() => setToggleProjects(!toggleProjects)}>
+          <span className={`${style.projectsTitleIcon} mr-1`}><IoIosArrowDown className={toggleProjects ? 'rotate-0' : 'rotate-90'} /></span>
+          <span>Projects</span>
+        </div>
+        <div>
+          <span className={style.projectsTitleIcon} onClick={openModal}><IoMdAdd /></span>
+        </div>
+      </div>
+
       {projects.map(project => {
-        return <Project key={project.id} project={project} userId={props.userId} />;
+        return <div key={project.id} className={toggleProjects ? style.projectShow : style.projectHide}>
+          <ul>
+            <Project
+              project={project}
+              userId={props.userId}
+            />
+          </ul>
+        </div>
       })}
+
     </div> : null}
     <div className={style.addProjectContainer} onClick={openModal}>
       <span><IoMdAdd /></span>
       <button>Add project</button>
     </div>
+
     {modal && <Modal
       inputValue={projectValue}
       onChange={onChange}
@@ -66,6 +88,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       labelName='Project name'
       closeModal={closeModal}
       request={addNewProject} />}
+
     {isLoading && <div className='overlay'>
       <img src={spinner} alt='spinner' />
     </div>}

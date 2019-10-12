@@ -65,3 +65,21 @@ export const removeProject = (userId, projectId) => {
         }
     }
 }
+
+export const editProject = (userId, projectId, newProjectValue) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: SET_PROJECT_LOADING
+            })
+
+            await axios.put(`/project/${projectId}`, { name: newProjectValue })
+            dispatch({
+                type: UNSET_PROJECT_LOADING
+            })
+            dispatch(getProjects(userId))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

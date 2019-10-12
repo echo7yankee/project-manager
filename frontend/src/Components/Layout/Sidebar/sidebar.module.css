@@ -1,4 +1,4 @@
 .sidebar {
     margin-top: 10rem;
-    max-width: 26rem;
+    flex: 0 0 25%;
 }

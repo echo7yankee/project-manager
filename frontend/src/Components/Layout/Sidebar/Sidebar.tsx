@@ -13,6 +13,7 @@ export const Sidebar = ({ userId }) => {
                 <Projects userId={userId} />
             </div>
         </div>
+
     )
 }
 
