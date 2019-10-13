@@ -12,7 +12,7 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 import { ModalDropdown } from '../modal/ModalDropdown';
 import { ProjectDropdown } from './ProjectDropdown';
 import { Modal } from '../modal/Modal';
-import { Tasks } from '../../TasksContent/Tasks';
+//import { Tasks } from '../../TasksContent/Tasks';
 
 export const Project = ({ project, userId }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);

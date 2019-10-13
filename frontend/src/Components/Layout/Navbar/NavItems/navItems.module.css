@@ -37,7 +37,7 @@
 
 .dropdown,.dropdownShow {
     position: absolute;
-    top: 4.8rem;
+    top: 4.5rem;
     right: .9rem;
     background-color: var(--grey-color-2);
     box-shadow: 0 1px 3px rgba(0,0,0,.15);
