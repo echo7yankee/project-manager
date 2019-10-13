@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 
-//Components
-import { Sidebar } from "../Sidebar/Sidebar";
-
 //jwt
 import jwt from "jsonwebtoken";
 
@@ -15,6 +12,12 @@ import { Navbar } from "../Navbar/Navbar";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../../Redux/actions/user";
+
+//Components
+import { Sidebar } from "../Sidebar/Sidebar";
+import { Tasks } from "../TasksContent/Tasks";
+
+
 
 
 
@@ -47,7 +50,10 @@ export const Dashboard = (): JSX.Element => {
   return (
     <div>
       <Navbar />
-      <Sidebar userId={userId} />
+      <div className='container-dashboard container'>
+        <Sidebar userId={userId} />
+        <Tasks />
+      </div>
     </div>
   );
 };

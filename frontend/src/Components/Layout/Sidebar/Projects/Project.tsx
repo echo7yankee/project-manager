@@ -12,18 +12,17 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 import { ModalDropdown } from '../modal/ModalDropdown';
 import { ProjectDropdown } from './ProjectDropdown';
 import { Modal } from '../modal/Modal';
-//import { Tasks } from '../../TasksContent/Tasks';
 
 export const Project = ({ project, userId }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
     const [projectValueEdit, setProjectValueEdit] = useState(project.name);
-    const [toggleTasks, setToggleTasks] = useState(false)
 
     //redux
     const dispatch = useDispatch();
 
+    //DROPDOWN TOGGLE
     function openDropdown() {
         setDropdown(!dropdown);
     }
@@ -32,6 +31,7 @@ export const Project = ({ project, userId }): JSX.Element => {
         setDropdown(false)
     }
 
+    //MODAL TOGGLE
     function openModal() {
         setModal(!modal);
     }
@@ -40,6 +40,7 @@ export const Project = ({ project, userId }): JSX.Element => {
         setModal(false)
     }
 
+    //MODAL FROM DROPDOWN TOGGLE
     function openModalDropdown(): void {
         setModalDropdown(!modalDropdown);
         closeDropdown();
@@ -49,7 +50,7 @@ export const Project = ({ project, userId }): JSX.Element => {
         setModalDropdown(false);
     }
 
-    function onChange(e) {
+    function onChange(e: { target: { value: string; }; }) {
         setProjectValueEdit(e.target.value);
     }
 
@@ -57,20 +58,17 @@ export const Project = ({ project, userId }): JSX.Element => {
         dispatch(removeProject(userId, project.id));
     }
 
-    function editSelectedProject(e): void {
+    function editSelectedProject(e: { preventDefault: () => void; }): void {
         e.preventDefault();
         dispatch(editProject(userId, project.id, projectValueEdit));
         setModal(false);
     }
-    console.log(toggleTasks);
-    console.log(setToggleTasks);
-
 
     const question = `Are you sure you want to remove ${project.name}?`
 
     return (
         <>
-            <li className={style.projectItem} onClick={() => setToggleTasks(true)} >
+            <li className={style.projectItem} >
                 <div>
                     <span className='dot'></span>
                     <span>{project.name}</span>
@@ -87,7 +85,6 @@ export const Project = ({ project, userId }): JSX.Element => {
                 labelName='Project name'
                 title='Edit project'
                 request={editSelectedProject} />}
-            {/* {toggleTasks && <Tasks />} */}
         </>
     )
 };

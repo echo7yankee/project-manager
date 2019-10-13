@@ -21,7 +21,7 @@ interface IProjects {
 
 export const Projects = (props: IProjects): JSX.Element | null => {
   const [modal, setModal] = useState(false);
-  const [toggleProjects, setToggleProjects] = useState(false);
+  const [toggleProjects, setToggleProjects] = useState(true);
   const [projectValue, setProjectValue] = useState('');
   //redux
   const dispatch = useDispatch();

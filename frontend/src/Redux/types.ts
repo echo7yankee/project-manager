@@ -10,3 +10,6 @@ export const GET_USER: string = 'GET_USER';
 export const GET_PROJECTS: string = 'GET_PROJECTS';
 export const SET_PROJECT_LOADING: string = 'SET_PROJECT_LOADING';
 export const UNSET_PROJECT_LOADING: string = 'UNSET_PROJECT_LOADING';
+
+//tasks
+export const GET_TASKS: string = 'GET_TASKS';
