@@ -6,7 +6,7 @@ export function getTasks(projectId) {
         try {
             const response = await axios.get('/task', {
                 params: {
-                    projectId
+                    projectId,
                 },
             })
 
@@ -14,25 +14,47 @@ export function getTasks(projectId) {
 
             dispatch({
                 type: GET_TASKS,
-                payload: data
+                payload: data,
             })
         } catch (error) {
             console.log(error);
-
         }
     }
 }
 
-export function createTask(projectId) {
-    return async (_dispatch) => {
+export function createTask(projectId, task) {
+    return async (dispatch) => {
         try {
-            const response = await axios.post('/task', {
+
+            await axios.post('/task', task, {
                 params: {
-                    projectId
+                    projectId,
                 }
             })
-            console.log(response);
 
+            dispatch(getTasks(projectId));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function removeTask(projectId, taskId) {
+    return async (dispatch) => {
+        try {
+            await axios.delete(`/task/${taskId}`);
+            dispatch(getTasks(projectId));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function updateTask(projectId, taskId, newTaskValue) {
+    return async (dispatch) => {
+        try {
+            await axios.put(`/task/${taskId}`, newTaskValue);
+            dispatch(getTasks(projectId));
         } catch (error) {
             console.log(error);
         }

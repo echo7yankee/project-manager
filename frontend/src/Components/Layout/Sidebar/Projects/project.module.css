@@ -7,9 +7,17 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 8px 5px;
     border-radius: 3px;
     position: relative;
+}
+
+.projectItem a:visited,.projectItem a:link {
+    width: 90%;
+    padding: 1rem .5rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white-color);
 }
 
 .projectsTitle {

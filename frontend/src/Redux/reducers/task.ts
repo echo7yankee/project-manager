@@ -15,8 +15,7 @@ export function taskReducer(state, action) {
         case GET_TASKS:
             return {
                 ...state,
-                tasks: action.payload.data,
-                projectName: action.payload.projectName
+                tasks: action.payload,
             }
 
         default: return state;

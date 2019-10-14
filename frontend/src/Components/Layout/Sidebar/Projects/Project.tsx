@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 
 //style
-import style from './project.module.css';
 import { IoIosMore } from 'react-icons/io';
+import style from './project.module.css';
 
 //redux
 import { useDispatch } from 'react-redux';
 import { removeProject, editProject } from '../../../../Redux/actions/project';
 
+//react router dom
+import { Link } from 'react-router-dom';
+
 //Components
-import { ModalDropdown } from '../modal/ModalDropdown';
-import { ProjectDropdown } from './ProjectDropdown';
-import { Modal } from '../modal/Modal';
+import { Dropdown } from '../../../Dropdown/Dropdown';
+import { Modal } from '../../../modal/Modal';
+import { ModalDropdown } from '../../../modal/ModalDropdown';
 
 export const Project = ({ project, userId }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
@@ -64,22 +67,29 @@ export const Project = ({ project, userId }): JSX.Element => {
         setModal(false);
     }
 
-    const question = `Are you sure you want to remove ${project.name}?`
+    const question: string = `Are you sure you want to remove ${project.name}?`
 
     return (
         <>
-            <li className={style.projectItem} onClick={() => {
-                console.log(project.id);
-            }} >
-                <div>
+            <li className={style.projectItem} >
+                <Link className='test' to={`/task/${project.id}/search?q=${project.name}`}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
-                </div>
+                </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
-                {dropdown && <ProjectDropdown closeDropdown={closeDropdown} openModal={openModal} openModalDropdown={openModalDropdown} />}
+                {dropdown && <Dropdown
+                    closeDropdown={closeDropdown}
+                    setState={openModal}
+                    openModalDropdown={openModalDropdown}
+                    name='Project'
+                    left='93'
+                />}
             </li>
 
-            {modalDropdown && <ModalDropdown question={question} closeModal={closeModalDropdown} request={removeSelectedProject} />}
+            {modalDropdown && <ModalDropdown
+                question={question}
+                closeModal={closeModalDropdown}
+                request={removeSelectedProject} />}
             {modal && <Modal
                 onChange={onChange}
                 closeModal={closeModal}

@@ -4,22 +4,18 @@ import React, { useEffect } from "react";
 import jwt from "jsonwebtoken";
 
 //react router
-import { Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 //Components
 import { Navbar } from "../Navbar/Navbar";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../../Redux/actions/user";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../../Redux/actions/user';
 
 //Components
-import { Sidebar } from "../Sidebar/Sidebar";
-import { Tasks } from "../TasksContent/Tasks";
-
-
-
-
+import { Sidebar } from '../Sidebar/Sidebar';
+import { Tasks } from '../TasksContent/Tasks';
 
 export const Dashboard = (): JSX.Element => {
   //redux
@@ -44,7 +40,7 @@ export const Dashboard = (): JSX.Element => {
   console.log(userDetails);
 
   if (!authenticated) {
-    return <Redirect to="/register" />;
+    return <Redirect to='/register' />;
   }
 
   return (
@@ -52,7 +48,7 @@ export const Dashboard = (): JSX.Element => {
       <Navbar />
       <div className='container-dashboard container'>
         <Sidebar userId={userId} />
-        <Tasks />
+        <Route path='/task/:projectId' component={Tasks} />
       </div>
     </div>
   );

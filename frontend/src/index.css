@@ -12,7 +12,7 @@ html {
 }
 
 :root {
-  --white-color:#ffffff;
+  --white-color:#f9f9f9;
   --grey-color-dark:#1f1f1f;
   --grey-color-0:#202020;
   --grey-color-1:#282828;
@@ -60,7 +60,7 @@ button {
 }
 
 .container {
-  max-width: 100rem;
+  max-width: 90rem;
   margin: 0 auto;
 
 }

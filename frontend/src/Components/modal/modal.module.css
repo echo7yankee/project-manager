@@ -1,6 +1,6 @@
 .sidebarModal {
     background-color: var(--grey-color-2);
-    width: 40rem;
+    width: 38rem;
     border-radius: 3px;
     transform: translateY(-20rem);
     overflow: hidden;
