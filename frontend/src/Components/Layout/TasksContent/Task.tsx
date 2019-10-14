@@ -62,12 +62,12 @@ export const Task = ({ task, projectId }) => {
 
         const newTaskValue = {
             ...task,
-            task: taskValueEdit
+            task: taskValueEdit,
         }
 
         dispatch(updateTask(projectId, task.id, newTaskValue));
         setEditable();
-        closeDropdown()
+        closeDropdown();
     }
 
     const question: string = `Are you sure you want to remove ${task.task}?`;

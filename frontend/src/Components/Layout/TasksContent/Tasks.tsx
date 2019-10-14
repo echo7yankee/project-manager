@@ -58,14 +58,14 @@ export const Tasks = ({ history }) => {
                     <Task projectId={projectId} task={task} />
                 </ul>
             }) : null}
-            <TaskCreator onClick={toggleForm} />
-            {toggleTaskForm && <TaskForm
+            {toggleTaskForm ? <TaskForm
                 buttonDo='Add Task'
                 buttonClose='Cancel'
                 onClickClose={closeForm}
                 onChange={handleChange}
                 inputValue={taskValue}
-                request={createTaskRequest} />}
+                request={createTaskRequest} />
+                : <TaskCreator onClick={toggleForm} />}
         </div>
     )
 }
