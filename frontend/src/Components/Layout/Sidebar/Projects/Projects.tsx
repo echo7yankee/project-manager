@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
-import { getProjects, addProject } from "../../../../Redux/actions/project";
-import { Project } from "./Project";
+import { useDispatch, useSelector } from 'react-redux';
+import { getProjects, addProject } from '../../../../Redux/actions/project';
+import { Project } from './Project';
 
 //style
-import { IoMdAdd, IoIosArrowDown } from 'react-icons/io';
-import style from './project.module.css';
+import { IoIosArrowDown, IoMdAdd } from 'react-icons/io';
 import spinner from '../../../../assets/gifs/spinner.gif';
-
+import style from './project.module.css';
 
 //components
-import { Modal } from "../modal/Modal";
+import { Modal } from '../modal/Modal';
+import { ProjectCreator } from './ProjectCreator';
 
 
 interface IProjects {
@@ -76,10 +76,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       })}
 
     </div> : null}
-    <div className={style.addProjectContainer} onClick={openModal}>
-      <span><IoMdAdd /></span>
-      <button>Add project</button>
-    </div>
+    <ProjectCreator onClick={openModal} />
 
     {modal && <Modal
       inputValue={projectValue}

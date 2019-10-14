@@ -23,15 +23,14 @@ export const getProjects = (id: string) => {
         } catch (error) {
             console.log(error);
         }
-
     };
-}
+};
 
 export const addProject = (name, id) => {
     return async (dispatch) => {
         try {
             dispatch({
-                type: SET_PROJECT_LOADING
+                type: SET_PROJECT_LOADING,
             })
             await axios.post('/project', { name }, {
                 params: {
@@ -39,13 +38,12 @@ export const addProject = (name, id) => {
                 },
             })
             dispatch({
-                type: UNSET_PROJECT_LOADING
+                type: UNSET_PROJECT_LOADING,
             })
             dispatch(getProjects(id))
         } catch (error) {
             console.log(error);
         }
-
     }
 }
 
