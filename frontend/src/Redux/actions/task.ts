@@ -49,3 +49,14 @@ export function removeTask(projectId, taskId) {
         }
     }
 }
+
+export function updateTask(projectId, taskId, newTaskValue) {
+    return async (dispatch) => {
+        try {
+            await axios.put(`/task/${taskId}`, newTaskValue);
+            dispatch(getTasks(projectId));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
