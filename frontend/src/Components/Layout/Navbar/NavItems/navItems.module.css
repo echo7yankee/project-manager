@@ -57,18 +57,17 @@
     margin:0 !important;
     padding: 1rem 0rem;
     padding-left: 1rem;
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
     cursor: pointer;
     display: flex;
     align-items: center;
 }
 
 .dropdownItem:hover {
-    background-color: var(--grey-color-4);
+    background-color: var(--grey-color-1);
 }
 
 .dropdownIcon {
-    margin-right: 1rem;
     margin-top: .2rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
