@@ -71,17 +71,17 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     return (
         <>
-            <Link className={style.projectItem} to={`/task/${project.id}/search?q=${project.name}`} >
-                <div>
+            <li className={style.projectItem} >
+                <Link className='test' to={`/task/${project.id}/search?q=${project.name}`}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
-                </div>
+                </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <ProjectDropdown
                     closeDropdown={closeDropdown}
                     openModal={openModal}
                     openModalDropdown={openModalDropdown} />}
-            </Link>
+            </li>
 
             {modalDropdown && <ModalDropdown question={question} closeModal={closeModalDropdown} request={removeSelectedProject} />}
             {modal && <Modal

@@ -92,9 +92,32 @@
 .taskContainer {
     padding: 1.2rem .5rem;
     border-bottom: 1px solid var(--grey-color-2);
+    color: var(--white-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .task {
-    color: var(--white-color);
     font-size: 1.4rem;
 }
+
+.taskContainer:hover .taskItemSettings {
+    visibility: visible;
+}
+
+.taskItemSettings {
+    visibility: hidden;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+ .taskItemSettings:hover {
+     background-color:var(--grey-color-2)
+ }
+ 
