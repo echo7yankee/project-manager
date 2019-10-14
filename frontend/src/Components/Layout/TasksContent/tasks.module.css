@@ -1,6 +1,7 @@
 .tasks {
     background-color: var(--grey-color-dark);
     width: 100%;
+    min-height: 100vh;
     margin-left: 2.5rem;
     padding: 3rem;
     border-radius: 3px;

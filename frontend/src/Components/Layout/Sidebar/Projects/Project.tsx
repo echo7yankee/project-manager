@@ -68,7 +68,9 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     return (
         <>
-            <li className={style.projectItem} >
+            <li className={style.projectItem} onClick={() => {
+                console.log(project.id);
+            }} >
                 <div>
                     <span className='dot'></span>
                     <span>{project.name}</span>
