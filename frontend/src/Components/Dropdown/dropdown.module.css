@@ -1,7 +1,7 @@
 .projectDropdown {
     position: absolute;
     background-color: var(--grey-color-1);
-    left: 93%;
+    left: 95%;
     top: 2.7rem;
     width: 20rem;
     z-index: 5000;
@@ -16,6 +16,7 @@
     align-items: center;
     padding: .9rem 1rem;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .projectDropdown ul li:hover {

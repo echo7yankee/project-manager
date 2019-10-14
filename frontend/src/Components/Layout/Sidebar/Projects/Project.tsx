@@ -12,9 +12,9 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 import { Link } from 'react-router-dom';
 
 //Components
-import { Modal } from '../modal/Modal';
-import { ModalDropdown } from '../modal/ModalDropdown';
-import { ProjectDropdown } from './ProjectDropdown';
+import { Dropdown } from '../../../Dropdown/Dropdown';
+import { Modal } from '../../../modal/Modal';
+import { ModalDropdown } from '../../../modal/ModalDropdown';
 
 export const Project = ({ project, userId }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
@@ -77,13 +77,19 @@ export const Project = ({ project, userId }): JSX.Element => {
                     <span>{project.name}</span>
                 </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
-                {dropdown && <ProjectDropdown
+                {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    openModal={openModal}
-                    openModalDropdown={openModalDropdown} />}
+                    setState={openModal}
+                    openModalDropdown={openModalDropdown}
+                    name='Project'
+                    left='93'
+                />}
             </li>
 
-            {modalDropdown && <ModalDropdown question={question} closeModal={closeModalDropdown} request={removeSelectedProject} />}
+            {modalDropdown && <ModalDropdown
+                question={question}
+                closeModal={closeModalDropdown}
+                request={removeSelectedProject} />}
             {modal && <Modal
                 onChange={onChange}
                 closeModal={closeModal}

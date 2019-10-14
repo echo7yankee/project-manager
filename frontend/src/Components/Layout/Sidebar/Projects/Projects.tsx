@@ -11,7 +11,7 @@ import spinner from '../../../../assets/gifs/spinner.gif';
 import style from './project.module.css';
 
 //components
-import { Modal } from '../modal/Modal';
+import { Modal } from '../../../modal/Modal';
 import { ProjectCreator } from './ProjectCreator';
 
 

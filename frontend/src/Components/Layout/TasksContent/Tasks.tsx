@@ -54,9 +54,9 @@ export const Tasks = ({ history }) => {
         <div className={style.tasks}>
             <h1>{projectName}</h1>
             {tasks.length > 0 ? tasks && tasks.map(task => {
-                return <div key={task.id}>
-                    <Task task={task} />
-                </div>
+                return <ul key={task.id}>
+                    <Task projectId={projectId} task={task} />
+                </ul>
             }) : null}
             <TaskCreator onClick={toggleForm} />
             {toggleTaskForm && <TaskForm

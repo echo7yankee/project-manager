@@ -38,3 +38,14 @@ export function createTask(projectId, task) {
         }
     }
 }
+
+export function removeTask(projectId, taskId) {
+    return async (dispatch) => {
+        try {
+            await axios.delete(`/task/${taskId}`);
+            dispatch(getTasks(projectId));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

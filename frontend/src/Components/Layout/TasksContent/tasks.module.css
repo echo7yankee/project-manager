@@ -89,20 +89,21 @@
     text-decoration: underline;
 }
 
-.taskContainer {
+.taskItem {
     padding: 1.2rem .5rem;
     border-bottom: 1px solid var(--grey-color-2);
     color: var(--white-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .task {
     font-size: 1.4rem;
 }
 
-.taskContainer:hover .taskItemSettings {
+.taskItem:hover .taskItemSettings {
     visibility: visible;
 }
 
