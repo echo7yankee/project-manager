@@ -12,7 +12,7 @@
 }
 
 .projectItem a:visited,.projectItem a:link {
-    width: 100%;
+    width: 90%;
     padding: 1rem .5rem;
     display: flex;
     align-items: center;
