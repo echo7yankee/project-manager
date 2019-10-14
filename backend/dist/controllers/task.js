@@ -28,7 +28,17 @@ class Task {
                 if (tasks === null) {
                     return res.status(404).json({ error: "Tasks don't exist" });
                 }
-                return res.status(200).json(tasks);
+                const newTasks = tasks.map((task) => {
+                    return {
+                        task: task.task,
+                        projectId: projectId,
+                        archived: task.archived,
+                        date: task.date,
+                        id: task._id,
+                    };
+                });
+                console.log('NEW TASKS', newTasks);
+                return res.status(200).json(newTasks);
             }
             catch (error) {
                 console.log(error);

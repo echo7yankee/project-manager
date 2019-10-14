@@ -2,7 +2,7 @@
 //ts types
 import { TaskDao } from '../databaseStorage/TaskDao';
 import { Request, Response } from 'express';
-import { ITask } from '../TSTypes/Task';
+import { ITask, ITaskDatabase } from '../TSTypes/Task';
 
 export class Task {
     private taskDao: TaskDao;
@@ -19,7 +19,7 @@ export class Task {
                 projectId,
             };
 
-            const tasks: ITask[] = await this.taskDao.find({ projectId })
+            const tasks: ITaskDatabase[] = await this.taskDao.find({ projectId })
 
             const isSameTask: boolean = tasks.some((task: ITask) => {
                 return task.task === newTask.task;
@@ -42,11 +42,24 @@ export class Task {
         try {
             const projectId: string = req.query.projectId;
 
-            const tasks: ITask[] = await this.taskDao.find({ projectId })
+            const tasks: ITaskDatabase[] = await this.taskDao.find({ projectId })
             if (tasks === null) {
                 return res.status(404).json({ error: "Tasks don't exist" })
             }
-            return res.status(200).json(tasks)
+
+            const newTasks: ITask[] = tasks.map((task) => {
+                return {
+                    task: task.task,
+                    projectId: projectId,
+                    archived: task.archived,
+                    date: task.date,
+                    id: task._id,
+                };
+            });
+
+            console.log('NEW TASKS', newTasks);
+
+            return res.status(200).json(newTasks)
 
         } catch (error) {
             console.log(error);
