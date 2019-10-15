@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_TASKS } from '../types';
+import { GET_TASKS, GET_ALL_TASKS } from '../types';
 
 export function getTasks(projectId) {
     return async (dispatch) => {
@@ -14,6 +14,23 @@ export function getTasks(projectId) {
 
             dispatch({
                 type: GET_TASKS,
+                payload: data,
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function getAllTasks() {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get('/tasks')
+
+            const { data } = response;
+
+            dispatch({
+                type: GET_ALL_TASKS,
                 payload: data,
             })
         } catch (error) {
