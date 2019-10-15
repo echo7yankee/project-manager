@@ -4,13 +4,13 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 //redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllTasks } from '../../../../Redux/actions/task';
 //
 import style from './navbarSearchInfo.module.css';
 
-export const NavbarSearchInfo = ({ onClick, inputValue }): JSX.Element => {
+export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
 
     const allTasks = useSelector(state => state.task.allTasks);
     const projects = useSelector(state => state.project.projects);
@@ -35,7 +35,7 @@ export const NavbarSearchInfo = ({ onClick, inputValue }): JSX.Element => {
                     filter(allTasks).map(task => {
                         return <Link key={task.id}
                             className={style.searchItem}
-                            onClick={onClick}
+                            onClick={destroy}
                             to={`/project/${task.projectId}?q=${task.projectName}`}>
                             <span className='dot mr-1'></span>
                             <span>{task.task}</span>

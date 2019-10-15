@@ -1,4 +1,7 @@
-import React, { SetStateAction } from 'react';
+import React, { SetStateAction, useRef } from 'react';
+
+//closedropdown
+import { useOutsideClose } from '../../CloseDropdown/CloseDropdown';
 
 //style
 import { IoMdSearch } from 'react-icons/io';
@@ -10,17 +13,22 @@ import { NavbarSearchInfo } from './NavbarSearchInfo/NavbarSearchInfo';
 interface ISearchBar {
     onChange: (e: { target: { value: SetStateAction<string>; }; }) => void,
     inputValue: string,
-    onClick: () => void,
+    destroy: () => void,
 }
 
 export const SearchBar = (props: ISearchBar): JSX.Element => {
+
+    //close dropdown
+    const wrapperRef = useRef(null);
+    useOutsideClose(wrapperRef, props.destroy);
+
     return (
         <>
             <form className={style.searchBarForm}>
                 <span className={style.searchBarIcon}><IoMdSearch /></span>
                 <input type='text' placeholder='Quick find' value={props.inputValue} onChange={props.onChange} />
-                {props.inputValue && <div className={style.searchInfoContainer}>
-                    <NavbarSearchInfo onClick={props.onClick} inputValue={props.inputValue} />
+                {props.inputValue && <div className={style.searchInfoContainer} ref={wrapperRef}>
+                    <NavbarSearchInfo destroy={props.destroy} inputValue={props.inputValue} />
                 </div>}
             </form>
         </>
