@@ -49,7 +49,7 @@ export class Project {
     try {
       const id: string = req.query.userId;
       const projects: IProjectDatabase[] = await this.projectDao.find({
-        userId: id
+        userId: id,
       });
 
       if (projects === null) {

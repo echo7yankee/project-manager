@@ -2,6 +2,7 @@ import React from 'react';
 
 //redux
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 //
 import style from './navbarSearchInfo.module.css';
 
@@ -15,18 +16,18 @@ export const NavbarSearchInfo = ({ inputValue }): JSX.Element => {
             return task.task.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0
         })
     }
-
     console.log(tasks);
     console.log(projects);
-    console.log(inputValue);
-    console.log(filter(tasks));
 
     return (
         <div className={style.searchInfo}>
             <ul className={style.searchList}>
                 {tasks.length > 0 ?
                     filter(tasks).map(task => {
-                        return <li>{task.task}</li>
+                        return <Link key={task.id} className={style.searchItem} to={`/project/${task.projectId}?q=${task.projectName}`}>
+                            <span className='dot mr-1'></span>
+                            <span>{task.task}</span>
+                        </Link>
                     })
                     : null}
             </ul>

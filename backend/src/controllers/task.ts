@@ -51,6 +51,7 @@ export class Task {
                 return {
                     task: task.task,
                     projectId: projectId,
+                    projectName: task.projectName,
                     archived: task.archived,
                     date: task.date,
                     id: task._id,

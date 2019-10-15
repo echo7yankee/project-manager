@@ -48,7 +48,7 @@ export const Dashboard = (): JSX.Element => {
       <Navbar />
       <div className='container-dashboard container'>
         <Sidebar userId={userId} />
-        <Route path='/task/:projectId' component={Tasks} />
+        <Route path='/project/:projectId' component={Tasks} />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ class Project {
             try {
                 const id = req.query.userId;
                 const projects = await this.projectDao.find({
-                    userId: id
+                    userId: id,
                 });
                 if (projects === null) {
                     return res.status(404).json({ error: "Projects don't exist" });

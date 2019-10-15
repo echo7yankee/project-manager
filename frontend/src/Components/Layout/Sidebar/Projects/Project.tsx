@@ -72,7 +72,7 @@ export const Project = ({ project, userId }): JSX.Element => {
     return (
         <>
             <li className={style.projectItem} >
-                <Link className='test' to={`/task/${project.id}/search?q=${project.name}`}>
+                <Link className='test' to={`/project/${project.id}?q=${project.name}`}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
                 </Link>

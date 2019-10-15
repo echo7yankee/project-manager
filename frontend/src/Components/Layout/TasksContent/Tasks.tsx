@@ -15,7 +15,7 @@ import { Task } from './Task';
 export const Tasks = ({ history }) => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
     const [taskValue, setTaskValue] = useState('');
-    const projectId: string = history.location.pathname.split('task/').pop();
+    const projectId: string = history.location.pathname.split('project/').pop();
     const projectName: string = history.location.search.split('=').pop();
 
     //redux
@@ -44,6 +44,7 @@ export const Tasks = ({ history }) => {
         const newTask = {
             task: taskValue,
             date: new Date(),
+            projectName,
             archived: false,
         }
         dispatch(createTask(projectId, newTask));

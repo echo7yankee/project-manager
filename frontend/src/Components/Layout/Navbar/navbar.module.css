@@ -32,7 +32,7 @@
 .searchBarForm input {
     width: 100%;
     padding: .5rem .5rem .5rem 4rem;
-    background: var(--grey-color-4);
+    background: var(--grey-color-1);
     color: var(--grey-color-3);
     border: none;
     transition:  background .2s ease-in;
@@ -40,11 +40,11 @@
 }
 
 .searchBarForm input:hover {
-    background: var(--grey-color-hover-4);
+    background: var(--grey-color-4);
 }
 
 .searchBarForm input:focus {
-    background: var(--grey-color-4);
+    background: var(--grey-color-1);
 }
 
 
@@ -69,5 +69,5 @@ color: var(--grey-color-3);
     position: absolute;
     width: 100%;
     text-align: left;
-    background-color: red;
+    background-color: var(--grey-color-1);
 }

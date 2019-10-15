@@ -14,6 +14,10 @@ const taskSchema = new Schema({
         type: String,
         required: true,
     },
+    projectName: {
+        type: String,
+        required: true,
+    },
     archived: {
         type: Boolean,
         required: true,
