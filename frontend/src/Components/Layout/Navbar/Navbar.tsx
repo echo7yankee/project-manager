@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //Style
 import style from './navbar.module.css';
@@ -9,11 +9,18 @@ import { NavItems } from './NavItems/NavItems';
 import { SearchBar } from './SearchBar';
 
 export const Navbar = (): JSX.Element => {
+
+    const [searchValue, setSearchValue] = useState('');
+
+    function handleChange(e: { target: { value: React.SetStateAction<string>; }; }) {
+        setSearchValue(e.target.value)
+    }
+
     return (
         <nav className={style.navbar}>
             <div className='container dflex space-between'>
                 <Logo />
-                <SearchBar />
+                <SearchBar inputValue={searchValue} onChange={handleChange} />
                 <NavItems />
             </div>
         </nav>
