@@ -18,7 +18,6 @@ export const Navbar = (): JSX.Element => {
 
     function destroy() {
         setSearchValue('');
-        console.log('hey');
     }
 
     return (
