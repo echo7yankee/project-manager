@@ -14,11 +14,12 @@ export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
 
     const allTasks = useSelector(state => state.task.allTasks);
     const projects = useSelector(state => state.project.projects);
+    // const [keyIndex, setKeyIndex] = useState(0);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllTasks())
+        dispatch(getAllTasks());
     }, [dispatch])
 
     function filter(allTasks) {
@@ -26,20 +27,23 @@ export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
             return task.task.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0;
         })
     }
+
     console.log(projects);
 
     return (
         <div className={style.searchInfo}>
             <ul className={style.searchList}>
                 {allTasks.length > 0 ?
-                    filter(allTasks).map(task => {
-                        return <Link key={task.id}
+                    filter(allTasks).map((task) => {
+                        return <Link
+                            key={task.id}
                             className={style.searchItem}
                             onClick={destroy}
+                            tabIndex={0}
                             to={`/project/${task.projectId}?q=${task.projectName}`}>
                             <span className='dot mr-1'></span>
                             <span>{task.task}</span>
-                        </Link>
+                        </Link>;
                     })
                     : null}
             </ul>
