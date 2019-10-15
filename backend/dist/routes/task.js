@@ -9,4 +9,5 @@ exports.taskRouter.post('/task', task.createTask);
 exports.taskRouter.delete('/task/:id', task.removeTask);
 exports.taskRouter.put('/task/:id', task.editTask);
 exports.taskRouter.get('/task', task.getTasks);
+exports.taskRouter.get('/tasks', task.getAllTasks);
 //# sourceMappingURL=task.js.map

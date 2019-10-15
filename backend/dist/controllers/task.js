@@ -38,7 +38,30 @@ class Task {
                         id: task._id,
                     };
                 });
-                console.log('NEW TASKS', newTasks);
+                return res.status(200).json(newTasks);
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
+        this.getAllTasks = async (_req, res) => {
+            try {
+                const tasks = await this.taskDao.find({});
+                if (tasks === null) {
+                    return res.status(404).json({ error: "Tasks don't exist" });
+                }
+                const newTasks = tasks.map((task) => {
+                    return {
+                        task: task.task,
+                        projectName: task.projectName,
+                        projectId: task.projectId,
+                        archived: task.archived,
+                        date: task.date,
+                        id: task._id,
+                    };
+                });
+                console.log(newTasks);
                 return res.status(200).json(newTasks);
             }
             catch (error) {

@@ -12,3 +12,4 @@ taskRouter.post('/task', task.createTask);
 taskRouter.delete('/task/:id', task.removeTask);
 taskRouter.put('/task/:id', task.editTask);
 taskRouter.get('/task', task.getTasks);
+taskRouter.get('/tasks', task.getAllTasks);

@@ -13,3 +13,4 @@ export const UNSET_PROJECT_LOADING: string = 'UNSET_PROJECT_LOADING';
 
 //tasks
 export const GET_TASKS: string = 'GET_TASKS';
+export const GET_ALL_TASKS: string = 'GET_ALL_TASKS';
