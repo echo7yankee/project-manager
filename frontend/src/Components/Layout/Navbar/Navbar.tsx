@@ -18,13 +18,14 @@ export const Navbar = (): JSX.Element => {
 
     function destroy() {
         setSearchValue('');
+        console.log('hey');
     }
 
     return (
         <nav className={style.navbar}>
             <div className='container dflex space-between'>
                 <Logo />
-                <SearchBar onClick={destroy} inputValue={searchValue} onChange={handleChange} />
+                <SearchBar destroy={destroy} inputValue={searchValue} onChange={handleChange} />
                 <NavItems />
             </div>
         </nav>
