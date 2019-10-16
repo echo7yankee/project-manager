@@ -212,3 +212,7 @@ button {
 .pl-3 {
   padding-bottom: 3rem;
 }
+
+.active {
+  background-color: red;
+}

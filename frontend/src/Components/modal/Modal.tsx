@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
 
 //style
 import style from './modal.module.css'
@@ -14,6 +14,12 @@ interface IModalProps {
 
 export const Modal = (props: IModalProps): JSX.Element => {
 
+    const inputRef: any = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
+
     return (
         <div className='overlay' onClick={props.closeModal}>
             <div className={style.sidebarModal} onClick={(e) => e.stopPropagation()}>
@@ -23,7 +29,7 @@ export const Modal = (props: IModalProps): JSX.Element => {
                 <form onSubmit={props.request}>
                     <div className={style.modalGroupControl}>
                         <label htmlFor='projectInput'>{props.labelName}</label>
-                        <input id='projectInput' type='text' value={props.inputValue} onChange={props.onChange} />
+                        <input id='projectInput' type='text' value={props.inputValue} onChange={props.onChange} ref={inputRef} />
                     </div>
                     <div className={style.modalBtnContainer}>
                         <button type='button' onClick={props.closeModal}>Cancel</button>

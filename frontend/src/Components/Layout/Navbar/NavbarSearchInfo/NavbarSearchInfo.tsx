@@ -10,11 +10,17 @@ import { getAllTasks } from '../../../../Redux/actions/task';
 //
 import style from './navbarSearchInfo.module.css';
 
-export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
+interface INavbarSearchInfo {
+    destroy: () => void;
+    cursor: number;
+    filter;
+    allTasks;
+    setRef;
+}
 
-    const allTasks = useSelector(state => state.task.allTasks);
+export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
+
     const projects = useSelector(state => state.project.projects);
-    // const [keyIndex, setKeyIndex] = useState(0);
 
     const dispatch = useDispatch();
 
@@ -22,24 +28,19 @@ export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
         dispatch(getAllTasks());
     }, [dispatch])
 
-    function filter(allTasks) {
-        return allTasks.filter(task => {
-            return task.task.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0;
-        })
-    }
-
     console.log(projects);
 
     return (
         <div className={style.searchInfo}>
             <ul className={style.searchList}>
-                {allTasks.length > 0 ?
-                    filter(allTasks).map((task) => {
+                {props.allTasks.length > 0 ?
+                    props.filter(props.allTasks).map((task, index) => {
                         return <Link
                             key={task.id}
+                            ref={(ref) => props.setRef(ref, index)}
                             className={style.searchItem}
-                            onClick={destroy}
-                            tabIndex={0}
+                            tabIndex={index}
+                            onClick={props.destroy}
                             to={`/project/${task.projectId}?q=${task.projectName}`}>
                             <span className='dot mr-1'></span>
                             <span>{task.task}</span>
@@ -49,4 +50,4 @@ export const NavbarSearchInfo = ({ destroy, inputValue }): JSX.Element => {
             </ul>
         </div>
     )
-};
+});
