@@ -16,7 +16,7 @@ export const Navbar = (): JSX.Element => {
         setSearchValue(e.target.value)
     }
 
-    function destroy() {
+    function destroy(): void {
         setSearchValue('');
     }
 

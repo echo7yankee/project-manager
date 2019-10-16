@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React, { useEffect, useRef, SetStateAction } from 'react';
 
 //style
 import style from './tasks.module.css';
@@ -13,6 +13,13 @@ interface ITaskForm {
 }
 
 export const TaskForm = (props: ITaskForm): JSX.Element => {
+
+    const inputRef: any = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
+
     return (
         <form className={style.taskForm} onSubmit={props.request} >
             <div className={style.taskFormInputGroup}>
@@ -20,7 +27,8 @@ export const TaskForm = (props: ITaskForm): JSX.Element => {
                     type='text'
                     placeholder="Add a task ... e.g Read tonight's news"
                     value={props.inputValue}
-                    onChange={props.onChange} />
+                    onChange={props.onChange}
+                    ref={inputRef} />
             </div>
             <div className={style.taskFormButtonContainer}>
                 <button disabled={props.inputValue === ''}
