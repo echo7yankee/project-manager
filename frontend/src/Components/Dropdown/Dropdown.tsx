@@ -3,29 +3,34 @@ import React, { useRef } from 'react';
 //closedropdown
 import { useOutsideClose } from '../CloseDropdown/CloseDropdown';
 
-//style
-import { IoIosTrash, IoMdCreate } from 'react-icons/io';
+
 import style from './dropdown.module.css';
 
-export const Dropdown = ({ closeDropdown, openModalDropdown, setState, name, left }) => {
+export const Dropdown = ({ closeDropdown, dropdownItems, left, top }) => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, closeDropdown);
 
+    // const itemRef: any = useRef(null);
+
+    // useEffect(() => {
+    //     itemRef.current.focus();
+    //     console.log(itemRef.current)
+    // }, [])
+
     return (
-        <>
-            <div className={style.projectDropdown} ref={wrapperRef} style={{ left: left + '%' }}>
-                <ul>
-                    <li onClick={setState}>
-                        <span><IoMdCreate /></span>
-                        <span>Edit {name}</span>
-                    </li>
-                    <li className='dropdown__remove' onClick={openModalDropdown}>
-                        <span><IoIosTrash /></span>
-                        <span>Remove {name}</span>
-                    </li>
-                </ul>
-            </div>
-        </>
+        <div className={style.projectDropdown} ref={wrapperRef} style={{ left: left + '%', top: top + '%' }}>
+            <ul >
+                {dropdownItems.map(item => {
+                    return (<li
+                        key={item.name}
+                        onClick={item.action}
+                        className={item.className} >
+                        <span>{item.icon}</span>
+                        <span>{item.name}</span>
+                    </li>);
+                })}
+            </ul>
+        </div>
     )
-}
+};

@@ -23,6 +23,14 @@
     background: var(--grey-color-2);
 }
 
+.projectDropdown ul li:focus {
+    background: red;
+}
+
 .projectDropdown ul li span :first-child {
     margin-right: 1rem;
+    font-size: 1.6rem;
 }
+
+
+
