@@ -8,10 +8,14 @@ import { removeTask, updateTask } from '../../../Redux/actions/task';
 import { IoIosMore } from 'react-icons/io';
 import style from './tasks.module.css';
 
+//style
+import { IoIosTrash, IoMdCreate } from 'react-icons/io';
+
 //components
 import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
+
 
 export const Task = ({ task, projectId }) => {
 
@@ -19,7 +23,6 @@ export const Task = ({ task, projectId }) => {
     const [modalDropdown, setModalDropdown] = useState(false);
     const [taskValueEdit, setTaskValueEdit] = useState(task.task);
     const [isEditable, setIsEditable] = useState(false);
-
 
     //redux
     const dispatch = useDispatch();
@@ -70,6 +73,22 @@ export const Task = ({ task, projectId }) => {
         closeDropdown();
     }
 
+    const createIcon = <IoMdCreate />
+    const trash = <IoIosTrash />
+
+    const dropdownItems = [{
+        name: 'Edit Task',
+        action: setEditable,
+        className: '',
+        icon: createIcon,
+    },
+    {
+        name: 'Remove Task',
+        action: openModalDropdown,
+        className: 'dropdown__remove',
+        icon: trash
+    },]
+
     const question: string = `Are you sure you want to remove ${task.task}?`;
 
     return (
@@ -84,11 +103,10 @@ export const Task = ({ task, projectId }) => {
                     <span className={style.task} onClick={setEditable}>{task.task}</span>
                     <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>
                     {dropdown && <Dropdown
-                        setState={setEditable}
                         closeDropdown={closeDropdown}
-                        openModalDropdown={openModalDropdown}
-                        name='Task'
-                        left='97.5' />
+                        dropdownItems={dropdownItems}
+                        left='98.5'
+                        top='' />
                     }
                 </li>}
             {modalDropdown && <ModalDropdown
