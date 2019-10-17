@@ -60,6 +60,17 @@ export const Task = ({ task, projectId }) => {
         dispatch(removeTask(projectId, task.id));
     }
 
+    function setCompletedTask(id): void {
+        if (task.id === id) {
+            task = {
+                ...task,
+                completed: true,
+            }
+            console.log(task)
+            dispatch(updateTask(projectId, task.id, task));
+        }
+    }
+
     function editSelectedTask(e): void {
         e.preventDefault();
 
@@ -100,7 +111,11 @@ export const Task = ({ task, projectId }) => {
                 onChange={handleChange}
                 inputValue={taskValueEdit}
                 request={editSelectedTask} /> : <li className={style.taskItem}>
-                    <span className={style.task} onClick={setEditable}>{task.task}</span>
+
+                    <div className='dflex'>
+                        <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>
+                        <span className={style.task} onClick={setEditable}>{task.task}</span>
+                    </div>
                     <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>
                     {dropdown && <Dropdown
                         closeDropdown={closeDropdown}

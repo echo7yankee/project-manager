@@ -18,10 +18,6 @@
     padding: .3rem .6rem;
 }
 
-.navItems li:not(:last-child) {
-    margin-right: 1rem;
-}
-
 .navItem {
     transition: color .2s ease-in-out;
     border-radius: 3px;

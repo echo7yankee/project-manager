@@ -39,13 +39,14 @@ export const Settings = (): JSX.Element => {
     {
         name: 'Logout',
         icon: authIcon,
-        action: () => dispatch(logoutUser())
+        action: () => dispatch(logoutUser()),
+        className: 'dropdown__remove'
     },]
 
     return (
         <li className='pos-relative' onClick={toggleDropdown}>
             <span className={style.navItem}><IoMdSettings /></span>
-            {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='-500' top='100' />}
+            {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='100' top='100' />}
         </li>
     )
 };

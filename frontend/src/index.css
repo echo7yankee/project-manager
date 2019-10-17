@@ -82,6 +82,7 @@ button {
 
 .dflex {
   display: flex;
+  align-items: center;
 }
 
 .space-between {
