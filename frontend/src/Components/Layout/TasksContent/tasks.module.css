@@ -7,6 +7,33 @@
     border-radius: 3px;
 }
 
+.tasksTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tasksTitleContainer span {
+    color: var(--grey-color-hover-4);
+    font-size: 2.8rem;
+    cursor: pointer;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .3s ease-in, transform .2s ease-in-out;
+    border-radius: 50%;
+    position: relative;
+}
+
+.tasksTitleContainer span:hover {
+    background-color: var(--grey-color-2);
+    /* transform: translateY(-.4rem); */
+}
+
+
+
 .tasks h1 {
     font-size: 1.8rem;
     color: var(--white-color);
@@ -122,3 +149,17 @@
      background-color:var(--grey-color-2)
  }
  
+ .taskDot {
+     display: block;
+     border: 1px solid var(--grey-color-4);
+     border-radius: 50%;
+     width: 2rem;
+     height: 2rem;
+     margin-right: 2rem;
+     transition: background-color .4s ease-in;
+     cursor: pointer;
+ }
+
+ .taskDot:hover {
+     background-color: var(--grey-color-2);
+ }

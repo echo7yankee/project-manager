@@ -22,7 +22,7 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
 
     const [cursor, setCursor] = useState(0);
     const allTasks = useSelector(state => state.task.allTasks);
-    const test: any = []
+    const refs: any = []
 
     function filter(allTasks) {
         return allTasks.filter(task => {
@@ -31,8 +31,7 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
     }
 
     function setRef(ref, index) {
-        test.push(ref);
-        console.log(index)
+        refs.push(ref);
         index === cursor && ref && ref.focus();
     }
 
@@ -55,7 +54,7 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
                 setCursor(cursor - 1);
                 break;
             case 'Enter':
-                test[cursor].click()
+                refs[cursor].click()
                 break;
             default: console.log('hey')
         }
