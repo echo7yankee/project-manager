@@ -28,6 +28,7 @@ export function taskReducer(state, action) {
                 ...state,
                 tasks: action.payload,
                 isLoading: false,
+
             };
         case SET_SHOW_TOAST:
             return {
