@@ -7,13 +7,10 @@ import { ITask } from '../../../../TSTypes/Task';
 import style from './taskHistory.module.css';
 
 //redux
-import { useSelector } from 'react-redux';
 import { TaskHistoryItem } from './TaskHistoryItem';
 
-export const TasksHistory = () => {
+export const TasksHistory = ({ tasks, projectId }) => {
 
-    //redux
-    const tasks: ITask[] = useSelector(state => state.task.tasks);
     const completedTasks: ITask[] = tasks.filter(task => task.completed === true);
 
     console.log(tasks)
@@ -22,7 +19,7 @@ export const TasksHistory = () => {
         <div className={style.taskHistoryContainer}>
             <ul className={style.taskHistoryList}>
                 {completedTasks.map((task: ITask) => {
-                    return <TaskHistoryItem key={task.id} task={task} />
+                    return <TaskHistoryItem key={task.id} task={task} projectId={projectId} />
                 })}
             </ul>
         </div>

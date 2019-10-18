@@ -98,7 +98,7 @@ export const Tasks = ({ history }) => {
                 <img src={spinner} alt='spinner' />
             </div>}
 
-            <TasksHistory />
+            <TasksHistory projectId={projectId} tasks={tasks} />
         </div>
     )
 }
