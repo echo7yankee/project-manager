@@ -19,7 +19,7 @@ import { Dropdown } from '../../../Dropdown/Dropdown';
 import { Modal } from '../../../modal/Modal';
 import { ModalDropdown } from '../../../modal/ModalDropdown';
 
-export const Project = ({ project, userId }): JSX.Element => {
+export const Project = ({ project, userId, history }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -62,6 +62,7 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     function removeSelectedProject(): void {
         dispatch(removeProject(userId, project.id));
+        history.push(`/`)
     }
 
     function editSelectedProject(e: { preventDefault: () => void; }): void {

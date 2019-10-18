@@ -44,6 +44,7 @@
     display: flex;
     align-items: center; 
     cursor: pointer;
+    width: max-content;
 }
 
 .addTaskContainer button,.addTaskContainer span {

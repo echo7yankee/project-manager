@@ -17,7 +17,7 @@ import { getUser } from '../../../Redux/actions/user';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { Tasks } from '../TasksContent/Tasks';
 
-export const Dashboard = (): JSX.Element => {
+export const Dashboard = ({ history }): JSX.Element => {
   //redux
   const dispatch = useDispatch();
   const authenticated = useSelector(state => state.auth.authenticated);
@@ -47,7 +47,7 @@ export const Dashboard = (): JSX.Element => {
     <div>
       <Navbar />
       <div className='container-dashboard container'>
-        <Sidebar userId={userId} />
+        <Sidebar userId={userId} history={history} />
         <Route path='/project/:projectId' component={Tasks} />
       </div>
     </div>

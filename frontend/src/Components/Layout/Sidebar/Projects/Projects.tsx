@@ -17,6 +17,7 @@ import { ProjectCreator } from './ProjectCreator';
 
 interface IProjects {
   userId: string;
+  history;
 }
 
 export const Projects = (props: IProjects): JSX.Element | null => {
@@ -72,6 +73,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
             <Project
               project={project}
               userId={props.userId}
+              history={props.history}
             />
           </ul>
         </div>
