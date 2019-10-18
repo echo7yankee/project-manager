@@ -1,0 +1,41 @@
+.taskHistoryContainer {
+    margin-top: 3rem;
+}
+
+.taskHistoryList {
+    list-style: none;
+}
+
+.taskHistoryItem {
+    color: var(--grey-color-hover-4);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.taskHistoryItem:not(:first-child) {
+    margin-top: 1.5rem;
+}
+
+.taskHistoryDot {
+    font-size: 1.8rem;
+    margin-right: .8rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid  var(--grey-color-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .4s ease-in;
+}
+
+.taskHistoryDot:hover {
+    background-color: var(--grey-color-2);
+}
+
+.taskHistoryDotIcon {
+    color: var(--grey-color-3);  
+}

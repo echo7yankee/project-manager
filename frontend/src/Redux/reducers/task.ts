@@ -27,7 +27,7 @@ export function taskReducer(state, action) {
                 ...state,
                 tasks: action.payload,
                 isLoading: false
-            }
+            };
 
         default: return state;
     }

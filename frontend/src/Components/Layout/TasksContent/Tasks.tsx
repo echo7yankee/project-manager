@@ -12,8 +12,9 @@ import { TaskForm } from './TaskForm';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 import { createTask, getTasks } from '../../../Redux/actions/task';
-import { Task } from './Task';
 import { Dropdown } from '../../Dropdown/Dropdown';
+import { Task } from './Task';
+import { TasksHistory } from './TaskHistory/TasksHistory';
 
 export const Tasks = ({ history }) => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
@@ -69,6 +70,8 @@ export const Tasks = ({ history }) => {
         name: 'Show completed tasks'
     }]
 
+    const incompletedTasks = tasks.filter(task => task.completed !== true)
+
     return (
         <div className={style.tasks}>
             <div className={style.tasksTitleContainer} >
@@ -78,7 +81,7 @@ export const Tasks = ({ history }) => {
                     {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' />}
                 </span>
             </div>
-            {tasks.length > 0 ? tasks && tasks.map(task => {
+            {tasks.length > 0 ? tasks && incompletedTasks.map(task => {
                 return <ul key={task.id}>
                     <Task projectId={projectId} task={task} />
                 </ul>
@@ -94,6 +97,8 @@ export const Tasks = ({ history }) => {
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}
+
+            <TasksHistory />
         </div>
     )
 }

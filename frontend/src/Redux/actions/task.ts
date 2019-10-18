@@ -1,5 +1,11 @@
 import axios from 'axios'
-import { GET_TASKS, GET_ALL_TASKS, SET_TASK_LOADING, UNSET_TASK_LOADING } from '../types';
+import {
+    GET_ALL_TASKS,
+    GET_TASKS,
+    SET_TASK_LOADING,
+    UNSET_TASK_LOADING
+}
+    from '../types';
 
 export function getTasks(projectId) {
     return async (dispatch) => {
@@ -14,6 +20,8 @@ export function getTasks(projectId) {
             })
 
             const { data } = response;
+
+            console.log('FROM DATA', data)
 
             dispatch({
                 type: GET_TASKS,
