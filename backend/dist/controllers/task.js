@@ -34,6 +34,7 @@ class Task {
                         projectId: projectId,
                         projectName: task.projectName,
                         archived: task.archived,
+                        completed: task.completed,
                         date: task.date,
                         id: task._id,
                     };
@@ -57,11 +58,11 @@ class Task {
                         projectName: task.projectName,
                         projectId: task.projectId,
                         archived: task.archived,
+                        completed: task.completed,
                         date: task.date,
                         id: task._id,
                     };
                 });
-                console.log(newTasks);
                 return res.status(200).json(newTasks);
             }
             catch (error) {

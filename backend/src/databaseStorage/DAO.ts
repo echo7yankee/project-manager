@@ -24,6 +24,10 @@ export class DAO {
     return await this.client.remove(id);
   }
 
+  public async removeAll(params) {
+    return await this.client.removeAll(params);
+  }
+
   public async update(id, item) {
     return await this.client.update(id, item);
   }

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
 import { Task } from '../controllers/task';
+import { taskDao } from '../databaseStorage/daos';
 
 // Daos
-import { taskDao } from '../databaseStorage/daos';
 export const taskRouter: Router = Router();
 const task: Task = new Task(taskDao);
 

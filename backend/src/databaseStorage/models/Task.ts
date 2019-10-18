@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 const Schema: Schema = mongoose.Schema;
 
-const taskSchema = new Schema({
+export const taskSchema = new Schema({
     task: {
         type: String,
         required: true,
@@ -17,6 +17,10 @@ const taskSchema = new Schema({
     archived: {
         type: Boolean,
         required: true,
+    },
+    completed: {
+        type: Boolean,
+        required: true
     },
     date: {
         type: Date,

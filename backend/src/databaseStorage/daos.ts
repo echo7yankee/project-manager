@@ -6,7 +6,6 @@ import { Role } from './models/Role';
 import { User } from './models/User';
 import { Project } from './models/Project';
 import { Task } from './models/Task';
-
 //Daos
 import { RoleDao } from './RoleDao';
 import { UserDao } from './UserDao';
