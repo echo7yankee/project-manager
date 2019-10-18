@@ -1,15 +1,18 @@
 //TS TYPES
-import { ProjectDao } from "../databaseStorage/ProjectDao";
-import { Request } from "express";
-import { Response } from "express-serve-static-core";
+import { ProjectDao } from '../databaseStorage/ProjectDao';
+import { Request } from 'express';
+import { Response } from 'express-serve-static-core';
 
 //ts types
 import { ProjectReqBody, IProject, IProjectDatabase } from "../TSTypes/Project";
+import { TaskDao } from '../databaseStorage/TaskDao';
 
 export class Project {
   private projectDao: ProjectDao;
-  constructor(projectDao: ProjectDao) {
+  private taskDao: TaskDao;
+  constructor(projectDao: ProjectDao, taskDao: TaskDao) {
     this.projectDao = projectDao;
+    this.taskDao = taskDao;
   }
   public createProject = async (
     req: Request,
@@ -90,7 +93,7 @@ export class Project {
       return res.status(200).json(updatedProject);
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ error: "Something went wrong" });
+      return res.status(500).json({ error: 'Something went wrong' });
     }
   };
 
@@ -107,6 +110,8 @@ export class Project {
           .status(404)
           .json({ error: `Project with id ${id} does not exist` });
       }
+
+      await this.taskDao.removeAll({ projectId: id })
 
       return res.status(200).json({
         message: `Project with id ${id} has been removed from the collection`

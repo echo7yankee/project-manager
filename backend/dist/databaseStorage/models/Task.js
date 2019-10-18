@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-const taskSchema = new Schema({
+exports.taskSchema = new Schema({
     task: {
         type: String,
         required: true,
@@ -22,9 +22,13 @@ const taskSchema = new Schema({
         type: Boolean,
         required: true,
     },
+    completed: {
+        type: Boolean,
+        required: true
+    },
     date: {
         type: Date,
     }
 });
-exports.Task = mongoose_1.default.model('Task', taskSchema);
+exports.Task = mongoose_1.default.model('Task', exports.taskSchema);
 //# sourceMappingURL=Task.js.map

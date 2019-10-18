@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Project {
-    constructor(projectDao) {
+    constructor(projectDao, taskDao) {
         this.createProject = async (req, res) => {
             try {
                 const id = req.query.userId;
@@ -59,7 +59,7 @@ class Project {
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ error: "Something went wrong" });
+                return res.status(500).json({ error: 'Something went wrong' });
             }
         };
         this.removeProject = async (req, res) => {
@@ -71,6 +71,7 @@ class Project {
                         .status(404)
                         .json({ error: `Project with id ${id} does not exist` });
                 }
+                await this.taskDao.removeAll({ projectId: id });
                 return res.status(200).json({
                     message: `Project with id ${id} has been removed from the collection`
                 });
@@ -81,6 +82,7 @@ class Project {
             }
         };
         this.projectDao = projectDao;
+        this.taskDao = taskDao;
     }
 }
 exports.Project = Project;

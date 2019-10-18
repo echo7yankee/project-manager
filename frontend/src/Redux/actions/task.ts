@@ -1,8 +1,17 @@
 import axios from 'axios'
-import { GET_TASKS, GET_ALL_TASKS } from '../types';
+import {
+    GET_ALL_TASKS,
+    GET_TASKS,
+    SET_TASK_LOADING,
+    SET_SHOW_TOAST,
+}
+    from '../types';
 
 export function getTasks(projectId) {
     return async (dispatch) => {
+        dispatch({
+            type: SET_TASK_LOADING
+        })
         try {
             const response = await axios.get('/task', {
                 params: {
@@ -42,14 +51,17 @@ export function getAllTasks() {
 export function createTask(projectId, task) {
     return async (dispatch) => {
         try {
-
             await axios.post('/task', task, {
                 params: {
                     projectId,
                 }
             })
-
             dispatch(getTasks(projectId));
+
+            dispatch({
+                type: SET_SHOW_TOAST
+            })
+
         } catch (error) {
             console.log(error);
         }

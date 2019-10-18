@@ -53,6 +53,7 @@ export class Task {
                     projectId: projectId,
                     projectName: task.projectName,
                     archived: task.archived,
+                    completed: task.completed,
                     date: task.date,
                     id: task._id,
                 };
@@ -80,12 +81,11 @@ export class Task {
                     projectName: task.projectName,
                     projectId: task.projectId,
                     archived: task.archived,
+                    completed: task.completed,
                     date: task.date,
                     id: task._id,
                 };
             });
-
-            console.log(newTasks);
 
             return res.status(200).json(newTasks)
         } catch (error) {
@@ -102,6 +102,7 @@ export class Task {
             if (updatedTask === null) {
                 return res.status(404).json({ error: `Task with id ${id} does not exist` });
             }
+
             return res.status(200).json(updatedTask);
 
         } catch (error) {

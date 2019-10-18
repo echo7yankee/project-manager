@@ -1,28 +1,38 @@
 .projectDropdown {
-    position: absolute;
-    background-color: var(--grey-color-1);
-    left: 95%;
-    top: 2.7rem;
-    width: 20rem;
-    z-index: 5000;
-    box-shadow: 0 2px 5px rgba(0,0,0,.35);
-    box-shadow: 0 4px 6px rgba(0,0,0,.45);
-    border-radius: 3px;
+    position: absolute ;
+    background-color: var(--grey-color-1) ;
+    left: 95% ;
+    top: 2.7rem ;
+    width: 20rem ;
+    z-index: 5000 ;
+    box-shadow: 0 2px 5px rgba(0,0,0,.35) ;
+    box-shadow: 0 4px 6px rgba(0,0,0,.45) ;
+    border-radius: 3px ;
 }
 
 .projectDropdown ul li {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    padding: .9rem 1rem;
-    font-size: 1.2rem;
-    cursor: pointer;
+    list-style: none ;
+    display: flex ;
+    align-items: center ;
+    padding: .9rem 1rem ;
+    font-size: 1.2rem ;
+    cursor: pointer ;
+    color: var(--white-color);
 }
 
 .projectDropdown ul li:hover {
+    background: var(--grey-color-2) ;
+}
+
+.projectDropdown ul li:focus {
     background: var(--grey-color-2);
+    outline: none ;
 }
 
 .projectDropdown ul li span :first-child {
-    margin-right: 1rem;
+    margin-right: .6rem ;
+    font-size: 1.6rem ;
 }
+
+
+

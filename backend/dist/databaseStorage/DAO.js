@@ -19,6 +19,9 @@ class DAO {
     async remove(id) {
         return await this.client.remove(id);
     }
+    async removeAll(params) {
+        return await this.client.removeAll(params);
+    }
     async update(id, item) {
         return await this.client.update(id, item);
     }

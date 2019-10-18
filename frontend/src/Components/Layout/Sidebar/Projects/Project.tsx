@@ -11,12 +11,15 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 //react router dom
 import { Link } from 'react-router-dom';
 
+//style
+import { IoIosTrash, IoMdCreate } from 'react-icons/io';
+
 //Components
 import { Dropdown } from '../../../Dropdown/Dropdown';
 import { Modal } from '../../../modal/Modal';
 import { ModalDropdown } from '../../../modal/ModalDropdown';
 
-export const Project = ({ project, userId }): JSX.Element => {
+export const Project = ({ project, userId, history }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -27,7 +30,7 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     //DROPDOWN TOGGLE
     function openDropdown() {
-        setDropdown(!dropdown);
+        setDropdown(true);
     }
 
     function closeDropdown() {
@@ -36,7 +39,7 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     //MODAL TOGGLE
     function openModal() {
-        setModal(!modal);
+        setModal(true);
     }
 
     function closeModal() {
@@ -45,7 +48,7 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     //MODAL FROM DROPDOWN TOGGLE
     function openModalDropdown(): void {
-        setModalDropdown(!modalDropdown);
+        setModalDropdown(true);
         closeDropdown();
     }
 
@@ -59,6 +62,7 @@ export const Project = ({ project, userId }): JSX.Element => {
 
     function removeSelectedProject(): void {
         dispatch(removeProject(userId, project.id));
+        history.push(`/`)
     }
 
     function editSelectedProject(e: { preventDefault: () => void; }): void {
@@ -66,6 +70,22 @@ export const Project = ({ project, userId }): JSX.Element => {
         dispatch(editProject(userId, project.id, projectValueEdit));
         setModal(false);
     }
+
+    const createIcon = <IoMdCreate />
+    const trash = <IoIosTrash />
+
+    const dropdownItems = [{
+        name: 'Edit Project',
+        action: openModal,
+        className: '',
+        icon: createIcon,
+    },
+    {
+        name: 'Remove Project',
+        action: openModalDropdown,
+        className: 'dropdown__remove',
+        icon: trash
+    },]
 
     const question: string = `Are you sure you want to remove ${project.name}?`
 
@@ -79,17 +99,17 @@ export const Project = ({ project, userId }): JSX.Element => {
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    setState={openModal}
-                    openModalDropdown={openModalDropdown}
-                    name='Project'
-                    left='93'
+                    dropdownItems={dropdownItems}
+                    left='97.5'
+                    top='70'
                 />}
             </li>
 
             {modalDropdown && <ModalDropdown
                 question={question}
                 closeModal={closeModalDropdown}
-                request={removeSelectedProject} />}
+                request={removeSelectedProject}
+            />}
             {modal && <Modal
                 onChange={onChange}
                 closeModal={closeModal}

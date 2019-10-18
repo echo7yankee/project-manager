@@ -17,6 +17,7 @@ import { ProjectCreator } from './ProjectCreator';
 
 interface IProjects {
   userId: string;
+  history;
 }
 
 export const Projects = (props: IProjects): JSX.Element | null => {
@@ -56,7 +57,9 @@ export const Projects = (props: IProjects): JSX.Element | null => {
     {projects.length > 0 ? <div>
       <div className={style.projectsTitle}>
         <div onClick={() => setToggleProjects(!toggleProjects)}>
-          <span className={`${style.projectsTitleIcon} mr-1`}><IoIosArrowDown className={toggleProjects ? 'rotate-0' : 'rotate-90'} /></span>
+          <span className={`${style.projectsTitleIcon} mr-1`}>
+            <IoIosArrowDown className={toggleProjects ? 'rotate-0' : 'rotate-90'} />
+          </span>
           <span>Projects</span>
         </div>
         <div>
@@ -70,6 +73,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
             <Project
               project={project}
               userId={props.userId}
+              history={props.history}
             />
           </ul>
         </div>

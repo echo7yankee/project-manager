@@ -30,7 +30,8 @@ export function authReducer(state, action) {
         case SET_ERRORS:
             return {
                 ...state,
-                errors: action.payload
+                errors: action.payload,
+                isLoading: false
             }
         case SET_UNAUTHENTICATED:
             return initState;

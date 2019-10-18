@@ -1,8 +1,4 @@
-import React, { useState, useRef } from 'react';
-
-//close dropdown
-import { useOutsideClose } from '../../../CloseDropdown/CloseDropdown';
-
+import React, { useState } from 'react';
 //redux
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../../Redux/actions/auth';
@@ -11,6 +7,8 @@ import { logoutUser } from '../../../../Redux/actions/auth';
 import style from './navItems.module.css'
 import { IoMdSettings, IoIosLogIn, IoIosColorPalette } from 'react-icons/io';
 
+//Components
+import { Dropdown } from '../../../Dropdown/Dropdown';
 
 export const Settings = (): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
@@ -19,35 +17,36 @@ export const Settings = (): JSX.Element => {
     const dispatch = useDispatch();
 
     function toggleDropdown() {
-        setDropdown(!dropdown);
+        setDropdown(true);
     }
 
     function closeDropdown() {
         setDropdown(false);
     }
 
-    //close dropdown
-    const wrapperRef = useRef(null);
-    useOutsideClose(wrapperRef, closeDropdown);
+    const settingsIcon = <IoMdSettings />;
+    const themeIcon = <IoIosColorPalette />;
+    const authIcon = <IoIosLogIn />;
+
+    const dropdownItems = [{
+        name: 'Settings',
+        icon: settingsIcon,
+    },
+    {
+        name: 'Theme',
+        icon: themeIcon,
+    },
+    {
+        name: 'Logout',
+        icon: authIcon,
+        action: () => dispatch(logoutUser()),
+        className: 'dropdown__remove'
+    },]
 
     return (
         <li className='pos-relative' onClick={toggleDropdown}>
             <span className={style.navItem}><IoMdSettings /></span>
-
-            <ul className={dropdown ? style.dropdownShow : style.dropdown} ref={wrapperRef}>
-                <li className={style.dropdownItem}>
-                    <span className={style.dropdownIcon}><IoMdSettings /></span>
-                    <span>Settings</span>
-                </li >
-                <li className={style.dropdownItem}>
-                    <span className={style.dropdownIcon}><IoIosColorPalette /></span>
-                    <span>Theme</span>
-                </li>
-                <li className={`${style.dropdownItem} dropdown__remove`} onClick={() => dispatch(logoutUser())} >
-                    <span className={style.dropdownIcon}><IoIosLogIn /></span>
-                    <span>Logout</span>
-                </li>
-            </ul>
+            {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='100' top='105' />}
         </li>
     )
 };

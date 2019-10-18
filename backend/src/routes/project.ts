@@ -2,10 +2,10 @@ import { Router } from 'express';
 import { Project } from '../controllers/project';
 
 // Daos
-import { projectDao } from '../databaseStorage/daos';
+import { projectDao, taskDao } from '../databaseStorage/daos';
 export const projectRouter: Router = Router();
 
-const project: Project = new Project(projectDao);
+const project: Project = new Project(projectDao, taskDao);
 
 //projects
 projectRouter.post('/project', project.createProject);
