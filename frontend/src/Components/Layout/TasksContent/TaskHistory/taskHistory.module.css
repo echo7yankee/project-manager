@@ -50,6 +50,10 @@
     border-bottom: 1px solid var(--grey-color-1);
 }
 
+.taskHistoryItem:last-child {
+    animation: historyTask .4s ease-in-out;
+}
+
 .taskHistoryDot {
     font-size: 1.8rem;
     margin-right: .8rem;
@@ -70,4 +74,14 @@
 
 .taskHistoryDotIcon {
     color: var(--grey-color-3);  
+}
+
+@keyframes historyTask{
+    from {
+        background-color:var(--grey-color-4);
+    }
+
+    to {
+        background-color:transparent;
+    }
 }

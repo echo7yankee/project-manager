@@ -13,6 +13,7 @@ import { TaskForm } from './TaskForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTask, getTasks } from '../../../Redux/actions/task';
 import { Dropdown } from '../../Dropdown/Dropdown';
+import { Toast } from '../../Toast/Toast';
 import { Task } from './Task';
 import { TasksHistory } from './TaskHistory/TasksHistory';
 
@@ -26,6 +27,7 @@ export const Tasks = ({ history }) => {
     //redux
     const tasks = useSelector(state => state.task.tasks);
     const isLoading = useSelector(state => state.task.isLoading);
+    const showToast = useSelector(state => state.task.showToast);
 
     const dispatch = useDispatch();
 
@@ -67,7 +69,7 @@ export const Tasks = ({ history }) => {
     };
 
     const dropdownItems = [{
-        name: 'Show completed tasks'
+        name: 'Show completed tasks',
     }]
 
     const incompletedTasks = tasks.filter(task => task.completed !== true)
@@ -99,6 +101,7 @@ export const Tasks = ({ history }) => {
             </div>}
 
             <TasksHistory projectId={projectId} tasks={tasks} />
+            <Toast showToast={showToast} text='Task added' />
         </div>
     )
 }

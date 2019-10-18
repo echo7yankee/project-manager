@@ -1,4 +1,4 @@
-import { GET_PROJECTS, SET_PROJECT_LOADING, UNSET_PROJECT_LOADING } from '../types'
+import { GET_PROJECTS, SET_PROJECT_LOADING } from '../types'
 
 //ts types
 import { IProject } from '../../TSTypes/reducers/project';
@@ -19,11 +19,6 @@ export function projectReducer(state, action) {
             return {
                 ...state,
                 isLoading: true,
-            }
-        case UNSET_PROJECT_LOADING:
-            return {
-                ...state,
-                isLoading: false
             }
 
         case GET_PROJECTS:

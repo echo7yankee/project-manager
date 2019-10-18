@@ -15,8 +15,6 @@ export const TasksHistory = ({ tasks, projectId }) => {
     const [toggleHistoryTasks, setToggleHistoryTasks] = useState(false);
     const completedTasks: ITask[] = tasks.filter(task => task.completed === true);
 
-    console.log(tasks)
-
     return (
         <div className={style.taskHistoryContainer}>
             {completedTasks.length &&

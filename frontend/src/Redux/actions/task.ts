@@ -3,7 +3,7 @@ import {
     GET_ALL_TASKS,
     GET_TASKS,
     SET_TASK_LOADING,
-    UNSET_TASK_LOADING
+    SET_SHOW_TOAST,
 }
     from '../types';
 
@@ -20,8 +20,6 @@ export function getTasks(projectId) {
             })
 
             const { data } = response;
-
-            console.log('FROM DATA', data)
 
             dispatch({
                 type: GET_TASKS,
@@ -52,19 +50,18 @@ export function getAllTasks() {
 
 export function createTask(projectId, task) {
     return async (dispatch) => {
-        dispatch({
-            type: SET_TASK_LOADING
-        })
         try {
             await axios.post('/task', task, {
                 params: {
                     projectId,
                 }
             })
-            dispatch({
-                type: UNSET_TASK_LOADING
-            })
             dispatch(getTasks(projectId));
+
+            dispatch({
+                type: SET_SHOW_TOAST
+            })
+
         } catch (error) {
             console.log(error);
         }
@@ -73,14 +70,8 @@ export function createTask(projectId, task) {
 
 export function removeTask(projectId, taskId) {
     return async (dispatch) => {
-        dispatch({
-            type: SET_TASK_LOADING
-        })
         try {
             await axios.delete(`/task/${taskId}`);
-            dispatch({
-                type: UNSET_TASK_LOADING
-            })
             dispatch(getTasks(projectId));
         } catch (error) {
             console.log(error);
@@ -90,14 +81,8 @@ export function removeTask(projectId, taskId) {
 
 export function updateTask(projectId, taskId, newTaskValue) {
     return async (dispatch) => {
-        dispatch({
-            type: SET_TASK_LOADING
-        })
         try {
             await axios.put(`/task/${taskId}`, newTaskValue);
-            dispatch({
-                type: UNSET_TASK_LOADING
-            })
             dispatch(getTasks(projectId));
         } catch (error) {
             console.log(error);

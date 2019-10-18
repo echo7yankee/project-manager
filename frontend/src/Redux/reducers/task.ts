@@ -1,9 +1,10 @@
-import { GET_ALL_TASKS, GET_TASKS, SET_TASK_LOADING } from '../types'
+import { GET_ALL_TASKS, GET_TASKS, SET_TASK_LOADING, SET_SHOW_TOAST } from '../types'
 
 const initState = {
     tasks: [],
     allTasks: [],
-    isLoading: false
+    isLoading: false,
+    showToast: false,
 }
 
 export function taskReducer(state, action) {
@@ -26,8 +27,13 @@ export function taskReducer(state, action) {
             return {
                 ...state,
                 tasks: action.payload,
-                isLoading: false
+                isLoading: false,
             };
+        case SET_SHOW_TOAST:
+            return {
+                ...state,
+                showToast: true
+            }
 
         default: return state;
     }
