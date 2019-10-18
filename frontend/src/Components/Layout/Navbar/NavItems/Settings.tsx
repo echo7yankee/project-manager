@@ -46,7 +46,7 @@ export const Settings = (): JSX.Element => {
     return (
         <li className='pos-relative' onClick={toggleDropdown}>
             <span className={style.navItem}><IoMdSettings /></span>
-            {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='100' top='100' />}
+            {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='100' top='105' />}
         </li>
     )
 };
