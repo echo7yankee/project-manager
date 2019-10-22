@@ -13,6 +13,7 @@ import style from './project.module.css';
 //components
 import { Modal } from '../../../modal/Modal';
 import { ProjectCreator } from './ProjectCreator';
+import { IProjectsType } from '../../../../TSTypes/reducers/project';
 
 
 export interface IProjects {
@@ -56,7 +57,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
     setModal(!modal);
   }
 
-  const unarchivedProjects = projects && projects.filter(project => {
+  const unarchivedProjects:IProjectsType[] = projects && projects.filter(project => {
     return project.archived === false;
   });
 

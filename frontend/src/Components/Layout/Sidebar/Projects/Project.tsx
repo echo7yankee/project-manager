@@ -62,7 +62,7 @@ export const Project = ({ project, userId, history }): JSX.Element => {
 
     function removeSelectedProject(): void {
         dispatch(removeProject(userId, project.id));
-        history.push(`/`)
+        history.push('/')
     }
 
     function editSelectedProject(e: { preventDefault: () => void; }): void {
@@ -92,12 +92,12 @@ export const Project = ({ project, userId, history }): JSX.Element => {
         return [{
             name:'Edit project',
             action:openModal,
-            icon:editIcon
+            icon:editIcon,
         },
         {
             name:'Archive project',
             action:() => setProjectArchived(project),
-            icon:archiveIcon
+            icon:archiveIcon,
         },
         {
             name:'Remove project',
