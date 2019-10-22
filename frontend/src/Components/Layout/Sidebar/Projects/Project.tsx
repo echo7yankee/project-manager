@@ -12,7 +12,7 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 import { Link } from 'react-router-dom';
 
 //style
-import { IoIosTrash, IoMdCreate } from 'react-icons/io';
+import { IoIosTrash, IoMdCreate, IoIosArchive } from 'react-icons/io';
 
 //Components
 import { Dropdown } from '../../../Dropdown/Dropdown';
@@ -67,27 +67,52 @@ export const Project = ({ project, userId, history }): JSX.Element => {
 
     function editSelectedProject(e: { preventDefault: () => void; }): void {
         e.preventDefault();
-        dispatch(editProject(userId, project.id, projectValueEdit));
+        const newProject = {
+            name: projectValueEdit,
+            archived: false
+        }
+        dispatch(editProject(userId, project.id, newProject));
         setModal(false);
     }
 
-    const createIcon = <IoMdCreate />
-    const trash = <IoIosTrash />
+    function setProjectArchived(id) {
+        if (project.id === id) {
+            project = {
+                ...project,
+                archived: true,
+            }
+        }
+        dispatch(editProject(userId, project.id, project));
+        setDropdown(false);
+    }
 
-    const dropdownItems = [{
-        name: 'Edit Project',
-        action: openModal,
-        className: '',
-        icon: createIcon,
-    },
-    {
-        name: 'Remove Project',
-        action: openModalDropdown,
-        className: 'dropdown__remove',
-        icon: trash
-    },]
+    const createIcon = <IoMdCreate />;
+    const trashIcon = <IoIosTrash />;
+    const archiveIcon = <IoIosArchive/>;
 
-    const question: string = `Are you sure you want to remove ${project.name}?`
+    function displayDropdownItems(id) {
+        return [{
+            name: 'Edit Project',
+            action: openModal,
+            className: '',
+            icon: createIcon,
+        },
+        {
+            name: 'Archive Project',
+            className: '',
+            action: () => setProjectArchived(id),
+            icon: archiveIcon,
+        },
+        {
+            name: 'Remove Project',
+            action: openModalDropdown,
+            className: 'dropdown__remove',
+            icon: trashIcon,
+        },
+    ];
+   }
+
+    const question: string = `Are you sure you want to remove ${project.name}?`;
 
     return (
         <>
@@ -99,7 +124,8 @@ export const Project = ({ project, userId, history }): JSX.Element => {
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    dropdownItems={dropdownItems}
+                    dropdownItems={displayDropdownItems}
+                    id={project.id}
                     left='97.5'
                     top='70'
                 />}

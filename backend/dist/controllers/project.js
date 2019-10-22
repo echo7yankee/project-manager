@@ -35,6 +35,7 @@ class Project {
                     return {
                         name: project.name,
                         userId: project.userId,
+                        archived: project.archived,
                         id: project._id
                     };
                 });

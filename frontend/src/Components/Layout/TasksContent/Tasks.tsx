@@ -86,7 +86,7 @@ export const Tasks = ({ history }) => {
                 <h1>{projectName}</h1>
                 <span onClick={openDropdown} >
                     <IoIosMore />
-                    {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' />}
+                    {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' id=''/>}
                 </span>
             </div>
             {tasks.length > 0 ? tasks && incompletedTasks.map(task => {

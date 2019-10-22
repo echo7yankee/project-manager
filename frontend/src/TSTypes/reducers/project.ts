@@ -1,10 +1,11 @@
-export type IProjects = {
+export type IProjectsType = {
     id: string,
     name: string,
     userId: string,
+    archived:boolean,
 }
 
-export type IProject = {
-    projects: IProjects[];
+export type IProjectType = {
+    projects: IProjectsType[];
     isLoading: boolean,
 }

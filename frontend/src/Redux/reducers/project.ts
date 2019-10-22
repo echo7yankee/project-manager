@@ -1,9 +1,9 @@
 import { GET_PROJECTS, SET_PROJECT_LOADING } from '../types'
 
 //ts types
-import { IProject } from '../../TSTypes/reducers/project';
+import { IProjectType } from '../../TSTypes/reducers/project';
 
-const initState: IProject = {
+const initState: IProjectType = {
     projects: [],
     isLoading: false,
 }

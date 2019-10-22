@@ -86,18 +86,20 @@ export const Task = ({ task, projectId }) => {
     const createIcon = <IoMdCreate />;
     const trash = <IoIosTrash />;
 
-    const dropdownItems = [{
-        name: 'Edit Task',
-        action: setEditable,
-        className: '',
-        icon: createIcon,
-    },
-    {
-        name: 'Remove Task',
-        action: openModalDropdown,
-        className: 'dropdown__remove',
-        icon: trash,
-    },]
+    function displayDropdownItems() {
+        return [{
+            name: 'Edit Task',
+            action: setEditable,
+            className: '',
+            icon: createIcon,
+        },
+        {
+            name: 'Remove Task',
+            action: openModalDropdown,
+            className: 'dropdown__remove',
+            icon: trash,
+        },];
+    }
 
     const question: string = `Are you sure you want to remove ${task.task}?`;
 
@@ -118,7 +120,8 @@ export const Task = ({ task, projectId }) => {
                     <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>
                     {dropdown && <Dropdown
                         closeDropdown={closeDropdown}
-                        dropdownItems={dropdownItems}
+                        dropdownItems={displayDropdownItems}
+                        id={task.id}
                         left='98.5'
                         top='' />
                     }

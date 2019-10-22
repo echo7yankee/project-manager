@@ -10,5 +10,6 @@ export type IProject = {
 export type IProjectDatabase = {
     name: string,
     userId: string,
+    archived:boolean,
     _id: string
 }

@@ -115,6 +115,22 @@
     color: var(--grey-color-4);
 }
 
+.archivedProjectsContainer {
+    margin: 2.5rem 0;
+}
+
+.archivedProjectsContainer h3 {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--grey-color-hover-4);
+    font-weight: 500;
+    width: max-content;
+}
+
+.archivedProjectsContainer h3:hover {
+    color: var(--grey-color-3);
+}
+
 @keyframes project{
     from {
         background-color:var(--grey-color-4);

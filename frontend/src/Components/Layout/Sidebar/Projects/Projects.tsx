@@ -15,7 +15,7 @@ import { Modal } from '../../../modal/Modal';
 import { ProjectCreator } from './ProjectCreator';
 
 
-interface IProjects {
+export interface IProjects {
   userId: string;
   history;
 }
@@ -47,11 +47,18 @@ export const Projects = (props: IProjects): JSX.Element | null => {
 
   function addNewProject(e) {
     e.preventDefault();
-    dispatch(addProject(projectValue, props.userId))
+    const newProject = {
+      name:projectValue,
+      archived:false,
+    }
+    dispatch(addProject(newProject, props.userId))
     setProjectValue('');
     setModal(!modal);
   }
 
+  const unarchivedProjects = projects && projects.filter(project => {
+    return project.archived === false;
+  });
 
   return <div>
     {projects.length > 0 ? <div>
@@ -67,7 +74,8 @@ export const Projects = (props: IProjects): JSX.Element | null => {
         </div>
       </div>
 
-      {projects.map(project => {
+      {unarchivedProjects.map(project => {
+        console.log(project)
         return <div key={project.id} className={toggleProjects ? style.projectShow : style.projectHide}>
           <ul>
             <Project
