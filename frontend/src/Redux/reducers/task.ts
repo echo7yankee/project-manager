@@ -1,10 +1,11 @@
-import { GET_ALL_TASKS, GET_TASKS, SET_TASK_LOADING, SET_SHOW_TOAST } from '../types'
+import { GET_ALL_TASKS, GET_TASKS, SET_SHOW_TOAST_ADD,SET_TASK_LOADING, UNSET_SHOW_TOAST, SET_SHOW_TOAST_REMOVE } from '../types';
 
 const initState = {
     tasks: [],
     allTasks: [],
     isLoading: false,
     showToast: false,
+    toastText:'',
 }
 
 export function taskReducer(state, action) {
@@ -16,7 +17,7 @@ export function taskReducer(state, action) {
         case SET_TASK_LOADING:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
             }
         case GET_ALL_TASKS:
             return {
@@ -30,11 +31,23 @@ export function taskReducer(state, action) {
                 isLoading: false,
 
             };
-        case SET_SHOW_TOAST:
+        case SET_SHOW_TOAST_ADD:
             return {
                 ...state,
-                showToast: true
+                showToast: true,
+                toastText: 'Task added',
+            };
+        case SET_SHOW_TOAST_REMOVE:
+            return {
+                ...state,
+                showToast:true,
+                toastText:'Task removed',
             }
+        case UNSET_SHOW_TOAST:
+            return {
+                ...state,
+                    showToast: false,
+            };
 
         default: return state;
     }

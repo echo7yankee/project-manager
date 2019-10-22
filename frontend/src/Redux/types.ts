@@ -16,5 +16,7 @@ export const GET_ALL_TASKS: string = 'GET_ALL_TASKS';
 export const SET_TASK_LOADING: string = 'SET_TASK_LOADING';
 
 //toast
-export const SET_SHOW_TOAST: string = 'SET_SHOW_TOAST';
+export const SET_SHOW_TOAST_ADD: string = 'SET_SHOW_TOAST_ADD';
+export const SET_SHOW_TOAST_COMPLETE: string = 'SET_SHOW_TOAST_COMPLETE';
+export const SET_SHOW_TOAST_REMOVE: string = 'SET_SHOW_TOAST_REMOVE';
 export const UNSET_SHOW_TOAST: string = 'UNSET_SHOW_TOAST';

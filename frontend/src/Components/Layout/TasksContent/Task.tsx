@@ -16,7 +16,6 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-
 export const Task = ({ task, projectId }) => {
 
     const [dropdown, setDropdown] = useState(false);
@@ -84,8 +83,8 @@ export const Task = ({ task, projectId }) => {
         closeDropdown();
     }
 
-    const createIcon = <IoMdCreate />
-    const trash = <IoIosTrash />
+    const createIcon = <IoMdCreate />;
+    const trash = <IoIosTrash />;
 
     const dropdownItems = [{
         name: 'Edit Task',
@@ -97,7 +96,7 @@ export const Task = ({ task, projectId }) => {
         name: 'Remove Task',
         action: openModalDropdown,
         className: 'dropdown__remove',
-        icon: trash
+        icon: trash,
     },]
 
     const question: string = `Are you sure you want to remove ${task.task}?`;

@@ -3,9 +3,13 @@ import {
     GET_ALL_TASKS,
     GET_TASKS,
     SET_TASK_LOADING,
-    SET_SHOW_TOAST,
+    SET_SHOW_TOAST_ADD,
+    UNSET_SHOW_TOAST,
+    SET_SHOW_TOAST_REMOVE,
 }
     from '../types';
+
+import configData from '../../config/config.json';
 
 export function getTasks(projectId) {
     return async (dispatch) => {
@@ -59,8 +63,14 @@ export function createTask(projectId, task) {
             dispatch(getTasks(projectId));
 
             dispatch({
-                type: SET_SHOW_TOAST
+                type: SET_SHOW_TOAST_ADD
             })
+
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_SHOW_TOAST
+                })
+            },configData.timeOutForToasterInSeconds);
 
         } catch (error) {
             console.log(error);
@@ -73,6 +83,17 @@ export function removeTask(projectId, taskId) {
         try {
             await axios.delete(`/task/${taskId}`);
             dispatch(getTasks(projectId));
+
+            dispatch({
+                type:SET_SHOW_TOAST_REMOVE
+            })
+
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_SHOW_TOAST
+                })
+            },configData.timeOutForToasterInSeconds);
+        
         } catch (error) {
             console.log(error);
         }

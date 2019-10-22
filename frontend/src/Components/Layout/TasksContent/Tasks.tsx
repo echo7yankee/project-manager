@@ -28,6 +28,7 @@ export const Tasks = ({ history }) => {
     const tasks = useSelector(state => state.task.tasks);
     const isLoading = useSelector(state => state.task.isLoading);
     const showToast = useSelector(state => state.task.showToast);
+    const toastText = useSelector(state => state.task.toastText);
 
     const dispatch = useDispatch();
 
@@ -101,7 +102,7 @@ export const Tasks = ({ history }) => {
             </div>}
 
             <TasksHistory projectId={projectId} tasks={tasks} />
-            <Toast showToast={showToast} text='Task added' />
+            <Toast showToast={showToast} text={toastText} />
         </div>
     )
 }

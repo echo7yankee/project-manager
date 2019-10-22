@@ -12,7 +12,7 @@ import { TaskHistoryItem } from './TaskHistoryItem';
 
 export const TasksHistory = ({ tasks, projectId }) => {
 
-    const [toggleHistoryTasks, setToggleHistoryTasks] = useState(false);
+    const [toggleHistoryTasks, setToggleHistoryTasks] = useState(true);
     const completedTasks: ITask[] = tasks.filter(task => task.completed === true);
 
     return (
