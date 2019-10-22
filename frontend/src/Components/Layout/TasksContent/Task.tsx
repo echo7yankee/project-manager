@@ -112,7 +112,6 @@ export const Task = ({ task, projectId }) => {
                 onChange={handleChange}
                 inputValue={taskValueEdit}
                 request={editSelectedTask} /> : <li className={style.taskItem}>
-
                     <div className='dflex'>
                         <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>
                         <span className={style.task} onClick={setEditable}>{task.task}</span>
@@ -121,7 +120,7 @@ export const Task = ({ task, projectId }) => {
                     {dropdown && <Dropdown
                         closeDropdown={closeDropdown}
                         dropdownItems={displayDropdownItems}
-                        id={task.id}
+                        item={task}
                         left='98.5'
                         top='' />
                     }

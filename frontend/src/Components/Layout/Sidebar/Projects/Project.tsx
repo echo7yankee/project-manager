@@ -75,42 +75,37 @@ export const Project = ({ project, userId, history }): JSX.Element => {
         setModal(false);
     }
 
-    function setProjectArchived(id) {
-        if (project.id === id) {
-            project = {
-                ...project,
-                archived: true,
-            }
+    function setProjectArchived(project) {
+        project = {
+            ...project,
+            archived: true,
         }
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }
 
-    const createIcon = <IoMdCreate />;
-    const trashIcon = <IoIosTrash />;
+    const editIcon = <IoMdCreate/>;
     const archiveIcon = <IoIosArchive/>;
+    const removeIcon = <IoIosTrash/>;
 
-    function displayDropdownItems(id) {
+    function displayDropdownItems(project) {
         return [{
-            name: 'Edit Project',
-            action: openModal,
-            className: '',
-            icon: createIcon,
+            name:'Edit project',
+            action:openModal,
+            icon:editIcon
         },
         {
-            name: 'Archive Project',
-            className: '',
-            action: () => setProjectArchived(id),
-            icon: archiveIcon,
+            name:'Archive project',
+            action:() => setProjectArchived(project),
+            icon:archiveIcon
         },
         {
-            name: 'Remove Project',
-            action: openModalDropdown,
-            className: 'dropdown__remove',
-            icon: trashIcon,
-        },
-    ];
-   }
+            name:'Remove project',
+            action:openModalDropdown,
+            icon:removeIcon,
+            }
+        ]
+    }
 
     const question: string = `Are you sure you want to remove ${project.name}?`;
 
@@ -125,7 +120,7 @@ export const Project = ({ project, userId, history }): JSX.Element => {
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
                     dropdownItems={displayDropdownItems}
-                    id={project.id}
+                    item={project}
                     left='97.5'
                     top='70'
                 />}

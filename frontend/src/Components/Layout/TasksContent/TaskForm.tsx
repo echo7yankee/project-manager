@@ -33,7 +33,7 @@ export const TaskForm = (props: ITaskForm): JSX.Element => {
             <div className={style.taskFormButtonContainer}>
                 <button disabled={props.inputValue === ''}
                     className={props.inputValue === '' ? 'disabled-button' : ''}>{props.buttonDo}</button>
-                <button onClick={props.onClickClose} >{props.buttonClose}</button>
+                <button onClick={props.onClickClose}>{props.buttonClose}</button>
             </div>
         </form>
     );
