@@ -8,6 +8,7 @@ import style from './tasks.module.css';
 //components
 import { TaskCreator } from './TaskCreator';
 import { TaskForm } from './TaskForm';
+import { Error } from '../../Error/Error';
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +30,7 @@ export const Tasks = ({ history }) => {
     const isLoading = useSelector(state => state.task.isLoading);
     const showToast = useSelector(state => state.task.showToast);
     const toastText = useSelector(state => state.task.toastText);
+    const errors = useSelector(state => state.task.errors);
 
     const dispatch = useDispatch();
 
@@ -75,7 +77,10 @@ export const Tasks = ({ history }) => {
 
     const incompletedTasks = tasks.filter(task => task.completed !== true)
 
+    console.log(errors)
+
     return (
+        <>
         <div className={style.tasks}>
             <div className={style.tasksTitleContainer} >
                 <h1>{projectName}</h1>
@@ -97,12 +102,13 @@ export const Tasks = ({ history }) => {
                 inputValue={taskValue}
                 request={createTaskRequest} />
                 : <TaskCreator onClick={toggleForm} />}
-            {isLoading && <div className='overlay'>
-                <img src={spinner} alt='spinner' />
-            </div>}
-
+                       {errors.error && <Error textError={errors.error}/> }
             <TasksHistory projectId={projectId} tasks={tasks} />
             <Toast showToast={showToast} text={toastText} />
         </div>
+        {isLoading && <div className='overlay'>
+                <img src={spinner} alt='spinner' />
+            </div>}
+        </>
     )
 }

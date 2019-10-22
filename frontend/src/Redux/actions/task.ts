@@ -6,6 +6,7 @@ import {
     SET_SHOW_TOAST_ADD,
     UNSET_SHOW_TOAST,
     SET_SHOW_TOAST_REMOVE,
+    SET_ERRORS,
 }
     from '../types';
 
@@ -73,7 +74,10 @@ export function createTask(projectId, task) {
             },configData.timeOutForToasterInSeconds);
 
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.response && error.response.data,
+            })
         }
     }
 }

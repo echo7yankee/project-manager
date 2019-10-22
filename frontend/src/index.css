@@ -97,7 +97,7 @@ button {
   background-color: var(--red-color-2);
   font-size: 1.3rem;
   width: max-content;
-  margin:0px;
+  margin: .7rem 0;
 }
 
 .auth_spinner {
