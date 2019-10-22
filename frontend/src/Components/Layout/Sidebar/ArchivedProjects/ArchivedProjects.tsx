@@ -23,18 +23,16 @@ export const ArchivedProjects = (props:IProjects) => {
         return projects.archived === true;
     });
 
-    return (
-        <div className={style.archivedProjectsContainer}>
-            <div>
-                <h3 onClick={() => setToggleArchivedProjects(!toggleArchivedProjects)}>
-                {toggleArchivedProjects ? 'Hide archive' : 'Archived projects' }
-                </h3>
-            </div>
-            <div className={toggleArchivedProjects ? style.projectShow : style.projectHide}>
-            <ul>{archivedProjects.map(project => {
-                return <Project key={project.id} project={project} history={props.history} userId={props.userId} />
-            })}</ul>
-            </div>
+    return archivedProjects.length > 0 ?   <div className={style.archivedProjectsContainer}>
+    <div>
+        <h3 onClick={() => setToggleArchivedProjects(!toggleArchivedProjects)}>
+        {toggleArchivedProjects ? 'Hide archive' : 'Archived projects' }
+        </h3>
         </div>
-    )
+        <div className={toggleArchivedProjects ? style.projectShow : style.projectHide}>
+        <ul>{archivedProjects.map(project => {
+            return <Project key={project.id} project={project} history={props.history} userId={props.userId} />
+            })}</ul>
+        </div>
+    </div>:null;
 };
