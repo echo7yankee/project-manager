@@ -87,6 +87,10 @@ button {
 
 .space-between {
   justify-content: space-between;
+}
+
+.space-between {
+  justify-content: space-between;
   align-items: center;
 }
 

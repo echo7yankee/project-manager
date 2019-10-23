@@ -23,11 +23,13 @@ export const ArchivedProjects = (props:IProjects) => {
         return projects.archived === true;
     });
 
-    return archivedProjects.length > 0 ?   <div className={style.archivedProjectsContainer}>
-    <div>
-        <h3 onClick={() => setToggleArchivedProjects(!toggleArchivedProjects)}>
-        {toggleArchivedProjects ? 'Hide archive' : 'Archived projects' }
-        </h3>
+    return archivedProjects.length > 0 ?
+    <div className={style.archivedProjectsContainer}>
+        <div className='dflex space-between' onClick={() => setToggleArchivedProjects(!toggleArchivedProjects)}>
+            <h3>
+            {toggleArchivedProjects ? 'Hide archive' : 'Archived projects' }
+            </h3>
+            <span>{archivedProjects.length}</span>
         </div>
         <div className={toggleArchivedProjects ? style.projectShow : style.projectHide}>
         <ul>{archivedProjects.map(project => {
