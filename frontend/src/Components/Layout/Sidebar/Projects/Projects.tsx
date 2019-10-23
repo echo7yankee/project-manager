@@ -83,6 +83,8 @@ export const Projects = (props: IProjects): JSX.Element | null => {
               project={project}
               userId={props.userId}
               history={props.history}
+              areArchivedProjects={false}
+              isArchived={false}
             />
           </ul>
         </div>

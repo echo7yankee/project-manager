@@ -7,8 +7,8 @@ import style from '../Projects/project.module.css';
 import { useSelector } from 'react-redux';
 
 //ts types
-import { IProjects } from '../Projects/Projects';
 import { IProjectsType } from '../../../../TSTypes/reducers/project';
+import { IProjects } from '../Projects/Projects';
 
 //components
 import { Project } from '../Projects/Project';
@@ -31,7 +31,13 @@ export const ArchivedProjects = (props:IProjects) => {
         </div>
         <div className={toggleArchivedProjects ? style.projectShow : style.projectHide}>
         <ul>{archivedProjects.map(project => {
-            return <Project key={project.id} project={project} history={props.history} userId={props.userId} />
+            return <Project 
+            key={project.id}
+            project={project}
+            history={props.history}
+            userId={props.userId} 
+            areArchivedProjects={true}
+            isArchived={true} />
             })}</ul>
         </div>
     </div>:null;

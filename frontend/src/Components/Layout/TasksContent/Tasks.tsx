@@ -18,12 +18,13 @@ import { Toast } from '../../Toast/Toast';
 import { Task } from './Task';
 import { TasksHistory } from './TaskHistory/TasksHistory';
 
-export const Tasks = ({ history }) => {
+export const Tasks = ({ history:{location} }) => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
     const [taskValue, setTaskValue] = useState('');
     const [dropdown, setDropdown] = useState(false);
-    const projectId: string = history.location.pathname.split('project/').pop();
-    const projectName: string = history.location.search.split('=').pop();
+    const projectId: string = location.pathname.split('project/').pop();
+    const projectName: string = location.search.split('?').pop();
+    const isArchived: boolean = location.state;
 
     //redux
     const tasks = useSelector(state => state.task.tasks);
@@ -75,23 +76,24 @@ export const Tasks = ({ history }) => {
         name: 'Show completed tasks',
     }]
 
-    const incompletedTasks = tasks.filter(task => task.completed !== true)
-
-    console.log(errors)
+    const incompletedTasks = tasks.filter(task => task.completed !== true);
 
     return (
         <>
         <div className={style.tasks}>
             <div className={style.tasksTitleContainer} >
+                <div>
                 <h1>{projectName}</h1>
-                <span onClick={openDropdown} >
+                {isArchived && <span>Archived</span> }
+                </div>
+                <span onClick={openDropdown} className={style.tasksTitleContainerDropdownAction} >
                     <IoIosMore />
                     {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' item=''/>}
                 </span>
             </div>
             {tasks.length > 0 ? tasks && incompletedTasks.map(task => {
                 return <ul key={task.id}>
-                    <Task projectId={projectId} task={task} />
+                    <Task projectId={projectId} task={task} isArchived={isArchived} />
                 </ul>
             }) : null}
             {toggleTaskForm ? <TaskForm
@@ -101,7 +103,7 @@ export const Tasks = ({ history }) => {
                 onChange={handleChange}
                 inputValue={taskValue}
                 request={createTaskRequest} />
-                : <TaskCreator onClick={toggleForm} />}
+                : !isArchived && <TaskCreator onClick={toggleForm} />}
                        {errors.error && <Error textError={errors.error}/> }
             <TasksHistory projectId={projectId} tasks={tasks} />
             <Toast showToast={showToast} text={toastText} />

@@ -16,7 +16,7 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-export const Task = ({ task, projectId }) => {
+export const Task = ({ task, projectId,isArchived }) => {
 
     const [dropdown, setDropdown] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -48,7 +48,7 @@ export const Task = ({ task, projectId }) => {
     //isEditable toggle
     function setEditable(): void {
         setIsEditable(!isEditable);
-        closeDropdown()
+        closeDropdown();
     }
 
     function handleChange(e) {
@@ -65,7 +65,6 @@ export const Task = ({ task, projectId }) => {
                 ...task,
                 completed: true,
             }
-            console.log(task)
             dispatch(updateTask(projectId, task.id, task));
         }
     }
@@ -83,8 +82,8 @@ export const Task = ({ task, projectId }) => {
         closeDropdown();
     }
 
-    const createIcon = <IoMdCreate />;
-    const trash = <IoIosTrash />;
+    const createIcon: JSX.Element = <IoMdCreate />;
+    const trash: JSX.Element = <IoIosTrash />;
 
     function displayDropdownItems() {
         return [{
@@ -98,14 +97,14 @@ export const Task = ({ task, projectId }) => {
             action: openModalDropdown,
             className: 'dropdown__remove',
             icon: trash,
-        },];
+        }, ];
     }
 
     const question: string = `Are you sure you want to remove ${task.task}?`;
 
     return (
         <>
-            {isEditable ? <TaskForm
+            {isEditable ? !isArchived && <TaskForm
                 buttonDo='Add Task'
                 buttonClose='Cancel'
                 onClickClose={setEditable}
@@ -114,9 +113,9 @@ export const Task = ({ task, projectId }) => {
                 request={editSelectedTask} /> : <li className={style.taskItem}>
                     <div className='dflex'>
                         <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>
-                        <span className={style.task} onClick={setEditable}>{task.task}</span>
+                        <span className={style.task} onClick={isArchived ? () => console.log('hello') : setEditable}>{task.task}</span>
                     </div>
-                    <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>
+                    {!isArchived && <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>}
                     {dropdown && <Dropdown
                         closeDropdown={closeDropdown}
                         dropdownItems={displayDropdownItems}

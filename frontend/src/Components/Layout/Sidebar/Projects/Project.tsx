@@ -19,7 +19,7 @@ import { Dropdown } from '../../../Dropdown/Dropdown';
 import { Modal } from '../../../modal/Modal';
 import { ModalDropdown } from '../../../modal/ModalDropdown';
 
-export const Project = ({ project, userId, history }): JSX.Element => {
+export const Project = ({ project, userId, history,areArchivedProjects,isArchived }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -84,11 +84,20 @@ export const Project = ({ project, userId, history }): JSX.Element => {
         setDropdown(false);
     }
 
+    function setProjectUnarchived(project) {
+        project = {
+            ...project,
+            archived:false
+        };
+        dispatch(editProject(userId, project.id, project));
+        setDropdown(false);
+    }
+
     const editIcon = <IoMdCreate/>;
     const archiveIcon = <IoIosArchive/>;
     const removeIcon = <IoIosTrash/>;
 
-    function displayDropdownItems(project) {
+    function displayDropdownItemsUnarchived(project) {
         return [{
             name:'Edit project',
             action:openModal,
@@ -107,19 +116,32 @@ export const Project = ({ project, userId, history }): JSX.Element => {
         ]
     }
 
+    function displayDropdownItemsArchived(project) {
+        return [{
+            name:'Unarchive project',
+            action:() => setProjectUnarchived(project),
+            icon:archiveIcon,
+        },
+        {
+            name:'Remove project',
+            action:openModalDropdown,
+            icon:removeIcon,
+        }]
+    }
+
     const question: string = `Are you sure you want to remove ${project.name}?`;
 
     return (
         <>
             <li className={style.projectItem} >
-                <Link className='test' to={`/project/${project.id}?q=${project.name}`}>
+                <Link className='test' to={{pathname:`/project/${project.id}`, search: project.name, state: isArchived}}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
                 </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    dropdownItems={displayDropdownItems}
+                    dropdownItems={areArchivedProjects ? displayDropdownItemsArchived : displayDropdownItemsUnarchived }
                     item={project}
                     left='97.5'
                     top='70'

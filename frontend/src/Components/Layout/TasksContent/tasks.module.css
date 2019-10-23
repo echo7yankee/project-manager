@@ -14,7 +14,7 @@
     justify-content: space-between;
 }
 
-.tasksTitleContainer span {
+.tasksTitleContainerDropdownAction {
     color: var(--grey-color-hover-4);
     font-size: 2.8rem;
     cursor: pointer;
@@ -28,12 +28,21 @@
     position: relative;
 }
 
-.tasksTitleContainer span:hover {
+.tasksTitleContainerDropdownAction:hover {
     background-color: var(--grey-color-2);
     /* transform: translateY(-.4rem); */
 }
 
+.tasksTitleContainer div:first-child {
+    display: flex;
+    align-items: center;
+}
 
+.tasksTitleContainer div:first-child span {
+    margin-left: .8rem;
+    color: var(--grey-color-3);
+    font-size: 1rem;
+}
 
 .tasks h1 {
     font-size: 1.8rem;
