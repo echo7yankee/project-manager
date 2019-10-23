@@ -112,7 +112,7 @@ export const Task = ({ task, projectId,isArchived }) => {
                 inputValue={taskValueEdit}
                 request={editSelectedTask} /> : <li className={style.taskItem}>
                     <div className='dflex'>
-                        <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>
+                        {!isArchived && <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>}
                         <span className={style.task} onClick={isArchived ? () => console.log('hello') : setEditable}>{task.task}</span>
                     </div>
                     {!isArchived && <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>}
