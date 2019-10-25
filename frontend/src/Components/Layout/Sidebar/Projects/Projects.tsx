@@ -13,9 +13,10 @@ import style from './project.module.css';
 //components
 import { Modal } from '../../../modal/Modal';
 import { ProjectCreator } from './ProjectCreator';
+import { IProjectsType } from '../../../../TSTypes/reducers/project';
 
 
-interface IProjects {
+export interface IProjects {
   userId: string;
   history;
 }
@@ -47,11 +48,18 @@ export const Projects = (props: IProjects): JSX.Element | null => {
 
   function addNewProject(e) {
     e.preventDefault();
-    dispatch(addProject(projectValue, props.userId))
+    const newProject = {
+      name:projectValue,
+      archived:false,
+    }
+    dispatch(addProject(newProject, props.userId))
     setProjectValue('');
     setModal(!modal);
   }
 
+  const unarchivedProjects:IProjectsType[] = projects && projects.filter(project => {
+    return project.archived === false;
+  });
 
   return <div>
     {projects.length > 0 ? <div>
@@ -67,13 +75,16 @@ export const Projects = (props: IProjects): JSX.Element | null => {
         </div>
       </div>
 
-      {projects.map(project => {
+      {unarchivedProjects.map(project => {
+        console.log(project)
         return <div key={project.id} className={toggleProjects ? style.projectShow : style.projectHide}>
           <ul>
             <Project
               project={project}
               userId={props.userId}
               history={props.history}
+              areArchivedProjects={false}
+              isArchived={false}
             />
           </ul>
         </div>

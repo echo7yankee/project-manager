@@ -12,14 +12,14 @@ import { removeProject, editProject } from '../../../../Redux/actions/project';
 import { Link } from 'react-router-dom';
 
 //style
-import { IoIosTrash, IoMdCreate } from 'react-icons/io';
+import { IoIosTrash, IoMdCreate, IoIosArchive } from 'react-icons/io';
 
 //Components
 import { Dropdown } from '../../../Dropdown/Dropdown';
 import { Modal } from '../../../modal/Modal';
 import { ModalDropdown } from '../../../modal/ModalDropdown';
 
-export const Project = ({ project, userId, history }): JSX.Element => {
+export const Project = ({ project, userId, history,areArchivedProjects,isArchived }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -62,44 +62,87 @@ export const Project = ({ project, userId, history }): JSX.Element => {
 
     function removeSelectedProject(): void {
         dispatch(removeProject(userId, project.id));
-        history.push(`/`)
+        history.push('/')
     }
 
     function editSelectedProject(e: { preventDefault: () => void; }): void {
         e.preventDefault();
-        dispatch(editProject(userId, project.id, projectValueEdit));
+        const newProject = {
+            name: projectValueEdit,
+            archived: false
+        }
+        dispatch(editProject(userId, project.id, newProject));
         setModal(false);
     }
 
-    const createIcon = <IoMdCreate />
-    const trash = <IoIosTrash />
+    function setProjectArchived(project) {
+        project = {
+            ...project,
+            archived: true,
+        }
+        dispatch(editProject(userId, project.id, project));
+        setDropdown(false);
+    }
 
-    const dropdownItems = [{
-        name: 'Edit Project',
-        action: openModal,
-        className: '',
-        icon: createIcon,
-    },
-    {
-        name: 'Remove Project',
-        action: openModalDropdown,
-        className: 'dropdown__remove',
-        icon: trash
-    },]
+    function setProjectUnarchived(project) {
+        project = {
+            ...project,
+            archived:false
+        };
+        dispatch(editProject(userId, project.id, project));
+        setDropdown(false);
+    }
 
-    const question: string = `Are you sure you want to remove ${project.name}?`
+    const editIcon = <IoMdCreate/>;
+    const archiveIcon = <IoIosArchive/>;
+    const removeIcon = <IoIosTrash/>;
+
+    function displayDropdownItemsUnarchived(project) {
+        return [{
+            name:'Edit project',
+            action:openModal,
+            icon:editIcon,
+        },
+        {
+            name:'Archive project',
+            action:() => setProjectArchived(project),
+            icon:archiveIcon,
+        },
+        {
+            name:'Remove project',
+            action:openModalDropdown,
+            icon:removeIcon,
+            }
+        ]
+    }
+
+    function displayDropdownItemsArchived(project) {
+        return [{
+            name:'Unarchive project',
+            action:() => setProjectUnarchived(project),
+            icon:archiveIcon,
+        },
+        {
+            name:'Remove project',
+            action:openModalDropdown,
+            icon:removeIcon,
+        }]
+    }
+
+    const question: string = `Are you sure you want to remove ${project.name}?`;
 
     return (
         <>
             <li className={style.projectItem} >
-                <Link className='test' to={`/project/${project.id}?q=${project.name}`}>
+                <Link className='test' to={{pathname:`/project/${project.id}`, search: project.name, state: isArchived}}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
                 </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    dropdownItems={dropdownItems}
+                    dropdownItems={areArchivedProjects ? displayDropdownItemsArchived : displayDropdownItemsUnarchived }
+                    item={project}
                     left='97.5'
                     top='70'
                 />}

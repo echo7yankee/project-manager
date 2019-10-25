@@ -115,6 +115,36 @@
     color: var(--grey-color-4);
 }
 
+.archivedProjectsContainer {
+    margin: 2.5rem 0;
+}
+
+
+.archivedProjectsContainer div:first-child {
+    color: var(--grey-color-hover-4);
+    cursor: pointer;
+}
+
+.archivedProjectsContainer h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.archivedProjectsContainer div:first-child span {
+    border: 1px solid var(--grey-color-4);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.archivedProjectsContainer div:first-child:hover h3,.archivedProjectsContainer div:first-child:hover span {
+    color: var(--grey-color-3);
+}
+
 @keyframes project{
     from {
         background-color:var(--grey-color-4);

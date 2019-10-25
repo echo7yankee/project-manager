@@ -26,10 +26,10 @@ export const getProjects = (id: string) => {
     };
 };
 
-export const addProject = (name, id) => {
+export const addProject = (newProject, id) => {
     return async (dispatch) => {
         try {
-            await axios.post('/project', { name }, {
+            await axios.post('/project', newProject, {
                 params: {
                     userId: id,
                 },
@@ -52,10 +52,10 @@ export const removeProject = (userId, projectId) => {
     }
 }
 
-export const editProject = (userId, projectId, newProjectValue) => {
+export const editProject = (userId, projectId, newProject) => {
     return async (dispatch) => {
         try {
-            await axios.put(`/project/${projectId}`, { name: newProjectValue })
+            await axios.put(`/project/${projectId}`, newProject )
             dispatch(getProjects(userId))
         } catch (error) {
             console.log(error);

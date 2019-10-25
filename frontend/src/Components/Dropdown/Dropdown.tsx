@@ -6,7 +6,7 @@ import { useOutsideClose } from '../CloseDropdown/CloseDropdown';
 
 import style from './dropdown.module.css';
 
-export const Dropdown = ({ closeDropdown, dropdownItems, left, top }) => {
+export const Dropdown = ({ closeDropdown, dropdownItems, left, top,item }) => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, closeDropdown);
@@ -47,7 +47,7 @@ export const Dropdown = ({ closeDropdown, dropdownItems, left, top }) => {
     return (
         <div className={style.projectDropdown} ref={wrapperRef} style={{ left: left + '%', top: top + '%' }}>
             <ul onKeyDown={handleKeyDown}>
-                {dropdownItems.map((item, index) => {
+                {dropdownItems(item).map((item, index) => {
                     return (<li
                         ref={(ref) => setRef(ref, index)}
                         key={item.name}

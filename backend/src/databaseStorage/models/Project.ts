@@ -7,6 +7,10 @@ const projectSchema = new Schema({
         required: true,
         trim: true,
     },
+    archived:{
+        type:Boolean,
+        required:true,
+    },
     userId: {
         type: String,
         required: true,
