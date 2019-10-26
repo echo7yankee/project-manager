@@ -18,13 +18,14 @@ import { Toast } from '../../Toast/Toast';
 import { Task } from './Task';
 import { TasksHistory } from './TaskHistory/TasksHistory';
 
-export const Tasks = ({ history:{location} }) => {
+export const Tasks = ({ history: { location } }) => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
     const [taskValue, setTaskValue] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const projectId: string = location.pathname.split('project/').pop();
-    const projectName: string = location.search.split('?').pop();
+    const projectName: string = location.search.split('=').pop();
     const isArchived: boolean = location.state;
+
 
     //redux
     const tasks = useSelector(state => state.task.tasks);
@@ -80,35 +81,35 @@ export const Tasks = ({ history:{location} }) => {
 
     return (
         <>
-        <div className={style.tasks}>
-            <div className={style.tasksTitleContainer} >
-                <div>
-                <h1>{projectName}</h1>
-                {isArchived && <span>Archived</span> }
+            <div className={style.tasks}>
+                <div className={style.tasksTitleContainer} >
+                    <div>
+                        <h1>{projectName}</h1>
+                        {isArchived && <span>Archived</span>}
+                    </div>
+                    <span onClick={openDropdown} className={style.tasksTitleContainerDropdownAction} >
+                        <IoIosMore />
+                        {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' item='' />}
+                    </span>
                 </div>
-                <span onClick={openDropdown} className={style.tasksTitleContainerDropdownAction} >
-                    <IoIosMore />
-                    {dropdown && <Dropdown closeDropdown={closeDropdown} dropdownItems={dropdownItems} left='0' top='0' item=''/>}
-                </span>
+                {tasks.length > 0 ? tasks && incompletedTasks.map(task => {
+                    return <ul key={task.id}>
+                        <Task projectId={projectId} task={task} isArchived={isArchived} />
+                    </ul>
+                }) : null}
+                {toggleTaskForm ? <TaskForm
+                    buttonDo='Add Task'
+                    buttonClose='Cancel'
+                    onClickClose={closeForm}
+                    onChange={handleChange}
+                    inputValue={taskValue}
+                    request={createTaskRequest} />
+                    : !isArchived && <TaskCreator onClick={toggleForm} />}
+                {errors.error && <Error textError={errors.error} />}
+                <TasksHistory projectId={projectId} tasks={tasks} />
+                <Toast showToast={showToast} text={toastText} />
             </div>
-            {tasks.length > 0 ? tasks && incompletedTasks.map(task => {
-                return <ul key={task.id}>
-                    <Task projectId={projectId} task={task} isArchived={isArchived} />
-                </ul>
-            }) : null}
-            {toggleTaskForm ? <TaskForm
-                buttonDo='Add Task'
-                buttonClose='Cancel'
-                onClickClose={closeForm}
-                onChange={handleChange}
-                inputValue={taskValue}
-                request={createTaskRequest} />
-                : !isArchived && <TaskCreator onClick={toggleForm} />}
-                       {errors.error && <Error textError={errors.error}/> }
-            <TasksHistory projectId={projectId} tasks={tasks} />
-            <Toast showToast={showToast} text={toastText} />
-        </div>
-        {isLoading && <div className='overlay'>
+            {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}
         </>
