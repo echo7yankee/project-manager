@@ -5,8 +5,9 @@ import { IoIosMore } from 'react-icons/io';
 import style from './project.module.css';
 
 //redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeProject, editProject } from '../../../../Redux/actions/project';
+import { updateTask } from '../../../../Redux/actions/task';
 
 //react router dom
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ import { Dropdown } from '../../../Dropdown/Dropdown';
 import { Modal } from '../../../modal/Modal';
 import { ModalDropdown } from '../../../modal/ModalDropdown';
 
-export const Project = ({ project, userId, history,areArchivedProjects,isArchived }): JSX.Element => {
+export const Project = ({ project, userId, history, areArchivedProjects, isArchived }): JSX.Element => {
     const [dropdown, setDropdown] = useState(false);
     const [modal, setModal] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -27,6 +28,7 @@ export const Project = ({ project, userId, history,areArchivedProjects,isArchive
 
     //redux
     const dispatch = useDispatch();
+    const tasks = useSelector(state => state.task.tasks);
 
     //DROPDOWN TOGGLE
     function openDropdown() {
@@ -76,6 +78,16 @@ export const Project = ({ project, userId, history,areArchivedProjects,isArchive
     }
 
     function setProjectArchived(project) {
+
+        tasks.map(task => {
+            const newTask = {
+                ...task,
+                archived: true
+            }
+            dispatch(updateTask(project.id, task.id, newTask))
+            return task;
+        })
+
         project = {
             ...project,
             archived: true,
@@ -85,63 +97,75 @@ export const Project = ({ project, userId, history,areArchivedProjects,isArchive
     }
 
     function setProjectUnarchived(project) {
+
+        tasks.map(task => {
+            const newTask = {
+                ...task,
+                archived: false
+            }
+            dispatch(updateTask(project.id, task.id, newTask))
+            return task;
+        })
+
         project = {
             ...project,
-            archived:false
+            archived: false
         };
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }
 
-    const editIcon = <IoMdCreate/>;
-    const archiveIcon = <IoIosArchive/>;
-    const removeIcon = <IoIosTrash/>;
+    const editIcon = <IoMdCreate />;
+    const archiveIcon = <IoIosArchive />;
+    const removeIcon = <IoIosTrash />;
 
     function displayDropdownItemsUnarchived(project) {
         return [{
-            name:'Edit project',
-            action:openModal,
-            icon:editIcon,
+            name: 'Edit project',
+            action: openModal,
+            icon: editIcon,
         },
         {
-            name:'Archive project',
-            action:() => setProjectArchived(project),
-            icon:archiveIcon,
+            name: 'Archive project',
+            action: () => setProjectArchived(project),
+            icon: archiveIcon,
         },
         {
-            name:'Remove project',
-            action:openModalDropdown,
-            icon:removeIcon,
-            }
+            name: 'Remove project',
+            action: openModalDropdown,
+            icon: removeIcon,
+        }
         ]
     }
 
     function displayDropdownItemsArchived(project) {
         return [{
-            name:'Unarchive project',
-            action:() => setProjectUnarchived(project),
-            icon:archiveIcon,
+            name: 'Unarchive project',
+            action: () => setProjectUnarchived(project),
+            icon: archiveIcon,
         },
         {
-            name:'Remove project',
-            action:openModalDropdown,
-            icon:removeIcon,
+            name: 'Remove project',
+            action: openModalDropdown,
+            icon: removeIcon,
         }]
     }
 
     const question: string = `Are you sure you want to remove ${project.name}?`;
 
+    console.log(tasks)
+
     return (
         <>
             <li className={style.projectItem} >
-                <Link className='test' to={{pathname:`/project/${project.id}`, search: project.name, state: isArchived}}>
+                <Link className='test' to={{ pathname: `/project/${project.id}`, search: project.name, state: isArchived }}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
                 </Link>
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    dropdownItems={areArchivedProjects ? displayDropdownItemsArchived : displayDropdownItemsUnarchived }
+                    dropdownItems={areArchivedProjects ? displayDropdownItemsArchived : displayDropdownItemsUnarchived}
                     item={project}
                     left='97.5'
                     top='70'

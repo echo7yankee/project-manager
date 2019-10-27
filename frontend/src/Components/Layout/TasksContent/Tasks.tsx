@@ -23,9 +23,8 @@ export const Tasks = ({ history: { location } }) => {
     const [taskValue, setTaskValue] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const projectId: string = location.pathname.split('project/').pop();
-    const projectName: string = location.search.split('=').pop();
+    const projectName: string = location.search.split('?').pop();
     const isArchived: boolean = location.state;
-
 
     //redux
     const tasks = useSelector(state => state.task.tasks);
@@ -67,7 +66,7 @@ export const Tasks = ({ history: { location } }) => {
             date: new Date(),
             projectName,
             completed: false,
-            archived: false,
+            archived: isArchived,
         }
         dispatch(createTask(projectId, newTask));
         setTaskValue('');

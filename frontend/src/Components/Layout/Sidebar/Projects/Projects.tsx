@@ -49,15 +49,15 @@ export const Projects = (props: IProjects): JSX.Element | null => {
   function addNewProject(e) {
     e.preventDefault();
     const newProject = {
-      name:projectValue,
-      archived:false,
+      name: projectValue,
+      archived: false,
     }
     dispatch(addProject(newProject, props.userId))
     setProjectValue('');
     setModal(!modal);
   }
 
-  const unarchivedProjects:IProjectsType[] = projects && projects.filter(project => {
+  const unarchivedProjects: IProjectsType[] = projects && projects.filter(project => {
     return project.archived === false;
   });
 
@@ -76,7 +76,6 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       </div>
 
       {unarchivedProjects.map(project => {
-        console.log(project)
         return <div key={project.id} className={toggleProjects ? style.projectShow : style.projectHide}>
           <ul>
             <Project

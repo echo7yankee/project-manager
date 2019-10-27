@@ -29,6 +29,7 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
     }, [dispatch])
 
     console.log(projects);
+    console.log(props.allTasks)
 
     return (
         <div className={style.searchInfo}>
@@ -41,7 +42,8 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
                             className={style.searchItem}
                             tabIndex={index}
                             onClick={props.destroy}
-                            to={`/project/${task.projectId}?q=${task.projectName}`}>
+                            to={{ pathname: `/project/${task.projectId}`, search: task.projectName, state: task.archived }}
+                        >
                             <span className='dot mr-1'></span>
                             <span>{task.task}</span>
                         </Link>;
