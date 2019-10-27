@@ -6,7 +6,7 @@ import { useOutsideClose } from '../CloseDropdown/CloseDropdown';
 
 import style from './dropdown.module.css';
 
-export const Dropdown = ({ closeDropdown, dropdownItems, left, top,item }) => {
+export const Dropdown = ({ closeDropdown, dropdownItems, left, top }) => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, closeDropdown);
@@ -20,6 +20,7 @@ export const Dropdown = ({ closeDropdown, dropdownItems, left, top,item }) => {
     }
 
     function handleKeyDown(e) {
+
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();
@@ -44,10 +45,13 @@ export const Dropdown = ({ closeDropdown, dropdownItems, left, top,item }) => {
         }
     }
 
+    console.log('dropdown items length', dropdownItems.length)
+    console.log('Cursor', cursor)
+
     return (
-        <div className={style.projectDropdown} ref={wrapperRef} style={{ left: left + '%', top: top + '%' }}>
+        <div className={style.dropdown} ref={wrapperRef} style={{ left: left + '%', top: top + '%' }}>
             <ul onKeyDown={handleKeyDown}>
-                {dropdownItems(item).map((item, index) => {
+                {dropdownItems.map((item, index) => {
                     return (<li
                         ref={(ref) => setRef(ref, index)}
                         key={item.name}

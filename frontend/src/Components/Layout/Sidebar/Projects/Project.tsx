@@ -77,7 +77,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
         setModal(false);
     }
 
-    function setProjectArchived(project) {
+    function setProjectArchived() {
 
         tasks.map(task => {
             const newTask = {
@@ -96,7 +96,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
         setDropdown(false);
     }
 
-    function setProjectUnarchived(project) {
+    function setProjectUnarchived() {
 
         tasks.map(task => {
             const newTask = {
@@ -119,41 +119,37 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     const archiveIcon = <IoIosArchive />;
     const removeIcon = <IoIosTrash />;
 
-    function displayDropdownItemsUnarchived(project) {
-        return [{
-            name: 'Edit project',
-            action: openModal,
-            icon: editIcon,
-        },
-        {
-            name: 'Archive project',
-            action: () => setProjectArchived(project),
-            icon: archiveIcon,
-        },
-        {
-            name: 'Remove project',
-            action: openModalDropdown,
-            icon: removeIcon,
-        }
-        ]
+    const dropdownItemsUnarchived = [{
+        name: 'Edit project',
+        action: openModal,
+        icon: editIcon,
+    },
+    {
+        name: 'Archive project',
+        action: () => setProjectArchived(),
+        icon: archiveIcon,
+    },
+    {
+        name: 'Remove project',
+        action: openModalDropdown,
+        icon: removeIcon,
     }
+    ]
 
-    function displayDropdownItemsArchived(project) {
-        return [{
-            name: 'Unarchive project',
-            action: () => setProjectUnarchived(project),
-            icon: archiveIcon,
-        },
-        {
-            name: 'Remove project',
-            action: openModalDropdown,
-            icon: removeIcon,
-        }]
-    }
+
+    const dropdownItemsArchived = [{
+        name: 'Unarchive project',
+        action: () => setProjectUnarchived(),
+        icon: archiveIcon,
+    },
+    {
+        name: 'Remove project',
+        action: openModalDropdown,
+        icon: removeIcon,
+    }]
+
 
     const question: string = `Are you sure you want to remove ${project.name}?`;
-
-    console.log(tasks)
 
     return (
         <>
@@ -165,8 +161,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
                 <span className={style.projectItemSettings} onClick={openDropdown}><IoIosMore /></span>
                 {dropdown && <Dropdown
                     closeDropdown={closeDropdown}
-                    dropdownItems={areArchivedProjects ? displayDropdownItemsArchived : displayDropdownItemsUnarchived}
-                    item={project}
+                    dropdownItems={areArchivedProjects ? dropdownItemsArchived : dropdownItemsUnarchived}
                     left='97.5'
                     top='70'
                 />}

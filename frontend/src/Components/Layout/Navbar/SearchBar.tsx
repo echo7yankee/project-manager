@@ -36,6 +36,7 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
     }
 
     function handleKeyDown(e) {
+
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();

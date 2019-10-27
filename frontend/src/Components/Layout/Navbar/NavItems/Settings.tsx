@@ -28,24 +28,23 @@ export const Settings = (): JSX.Element => {
   const themeIcon = <IoIosColorPalette />;
   const authIcon = <IoIosLogIn />;
 
-  function displayDropdownItems() {
-    return [
-      {
-        name: "Settings",
-        icon: settingsIcon
-      },
-      {
-        name: "Theme",
-        icon: themeIcon
-      },
-      {
-        name: "Logout",
-        icon: authIcon,
-        action: () => dispatch(logoutUser()),
-        className: "dropdown__remove"
-      }
-    ];
-  }
+  const dropdownItems = [
+    {
+      name: "Settings",
+      icon: settingsIcon
+    },
+    {
+      name: "Theme",
+      icon: themeIcon
+    },
+    {
+      name: "Logout",
+      icon: authIcon,
+      action: () => dispatch(logoutUser()),
+      className: "dropdown__remove"
+    }
+  ];
+
   return (
     <li className="pos-relative" onClick={toggleDropdown}>
       <span className={style.navItem}>
@@ -54,10 +53,9 @@ export const Settings = (): JSX.Element => {
       {dropdown && (
         <Dropdown
           closeDropdown={closeDropdown}
-          dropdownItems={displayDropdownItems}
-          left="100"
+          dropdownItems={dropdownItems}
+          left="0"
           top="105"
-          item=""
         />
       )}
     </li>

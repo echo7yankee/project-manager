@@ -16,7 +16,7 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-export const Task = ({ task, projectId,isArchived }) => {
+export const Task = ({ task, projectId, isArchived }) => {
 
     const [dropdown, setDropdown] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -85,20 +85,19 @@ export const Task = ({ task, projectId,isArchived }) => {
     const createIcon: JSX.Element = <IoMdCreate />;
     const trash: JSX.Element = <IoIosTrash />;
 
-    function displayDropdownItems() {
-        return [{
-            name: 'Edit Task',
-            action: setEditable,
-            className: '',
-            icon: createIcon,
-        },
-        {
-            name: 'Remove Task',
-            action: openModalDropdown,
-            className: 'dropdown__remove',
-            icon: trash,
-        }, ];
-    }
+    const dropdownItems = [{
+        name: 'Edit Task',
+        action: setEditable,
+        className: '',
+        icon: createIcon,
+    },
+    {
+        name: 'Remove Task',
+        action: openModalDropdown,
+        className: 'dropdown__remove',
+        icon: trash,
+    },];
+
 
     const question: string = `Are you sure you want to remove ${task.task}?`;
 
@@ -118,8 +117,7 @@ export const Task = ({ task, projectId,isArchived }) => {
                     {!isArchived && <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>}
                     {dropdown && <Dropdown
                         closeDropdown={closeDropdown}
-                        dropdownItems={displayDropdownItems}
-                        item={task}
+                        dropdownItems={dropdownItems}
                         left='98.5'
                         top='' />
                     }
