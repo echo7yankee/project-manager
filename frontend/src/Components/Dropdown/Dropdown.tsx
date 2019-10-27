@@ -45,9 +45,6 @@ export const Dropdown = ({ closeDropdown, dropdownItems, left, top }) => {
         }
     }
 
-    console.log('dropdown items length', dropdownItems.length)
-    console.log('Cursor', cursor)
-
     return (
         <div className={style.dropdown} ref={wrapperRef} style={{ left: left + '%', top: top + '%' }}>
             <ul onKeyDown={handleKeyDown}>
