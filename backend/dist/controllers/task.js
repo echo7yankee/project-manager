@@ -4,8 +4,11 @@ class Task {
     constructor(taskDao) {
         this.createTask = async (req, res) => {
             try {
+                const unixDate = new Date(req.body.schedule).getTime() / 1000;
+                console.log(unixDate);
                 const projectId = req.query.projectId;
-                const newTask = Object.assign({}, req.body, { date: new Date(), projectId });
+                const newTask = Object.assign({}, req.body, { schedule: unixDate, date: new Date(), projectId });
+                console.log(newTask);
                 const tasks = await this.taskDao.find({ projectId });
                 const isSameTask = tasks.some((task) => {
                     return task.task === newTask.task;
@@ -36,6 +39,7 @@ class Task {
                         archived: task.archived,
                         completed: task.completed,
                         date: task.date,
+                        schedule: task.schedule,
                         id: task._id,
                     };
                 });
@@ -60,6 +64,7 @@ class Task {
                         archived: task.archived,
                         completed: task.completed,
                         date: task.date,
+                        schedule: task.schedule,
                         id: task._id,
                     };
                 });

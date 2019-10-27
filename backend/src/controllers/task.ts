@@ -12,12 +12,19 @@ export class Task {
 
     public createTask = async (req: Request, res: Response): Promise<Response> => {
         try {
+
+            const unixDate = new Date(req.body.schedule).getTime() / 1000
+            console.log(unixDate)
+
             const projectId: string = req.query.projectId;
             const newTask: ITask = {
                 ...req.body,
+                schedule: unixDate,
                 date: new Date(),
                 projectId,
             };
+
+            console.log(newTask)
 
             const tasks: ITaskDatabase[] = await this.taskDao.find({ projectId })
 
@@ -55,6 +62,7 @@ export class Task {
                     archived: task.archived,
                     completed: task.completed,
                     date: task.date,
+                    schedule: task.schedule,
                     id: task._id,
                 };
             });
@@ -83,6 +91,7 @@ export class Task {
                     archived: task.archived,
                     completed: task.completed,
                     date: task.date,
+                    schedule: task.schedule,
                     id: task._id,
                 };
             });

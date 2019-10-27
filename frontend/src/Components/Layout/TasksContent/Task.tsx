@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+//moment
+import moment from 'moment';
+
 //redux
 import { useDispatch } from 'react-redux';
 import { removeTask, updateTask } from '../../../Redux/actions/task';
@@ -16,7 +19,7 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-export const Task = ({ task, projectId, isArchived }) => {
+export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange }) => {
 
     const [dropdown, setDropdown] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -98,8 +101,9 @@ export const Task = ({ task, projectId, isArchived }) => {
         icon: trash,
     },];
 
-
     const question: string = `Are you sure you want to remove ${task.task}?`;
+
+    console.log(task.schedule)
 
     return (
         <>
@@ -109,10 +113,19 @@ export const Task = ({ task, projectId, isArchived }) => {
                 onClickClose={setEditable}
                 onChange={handleChange}
                 inputValue={taskValueEdit}
-                request={editSelectedTask} /> : <li className={style.taskItem}>
-                    <div className='dflex'>
-                        {!isArchived && <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>}
-                        <span className={style.task} onClick={isArchived ? () => console.log('hello') : setEditable}>{task.task}</span>
+                request={editSelectedTask}
+                selectedDay={selectedDay}
+                handleDayChange={handleDayChange} /> : <li className={style.taskItem}>
+                    <div>
+                        <div className='dflex'>
+                            {!isArchived && <span className={style.taskDot} onClick={() => setCompletedTask(task.id)} ></span>}
+                            <span className={style.task} onClick={isArchived ? () => console.log('hello') : setEditable}>
+                                {task.task}
+                            </span>
+                        </div>
+                        <div>
+                            <span>{moment.unix(task.schedule).format('DD MM YYYY')}</span>
+                        </div>
                     </div>
                     {!isArchived && <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>}
                     {dropdown && <Dropdown

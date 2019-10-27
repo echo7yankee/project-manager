@@ -26,8 +26,11 @@ exports.taskSchema = new Schema({
         type: Boolean,
         required: true
     },
-    date: {
+    createdAt: {
         type: Date,
+    },
+    schedule: {
+        type: Number,
     }
 });
 exports.Task = mongoose_1.default.model('Task', exports.taskSchema);

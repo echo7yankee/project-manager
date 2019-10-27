@@ -22,6 +22,7 @@ export const Tasks = ({ history: { location } }) => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
     const [taskValue, setTaskValue] = useState('');
     const [dropdown, setDropdown] = useState(false);
+    const [selectedDay, setSelectedDay] = useState<Date>(new Date());
     const projectId: string = location.pathname.split('project/').pop();
     const projectName: string = location.search.split('?').pop();
     const isArchived: boolean = location.state;
@@ -64,6 +65,7 @@ export const Tasks = ({ history: { location } }) => {
         const newTask = {
             task: taskValue,
             date: new Date(),
+            schedule: selectedDay,
             projectName,
             completed: false,
             archived: isArchived,
@@ -72,11 +74,21 @@ export const Tasks = ({ history: { location } }) => {
         setTaskValue('');
     };
 
+    function handleDayChange(date, modifiers) {
+        if (modifiers.disabled) {
+            return;
+        }
+        setSelectedDay(date)
+    }
+
+
     const dropdownItems = [{
         name: 'Show completed tasks',
     }]
 
     const incompletedTasks = tasks.filter(task => task.completed !== true);
+
+    console.log(selectedDay)
 
     return (
         <>
@@ -98,7 +110,13 @@ export const Tasks = ({ history: { location } }) => {
                 </div>
                 {tasks.length > 0 ? tasks && incompletedTasks.map(task => {
                     return <ul key={task.id}>
-                        <Task projectId={projectId} task={task} isArchived={isArchived} />
+                        <Task
+                            projectId={projectId}
+                            task={task}
+                            isArchived={isArchived}
+                            selectedDay={selectedDay}
+                            handleDayChange={handleDayChange}
+                        />
                     </ul>
                 }) : null}
                 {toggleTaskForm ? <TaskForm
@@ -107,8 +125,12 @@ export const Tasks = ({ history: { location } }) => {
                     onClickClose={closeForm}
                     onChange={handleChange}
                     inputValue={taskValue}
-                    request={createTaskRequest} />
-                    : !isArchived && <TaskCreator onClick={toggleForm} />}
+                    request={createTaskRequest}
+                    selectedDay={selectedDay}
+                    handleDayChange={handleDayChange}
+                />
+                    : !isArchived && <TaskCreator onClick={toggleForm}
+                    />}
                 {errors.error && <Error textError={errors.error} />}
                 <TasksHistory projectId={projectId} tasks={tasks} />
                 <Toast showToast={showToast} text={toastText} />

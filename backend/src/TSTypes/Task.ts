@@ -4,6 +4,7 @@ export type ITaskDatabase = {
     projectName: string,
     archived: boolean,
     completed: boolean,
+    schedule: number,
     date: Date,
     _id: string
 }
@@ -13,5 +14,6 @@ export type ITask = {
     projectId: string,
     archived: boolean,
     completed: boolean,
+    schedule: number,
     date: Date,
 }

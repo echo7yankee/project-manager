@@ -163,6 +163,24 @@ button {
   transition: transform .2s ease-in-out;
 }
 
+/* calendar style */
+.DayPicker-wrapper {
+  background-color: var(--grey-color-2);
+  box-shadow: 0 3px 5px rgba(0,0,0,.4);
+}
+
+.DayPicker-Caption {
+  color: var(--white-color);
+}
+
+.DayPicker-Day {
+  color: var(--grey-color-3);
+}
+
+.DayPicker-Day--disabled {
+  color: var(--grey-color-4) !important;
+}
+
 /* mtb */
 .mtb-1 {
   margin: 1rem 0;

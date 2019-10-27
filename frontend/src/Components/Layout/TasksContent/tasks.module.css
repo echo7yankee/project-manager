@@ -89,7 +89,12 @@
     margin-top: 1.5rem;
 }
 
-.taskFormInputGroup input {
+.taskFormInputGroup {
+    display: flex;
+    align-items: center;
+}
+
+.taskFormInputGroup input:first-child {
     width: 100%;
     border: 1px solid var(--grey-color-4);
     background: var(--grey-color-dark);
@@ -98,9 +103,14 @@
     font-size: 1.3rem;
 }
 
-.taskFormInputGroup input::placeholder {
+.taskFormInputGroup input:first-child::placeholder {
     color: var(--grey-color-3);
     font-size: 1.4rem;
+}
+
+.taskFormInputGroup input:last-child {
+    width: 100%;
+    cursor: pointer;
 }
 
 .taskFormButtonContainer {

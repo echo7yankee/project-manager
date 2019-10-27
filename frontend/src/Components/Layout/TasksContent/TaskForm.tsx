@@ -2,12 +2,15 @@ import React, { useEffect, useRef, SetStateAction } from 'react';
 
 //style
 import style from './tasks.module.css';
+import { DatePickerCalendar } from '../../Datepicker/DatePickerCalendar';
 
 interface ITaskForm {
     buttonDo: string;
     buttonClose: string;
-    onClickClose: () => void;
+    selectedDay: Date;
     inputValue: string;
+    onClickClose: () => void;
+    handleDayChange;
     onChange: (e: { target: { value: SetStateAction<string>; }; }) => void;
     request: (e: { preventDefault: () => void; }) => void;
 }
@@ -29,6 +32,10 @@ export const TaskForm = (props: ITaskForm): JSX.Element => {
                     value={props.inputValue}
                     onChange={props.onChange}
                     ref={inputRef} />
+                <DatePickerCalendar
+                    selectedDay={props.selectedDay}
+                    handleDayChange={props.handleDayChange}
+                />
             </div>
             <div className={style.taskFormButtonContainer}>
                 <button disabled={props.inputValue === ''}

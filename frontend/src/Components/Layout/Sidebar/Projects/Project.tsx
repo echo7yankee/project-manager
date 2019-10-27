@@ -154,7 +154,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     return (
         <>
             <li className={style.projectItem} >
-                <Link className='test' to={{ pathname: `/project/${project.id}`, search: project.name, state: isArchived }}>
+                <Link to={{ pathname: `/project/${project.id}`, search: project.name, state: isArchived }}>
                     <span className='dot'></span>
                     <span>{project.name}</span>
                 </Link>
