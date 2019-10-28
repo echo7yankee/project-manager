@@ -14,7 +14,6 @@ export class Task {
         try {
 
             const unixDate = new Date(req.body.schedule).getTime() / 1000
-            console.log(unixDate)
 
             const projectId: string = req.query.projectId;
             const newTask: ITask = {
@@ -23,8 +22,6 @@ export class Task {
                 date: new Date(),
                 projectId,
             };
-
-            console.log(newTask)
 
             const tasks: ITaskDatabase[] = await this.taskDao.find({ projectId })
 
@@ -107,7 +104,14 @@ export class Task {
         try {
             const id = req.params.id;
 
-            const updatedTask = await this.taskDao.update(id, req.body);
+            const unixDate = new Date(req.body.schedule).getTime() / 1000
+
+            const newUpdatedTask = {
+                ...req.body,
+                schedule: unixDate
+            }
+
+            const updatedTask = await this.taskDao.update(id, newUpdatedTask);
             if (updatedTask === null) {
                 return res.status(404).json({ error: `Task with id ${id} does not exist` });
             }

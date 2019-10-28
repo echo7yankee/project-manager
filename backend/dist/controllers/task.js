@@ -5,10 +5,8 @@ class Task {
         this.createTask = async (req, res) => {
             try {
                 const unixDate = new Date(req.body.schedule).getTime() / 1000;
-                console.log(unixDate);
                 const projectId = req.query.projectId;
                 const newTask = Object.assign({}, req.body, { schedule: unixDate, date: new Date(), projectId });
-                console.log(newTask);
                 const tasks = await this.taskDao.find({ projectId });
                 const isSameTask = tasks.some((task) => {
                     return task.task === newTask.task;
@@ -78,7 +76,9 @@ class Task {
         this.editTask = async (req, res) => {
             try {
                 const id = req.params.id;
-                const updatedTask = await this.taskDao.update(id, req.body);
+                const unixDate = new Date(req.body.schedule).getTime() / 1000;
+                const newUpdatedTask = Object.assign({}, req.body, { schedule: unixDate });
+                const updatedTask = await this.taskDao.update(id, newUpdatedTask);
                 if (updatedTask === null) {
                     return res.status(404).json({ error: `Task with id ${id} does not exist` });
                 }

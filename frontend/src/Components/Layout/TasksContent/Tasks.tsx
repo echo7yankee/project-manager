@@ -88,8 +88,6 @@ export const Tasks = ({ history: { location } }) => {
 
     const incompletedTasks = tasks.filter(task => task.completed !== true);
 
-    console.log(selectedDay)
-
     return (
         <>
             <div className={style.tasks}>

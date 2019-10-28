@@ -42,7 +42,11 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
                             className={style.searchItem}
                             tabIndex={index}
                             onClick={props.destroy}
-                            to={{ pathname: `/project/${task.projectId}`, search: task.projectName, state: task.archived }}
+                            to={{
+                                pathname: `/project/${task.projectId}`,
+                                search: task.projectName,
+                                state: task.archived
+                            }}
                         >
                             <span className='dot mr-1'></span>
                             <span>{task.task}</span>

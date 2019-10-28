@@ -77,6 +77,7 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
 
         const newTaskValue = {
             ...task,
+            schedule: selectedDay,
             task: taskValueEdit,
         }
 
@@ -103,8 +104,6 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
 
     const question: string = `Are you sure you want to remove ${task.task}?`;
 
-    console.log(task.schedule)
-
     return (
         <>
             {isEditable ? !isArchived && <TaskForm
@@ -114,7 +113,7 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
                 onChange={handleChange}
                 inputValue={taskValueEdit}
                 request={editSelectedTask}
-                selectedDay={selectedDay}
+                selectedDay={new Date(task.schedule * 1000)}
                 handleDayChange={handleDayChange} /> : <li className={style.taskItem}>
                     <div>
                         <div className='dflex'>
@@ -123,8 +122,8 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
                                 {task.task}
                             </span>
                         </div>
-                        <div>
-                            <span>{moment.unix(task.schedule).format('DD MM YYYY')}</span>
+                        <div className={`${style.task} mt-1`} style={{ fontSize: '11px' }}>
+                            <span>{moment.unix(task.schedule).format('DD-MM-YYYY')}</span>
                         </div>
                     </div>
                     {!isArchived && <span className={style.taskItemSettings} onClick={openDropdown}><IoIosMore /></span>}
