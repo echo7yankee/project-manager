@@ -29,13 +29,13 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
     }, [dispatch])
 
     console.log(projects);
-    console.log(props.allTasks)
 
     return (
         <div className={style.searchInfo}>
             <ul className={style.searchList}>
                 {props.allTasks.length > 0 ?
                     props.filter(props.allTasks).map((task, index) => {
+                        console.log('Task from navbar', task)
                         return <Link
                             key={task.id}
                             ref={(ref) => props.setRef(ref, index)}

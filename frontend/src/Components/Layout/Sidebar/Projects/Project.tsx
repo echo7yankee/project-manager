@@ -5,9 +5,9 @@ import { IoIosMore } from 'react-icons/io';
 import style from './project.module.css';
 
 //redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeProject, editProject } from '../../../../Redux/actions/project';
-import { updateTask } from '../../../../Redux/actions/task';
+//import { updateTask } from '../../../../Redux/actions/task';
 
 //react router dom
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
 
     //redux
     const dispatch = useDispatch();
-    const tasks = useSelector(state => state.task.tasks);
+    //const tasks = useSelector(state => state.task.tasks);
 
     //DROPDOWN TOGGLE
     function openDropdown() {
@@ -78,39 +78,21 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     }
 
     function setProjectArchived() {
-
-        tasks.map(task => {
-            const newTask = {
-                ...task,
-                archived: true
-            }
-            dispatch(updateTask(project.id, task.id, newTask))
-            return task;
-        })
-
         project = {
             ...project,
             archived: true,
         }
+
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }
 
     function setProjectUnarchived() {
-
-        tasks.map(task => {
-            const newTask = {
-                ...task,
-                archived: false
-            }
-            dispatch(updateTask(project.id, task.id, newTask))
-            return task;
-        })
-
         project = {
             ...project,
             archived: false
         };
+
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }

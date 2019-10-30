@@ -19,7 +19,7 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange }) => {
+export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange, inputRef }) => {
 
     const [dropdown, setDropdown] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -114,6 +114,7 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
                 inputValue={taskValueEdit}
                 request={editSelectedTask}
                 selectedDay={new Date(task.schedule * 1000)}
+                inputRef={inputRef}
                 handleDayChange={handleDayChange} /> : <li className={style.taskItem}>
                     <div>
                         <div className='dflex'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, SetStateAction } from 'react';
+import React, { useEffect, SetStateAction } from 'react';
 
 //style
 import style from './tasks.module.css';
@@ -13,15 +13,14 @@ interface ITaskForm {
     handleDayChange;
     onChange: (e: { target: { value: SetStateAction<string>; }; }) => void;
     request: (e: { preventDefault: () => void; }) => void;
+    inputRef;
 }
 
 export const TaskForm = (props: ITaskForm): JSX.Element => {
 
-    const inputRef: any = useRef(null);
-
     useEffect(() => {
-        inputRef.current.focus();
-    }, [])
+        props.inputRef.current.focus();
+    }, [props.inputRef])
 
     return (
         <form className={style.taskForm} onSubmit={props.request} >
@@ -31,7 +30,7 @@ export const TaskForm = (props: ITaskForm): JSX.Element => {
                     placeholder="Add a task ... e.g Read tonight's news"
                     value={props.inputValue}
                     onChange={props.onChange}
-                    ref={inputRef} />
+                    ref={props.inputRef} />
                 <DatePickerCalendar
                     selectedDay={props.selectedDay}
                     handleDayChange={props.handleDayChange}
