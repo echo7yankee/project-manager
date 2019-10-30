@@ -60,7 +60,7 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
                 setCursor(cursor - 1);
                 break;
             case 'Enter':
-                refs[cursor].click()
+                refs[cursor - 1].click()
                 break;
             default: console.log('hey')
         }
