@@ -52,7 +52,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       name: projectValue,
       archived: false,
     }
-    dispatch(addProject(newProject, props.userId))
+    dispatch(addProject(newProject, props.userId, props.history))
     setProjectValue('');
     setModal(!modal);
   }

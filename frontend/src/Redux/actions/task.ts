@@ -102,10 +102,10 @@ export function removeTask(projectId, taskId) {
   };
 }
 
-export function updateTask(projectId, taskId, newTaskValue) {
+export function updateTask(projectId, taskId, newTask) {
   return async dispatch => {
     try {
-      await axios.put(`/task/${taskId}`, newTaskValue);
+      await axios.put(`/task/${taskId}`, newTask);
       dispatch(getTasks(projectId));
       dispatch({
         type: SET_SHOW_TOAST_EDIT

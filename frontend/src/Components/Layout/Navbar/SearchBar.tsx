@@ -50,14 +50,17 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
                 break;
             case 'ArrowUp':
                 e.preventDefault();
-                if (cursor <= + 1) {
+                if (cursor <= 1) {
                     inputRef.current.focus()
+                }
+                if (cursor === 0) {
+                    setCursor(filter(allTasks).length);
                     return;
                 }
                 setCursor(cursor - 1);
                 break;
             case 'Enter':
-                refs[cursor].click()
+                refs[cursor - 1].click()
                 break;
             default: console.log('hey')
         }
@@ -65,8 +68,6 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
     //close dropdown
     const wrapperRef = useRef(null);
     useOutsideClose(wrapperRef, props.destroy);
-
-    console.log(cursor)
 
     return (
         <>
@@ -77,13 +78,6 @@ export const SearchBar = (props: ISearchBar): JSX.Element => {
                     placeholder='Quick find'
                     value={props.inputValue}
                     onChange={props.onChange}
-                    onKeyDown={e => {
-                        if (e.key === 'ArrowDown') {
-                            setCursor(1);
-                        } else if (e.key === 'ArrowUp') {
-                            setCursor(allTasks.length);
-                        }
-                    }}
                     ref={inputRef}
                 />
                 {props.inputValue && <div className={style.searchInfoContainer} ref={wrapperRef}>

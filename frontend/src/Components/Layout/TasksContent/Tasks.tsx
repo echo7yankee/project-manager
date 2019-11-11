@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import spinner from '../../../assets/gifs/spinner.gif';
 
 //style
@@ -26,6 +26,7 @@ export const Tasks = ({ history: { location } }) => {
     const projectId: string = location.pathname.split('project/').pop();
     const projectName: string = location.search.split('?').pop();
     const isArchived: boolean = location.state;
+    const inputRef: any = useRef(null);
 
     //redux
     const tasks = useSelector(state => state.task.tasks);
@@ -72,6 +73,7 @@ export const Tasks = ({ history: { location } }) => {
         }
         dispatch(createTask(projectId, newTask));
         setTaskValue('');
+        inputRef.current.focus();
     };
 
     function handleDayChange(date, modifiers) {
@@ -114,6 +116,7 @@ export const Tasks = ({ history: { location } }) => {
                             isArchived={isArchived}
                             selectedDay={selectedDay}
                             handleDayChange={handleDayChange}
+                            inputRef={inputRef}
                         />
                     </ul>
                 }) : null}
@@ -126,6 +129,7 @@ export const Tasks = ({ history: { location } }) => {
                     request={createTaskRequest}
                     selectedDay={selectedDay}
                     handleDayChange={handleDayChange}
+                    inputRef={inputRef}
                 />
                     : !isArchived && <TaskCreator onClick={toggleForm}
                     />}
