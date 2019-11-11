@@ -78,6 +78,7 @@ class Task {
                 const id = req.params.id;
                 const unixDate = new Date(req.body.schedule).getTime() / 1000;
                 const newUpdatedTask = Object.assign({}, req.body, { schedule: unixDate });
+                console.log('Updated task', newUpdatedTask);
                 const updatedTask = await this.taskDao.update(id, newUpdatedTask);
                 if (updatedTask === null) {
                     return res.status(404).json({ error: `Task with id ${id} does not exist` });

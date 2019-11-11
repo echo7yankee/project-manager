@@ -6,14 +6,14 @@ import style from './project.module.css';
 
 //redux
 import { useDispatch } from 'react-redux';
-import { removeProject, editProject } from '../../../../Redux/actions/project';
+import { editProject, removeProject } from '../../../../Redux/actions/project';
 //import { updateTask } from '../../../../Redux/actions/task';
 
 //react router dom
 import { Link } from 'react-router-dom';
 
 //style
-import { IoIosTrash, IoMdCreate, IoIosArchive } from 'react-icons/io';
+import { IoIosArchive, IoIosTrash, IoMdCreate } from 'react-icons/io';
 
 //Components
 import { Dropdown } from '../../../Dropdown/Dropdown';
@@ -71,7 +71,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
         e.preventDefault();
         const newProject = {
             name: projectValueEdit,
-            archived: false
+            archived: false,
         }
         dispatch(editProject(userId, project.id, newProject));
         setModal(false);
@@ -90,16 +90,16 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     function setProjectUnarchived(): void {
         project = {
             ...project,
-            archived: false
+            archived: false,
         };
 
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }
 
-    const editIcon = <IoMdCreate />;
-    const archiveIcon = <IoIosArchive />;
-    const removeIcon = <IoIosTrash />;
+    const editIcon: JSX.Element = <IoMdCreate />;
+    const archiveIcon: JSX.Element = <IoIosArchive />;
+    const removeIcon: JSX.Element = <IoIosTrash />;
 
     const dropdownItemsUnarchived = [{
         name: 'Edit project',

@@ -13,7 +13,7 @@ export class Task {
     public createTask = async (req: Request, res: Response): Promise<Response> => {
         try {
 
-            const unixDate = new Date(req.body.schedule).getTime() / 1000
+            const unixDate = new Date(req.body.schedule).getTime() / 1000;
 
             const projectId: string = req.query.projectId;
             const newTask: ITask = {
@@ -102,14 +102,16 @@ export class Task {
 
     public editTask = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
-            const unixDate = new Date(req.body.schedule).getTime() / 1000
+            const unixDate = new Date(req.body.schedule).getTime() / 1000;
 
             const newUpdatedTask = {
                 ...req.body,
-                schedule: unixDate
+                schedule: unixDate,
             }
+
+            console.log('Updated task', newUpdatedTask)
 
             const updatedTask = await this.taskDao.update(id, newUpdatedTask);
             if (updatedTask === null) {

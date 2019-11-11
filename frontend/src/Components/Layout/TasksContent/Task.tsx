@@ -19,7 +19,7 @@ import { Dropdown } from '../../Dropdown/Dropdown';
 import { ModalDropdown } from '../../modal/ModalDropdown';
 import { TaskForm } from './TaskForm';
 
-export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange, inputRef }) => {
+export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange, inputRef }): JSX.Element => {
 
     const [dropdown, setDropdown] = useState(false);
     const [modalDropdown, setModalDropdown] = useState(false);
@@ -66,6 +66,7 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
         if (task.id === id) {
             task = {
                 ...task,
+                schedule: task.schedule * 1000,
                 completed: true,
             }
             dispatch(updateTask(projectId, task.id, task));

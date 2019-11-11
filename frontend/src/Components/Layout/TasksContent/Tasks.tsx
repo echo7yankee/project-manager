@@ -141,5 +141,5 @@ export const Tasks = ({ history: { location } }) => {
                 <img src={spinner} alt='spinner' />
             </div>}
         </>
-    )
+    );
 }

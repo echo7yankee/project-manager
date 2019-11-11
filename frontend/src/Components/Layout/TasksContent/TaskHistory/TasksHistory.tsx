@@ -10,7 +10,7 @@ import style from './taskHistory.module.css';
 //redux
 import { TaskHistoryItem } from './TaskHistoryItem';
 
-export const TasksHistory = ({ tasks, projectId }) => {
+export const TasksHistory = ({ tasks, projectId }): JSX.Element => {
 
     const [toggleHistoryTasks, setToggleHistoryTasks] = useState(true);
     const completedTasks: ITask[] = tasks.filter(task => task.completed === true);
