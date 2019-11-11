@@ -31,20 +31,20 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     const tasks = useSelector(state => state.task.tasks);
 
     //DROPDOWN TOGGLE
-    function openDropdown() {
+    function openDropdown(): void {
         setDropdown(true);
     }
 
-    function closeDropdown() {
+    function closeDropdown(): void {
         setDropdown(false)
     }
 
     //MODAL TOGGLE
-    function openModal() {
+    function openModal(): void {
         setModal(true);
     }
 
-    function closeModal() {
+    function closeModal(): void {
         setModal(false)
     }
 
@@ -77,12 +77,12 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
         setModal(false);
     }
 
-    function setProjectArchived() {
+    function setProjectArchived(): void {
 
         tasks.map(task => {
             const newTask = {
                 ...task,
-                archived: true
+                archived: true,
             }
             dispatch(updateTask(project.id, task.id, newTask))
             return task;
@@ -178,7 +178,8 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
                 inputValue={projectValueEdit}
                 labelName='Project name'
                 title='Edit project'
-                request={editSelectedProject} />}
+                request={editSelectedProject}
+                buttonDo='Edit' />}
         </>
     )
 };

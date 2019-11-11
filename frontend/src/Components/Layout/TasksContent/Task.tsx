@@ -107,7 +107,7 @@ export const Task = ({ task, projectId, isArchived, selectedDay, handleDayChange
     return (
         <>
             {isEditable ? !isArchived && <TaskForm
-                buttonDo='Add Task'
+                buttonDo='Edit Task'
                 buttonClose='Cancel'
                 onClickClose={setEditable}
                 onChange={handleChange}

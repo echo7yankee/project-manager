@@ -11,7 +11,7 @@ const app = express_1.default();
 app.use(cors_1.default());
 app.use(express_1.default.json());
 dotenv_1.default.config();
-mongoose_1.default.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
+mongoose_1.default.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useFindAndModify: false }, () => {
     console.log('Connection to mongodb has been established');
 });
 const auth_1 = require("./routes/auth");

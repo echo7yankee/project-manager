@@ -15,7 +15,7 @@ app.use(express.json());
 dotenv.config();
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useFindAndModify: false }, () => {
   console.log('Connection to mongodb has been established');
 });
 

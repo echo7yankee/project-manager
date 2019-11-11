@@ -10,6 +10,7 @@ interface IModalProps {
     title: string;
     labelName: string;
     inputValue: string;
+    buttonDo: string;
 }
 
 export const Modal = (props: IModalProps): JSX.Element => {
@@ -35,7 +36,7 @@ export const Modal = (props: IModalProps): JSX.Element => {
                         <button type='button' onClick={props.closeModal}>Cancel</button>
                         <button type='submit'
                             disabled={props.inputValue === ''}
-                            className={props.inputValue === '' ? 'disabled-button' : ''}>Add</button>
+                            className={props.inputValue === '' ? 'disabled-button' : ''}>{props.buttonDo}</button>
                     </div>
                 </form>
             </div>

@@ -46,7 +46,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
     setProjectValue(e.target.value);
   }
 
-  function addNewProject(e) {
+  function addNewProject(e: { preventDefault: () => void; }): void {
     e.preventDefault();
     const newProject = {
       name: projectValue,
@@ -98,7 +98,8 @@ export const Projects = (props: IProjects): JSX.Element | null => {
       title='Add project'
       labelName='Project name'
       closeModal={closeModal}
-      request={addNewProject} />}
+      request={addNewProject}
+      buttonDo='Add' />}
 
     {isLoading && <div className='overlay'>
       <img src={spinner} alt='spinner' />
