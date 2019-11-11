@@ -5,9 +5,9 @@ import { IoIosMore } from 'react-icons/io';
 import style from './project.module.css';
 
 //redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editProject, removeProject } from '../../../../Redux/actions/project';
-//import { updateTask } from '../../../../Redux/actions/task';
+import { updateTask } from '../../../../Redux/actions/task';
 
 //react router dom
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
 
     //redux
     const dispatch = useDispatch();
-    //const tasks = useSelector(state => state.task.tasks);
+    const tasks = useSelector(state => state.task.tasks);
 
     //DROPDOWN TOGGLE
     function openDropdown(): void {
@@ -58,7 +58,7 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
         setModalDropdown(false);
     }
 
-    function onChange(e: { target: { value: string; }; }) {
+    function onChange(e: { target: { value: string; }; }): void {
         setProjectValueEdit(e.target.value);
     }
 
@@ -78,16 +78,45 @@ export const Project = ({ project, userId, history, areArchivedProjects, isArchi
     }
 
     function setProjectArchived(): void {
+
+        tasks.map(task => {
+            task = {
+                ...task,
+                schedule: task.schedule * 1000,
+                archived: true,
+            };
+
+            dispatch(updateTask(project.id, task.id, task))
+            return task;
+        })
+
+        console.log('Projec', project)
+        console.log('ARCHIVED', tasks)
+
         project = {
             ...project,
             archived: true,
-        }
+        };
 
         dispatch(editProject(userId, project.id, project));
         setDropdown(false);
     }
 
     function setProjectUnarchived(): void {
+        tasks.map(task => {
+            task = {
+                ...task,
+                schedule: task.schedule * 1000,
+                archived: false,
+            };
+
+            console.log('Projec', project);
+            console.log('UNARCHIVED', tasks);
+
+            dispatch(updateTask(project.id, task.id, task));
+            return task;
+        })
+
         project = {
             ...project,
             archived: false,

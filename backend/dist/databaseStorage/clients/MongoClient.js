@@ -59,6 +59,15 @@ class MongoClient {
             console.log(error);
         }
     }
+    async updateAll(params) {
+        try {
+            const updatedItems = await this.model.deleteMany(params);
+            return updatedItems;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     async update(id, updatedAttributes) {
         try {
             const item = await this.model.findById(id);

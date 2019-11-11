@@ -35,7 +35,6 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
             <ul className={style.searchList}>
                 {props.allTasks.length > 0 ?
                     props.filter(props.allTasks).map((task, index) => {
-                        console.log('Task from navbar', task)
                         return <Link
                             key={task.id}
                             ref={(ref) => props.setRef(ref, index)}
@@ -45,7 +44,7 @@ export const NavbarSearchInfo = ((props: INavbarSearchInfo): JSX.Element => {
                             to={{
                                 pathname: `/project/${task.projectId}`,
                                 search: task.projectName,
-                                state: task.archived
+                                state: task.archived,
                             }}
                         >
                             <span className='dot mr-1'></span>

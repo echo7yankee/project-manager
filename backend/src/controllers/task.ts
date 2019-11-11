@@ -111,6 +111,8 @@ export class Task {
                 schedule: unixDate,
             }
 
+            console.log(newUpdatedTask)
+
             console.log('Updated task', newUpdatedTask)
 
             const updatedTask = await this.taskDao.update(id, newUpdatedTask);
