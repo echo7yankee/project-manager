@@ -10,7 +10,6 @@ import { updateTask } from '../../../../Redux/actions/task';
 //import { Toast } from '../../../Toast/Toast';
 
 export const TaskHistoryItem = ({ task, projectId }): JSX.Element => {
-    console.log(task)
     const [toggleIcon, setToggleIcon] = useState(false);
     const dispatch = useDispatch();
 
