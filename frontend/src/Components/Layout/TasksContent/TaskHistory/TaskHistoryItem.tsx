@@ -5,24 +5,23 @@ import { IoIosCheckmark, IoMdRemove } from 'react-icons/io';
 import style from './taskHistory.module.css';
 
 //redux
-import { updateTask } from '../../../../Redux/actions/task';
 import { useDispatch } from 'react-redux';
+import { updateTask } from '../../../../Redux/actions/task';
 //import { Toast } from '../../../Toast/Toast';
 
-export const TaskHistoryItem = ({ task, projectId }) => {
-
+export const TaskHistoryItem = ({ task, projectId }): JSX.Element => {
+    console.log(task)
     const [toggleIcon, setToggleIcon] = useState(false);
     const dispatch = useDispatch();
 
-    function setUncompletedTask(id) {
-        if (task.id === id) {
-            task = {
-                ...task,
-                completed: false,
-            }
-
-            dispatch(updateTask(projectId, task.id, task))
+    function setUncompletedTask() {
+        task = {
+            ...task,
+            schedule: task.schedule * 1000,
+            completed: false,
         }
+
+        dispatch(updateTask(projectId, task.id, task))
     }
 
     return (
@@ -30,7 +29,7 @@ export const TaskHistoryItem = ({ task, projectId }) => {
             <li className={style.taskHistoryItem} >
                 <span
                     className={style.taskHistoryDot}
-                    onClick={() => setUncompletedTask(task.id)}
+                    onClick={setUncompletedTask}
                     onMouseOver={() => setToggleIcon(true)}
                     onMouseOut={() => setToggleIcon(false)} >
                     {toggleIcon ?
