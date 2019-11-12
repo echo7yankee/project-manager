@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 //redux
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../../../Redux/actions/auth";
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../../../Redux/actions/auth';
 
 //style
-import style from "./navItems.module.css";
-import { IoMdSettings, IoIosLogIn, IoIosColorPalette } from "react-icons/io";
+import { IoIosColorPalette, IoIosLogIn, IoMdSettings } from 'react-icons/io';
+import style from './navItems.module.css';
 
 //Components
-import { Dropdown } from "../../../Dropdown/Dropdown";
+import { Dropdown } from '../../../Dropdown/Dropdown';
 
-export const Settings = (): JSX.Element => {
+//react router dom
+import { withRouter } from 'react-router-dom';
+
+const Settings = ({ history }): JSX.Element => {
   const [dropdown, setDropdown] = useState(false);
 
   //redux
@@ -30,23 +33,24 @@ export const Settings = (): JSX.Element => {
 
   const dropdownItems = [
     {
-      name: "Settings",
-      icon: settingsIcon
+      name: 'Settings',
+      icon: settingsIcon,
+      action: () => history.push('/account')
     },
     {
-      name: "Theme",
-      icon: themeIcon
+      name: 'Theme',
+      icon: themeIcon,
     },
     {
-      name: "Logout",
+      name: 'Logout',
       icon: authIcon,
       action: () => dispatch(logoutUser()),
-      className: "dropdown__remove"
+      className: 'dropdown__remove',
     }
   ];
 
   return (
-    <li className="pos-relative" onClick={toggleDropdown}>
+    <li className='pos-relative' onClick={toggleDropdown}>
       <span className={style.navItem}>
         <IoMdSettings />
       </span>
@@ -54,10 +58,12 @@ export const Settings = (): JSX.Element => {
         <Dropdown
           closeDropdown={closeDropdown}
           dropdownItems={dropdownItems}
-          left="0"
-          top="105"
+          left='0'
+          top='105'
         />
       )}
     </li>
   );
 };
+
+export default withRouter(Settings);

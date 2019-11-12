@@ -6,7 +6,7 @@ import style from './navItems.module.css';
 //Components
 import { AddTask } from './AddTask';
 import { Notifications } from './Notifications';
-import { Settings } from './Settings';
+import Settings from './Settings';
 
 export const NavItems = (): JSX.Element => {
     return (

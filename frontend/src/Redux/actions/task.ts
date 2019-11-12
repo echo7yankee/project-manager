@@ -102,7 +102,7 @@ export function removeTask(projectId, taskId) {
   };
 }
 
-export function updateTask(projectId, taskId, newTask) {
+export function updateTask(projectId: string, taskId: string, newTask) {
   return async dispatch => {
     try {
       await axios.put(`/task/${taskId}`, newTask);

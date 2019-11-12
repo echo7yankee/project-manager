@@ -20,7 +20,6 @@ export const Navbar = (): JSX.Element => {
         setSearchValue('');
     }
 
-
     return (
         <nav className={style.navbar}>
             <div className='container dflex space-between'>
