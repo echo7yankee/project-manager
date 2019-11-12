@@ -56,7 +56,7 @@ export function getAllTasks() {
 export function createTask(projectId, task) {
   return async dispatch => {
     try {
-      await axios.post("/task", task, {
+      await axios.post('/task', task, {
         params: {
           projectId
         }
@@ -114,6 +114,32 @@ export function updateTask(projectId, taskId, newTask) {
       setTimeout(() => {
         dispatch({
           type: UNSET_SHOW_TOAST
+        });
+      }, configData.timeOutForToasterInSeconds);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateAllTasks(projectId: string, projectName: string, isArchived: boolean) {
+  return async dispatch => {
+    try {
+      await axios.put('/tasks/archived', null, {
+        params: {
+          isArchived,
+          projectName,
+        }
+      });
+
+      dispatch(getTasks(projectId));
+      dispatch({
+        type: SET_SHOW_TOAST_EDIT,
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: UNSET_SHOW_TOAST,
         });
       }, configData.timeOutForToasterInSeconds);
     } catch (error) {

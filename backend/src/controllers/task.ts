@@ -109,11 +109,7 @@ export class Task {
             const newUpdatedTask = {
                 ...req.body,
                 schedule: unixDate,
-            }
-
-            console.log(newUpdatedTask)
-
-            console.log('Updated task', newUpdatedTask)
+            };
 
             const updatedTask = await this.taskDao.update(id, newUpdatedTask);
             if (updatedTask === null) {
@@ -122,6 +118,19 @@ export class Task {
 
             return res.status(200).json(updatedTask);
 
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ error: 'Something went wrong' })
+        }
+    }
+
+    public editAllTasks = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const { projectName }: { projectName: string } = req.query;
+            const { isArchived }: { isArchived: boolean } = req.query;
+
+            const updatedTasks = await this.taskDao.updateAll(projectName, isArchived);
+            return res.status(200).json(updatedTasks)
         } catch (error) {
             console.log(error);
             return res.status(500).json({ error: 'Something went wrong' })

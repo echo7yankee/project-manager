@@ -11,5 +11,6 @@ const task: Task = new Task(taskDao);
 taskRouter.post('/task', task.createTask);
 taskRouter.delete('/task/:id', task.removeTask);
 taskRouter.put('/task/:id', task.editTask);
+taskRouter.put('/tasks/archived', task.editAllTasks);
 taskRouter.get('/task', task.getTasks);
 taskRouter.get('/tasks', task.getAllTasks);

@@ -12,7 +12,6 @@ export const taskSchema = new Schema({
     },
     projectName: {
         type: String,
-        required: true,
     },
     archived: {
         type: Boolean,

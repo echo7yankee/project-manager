@@ -78,13 +78,23 @@ class Task {
                 const id = req.params.id;
                 const unixDate = new Date(req.body.schedule).getTime() / 1000;
                 const newUpdatedTask = Object.assign({}, req.body, { schedule: unixDate });
-                console.log(newUpdatedTask);
-                console.log('Updated task', newUpdatedTask);
                 const updatedTask = await this.taskDao.update(id, newUpdatedTask);
                 if (updatedTask === null) {
                     return res.status(404).json({ error: `Task with id ${id} does not exist` });
                 }
                 return res.status(200).json(updatedTask);
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
+        this.editAllTasks = async (req, res) => {
+            try {
+                const { projectName } = req.query;
+                const { isArchived } = req.query;
+                const updatedTasks = await this.taskDao.updateAll(projectName, isArchived);
+                return res.status(200).json(updatedTasks);
             }
             catch (error) {
                 console.log(error);
