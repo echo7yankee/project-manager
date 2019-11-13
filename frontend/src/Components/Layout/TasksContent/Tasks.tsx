@@ -6,9 +6,9 @@ import { IoIosMore } from 'react-icons/io';
 import style from './tasks.module.css';
 
 //components
+import { Error } from '../../Error/Error';
 import { TaskCreator } from './TaskCreator';
 import { TaskForm } from './TaskForm';
-import { Error } from '../../Error/Error';
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';

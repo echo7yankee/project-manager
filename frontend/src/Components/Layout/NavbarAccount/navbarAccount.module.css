@@ -1,0 +1,37 @@
+.navbarAccount {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--white-color);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,.10);
+}
+
+.navAccountTitleContainer a:link,.navAccountTitleContainer a:visited{
+    text-decoration: none;
+}
+
+.navbarAccountSettings h1{
+    color: var(--grey-color-2);
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+.navbarAccountClose {
+    display: flex;
+    align-items: center;
+}
+
+.navbarAccountClose span:first-child {
+    font-size: 1.1rem;
+    color: var(--grey-color-hover-4);
+    font-weight: 500;
+}
+
+.navbarAccountClose span:last-child svg {
+    width: 4rem;
+    height: 4rem;
+    color: var(--grey-color-hover-4);
+}

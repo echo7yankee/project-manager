@@ -14,10 +14,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 export function App(): JSX.Element {
   return <BrowserRouter>
     <Switch>
-      <Route path='/' component={Dashboard} exact />
       <Route path='/register' component={Register} />
       <Route path='/login' component={Login} />
       <Route path='/account' component={DashboardAccount} />
+      <Route path='/' component={Dashboard} />
     </Switch>
   </BrowserRouter>;
 }
