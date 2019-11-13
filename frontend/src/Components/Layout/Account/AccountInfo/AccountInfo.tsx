@@ -15,16 +15,16 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
     const [isEditable, setIsEditable] = useState<boolean>(false);
 
     function setEditable(): void {
-        setIsEditable(true);
+        setIsEditable(prevState => !prevState);
     }
 
     return (
-        <div className='dflex mt-2'>
+        <div className={`${style.accountInfo} dflex`}>
             <div className={style.accountSubtitle}>
                 {props.subtitle}
             </div>
             {isEditable ?
-                <AccountForm inputValue={props.subtitleUserInfo} /> :
+                <AccountForm inputValue={props.subtitleUserInfo} setEditable={setEditable} /> :
                 <AccountInfoItem
                     subtitle={props.subtitle}
                     subtitleUserInfo={props.subtitleUserInfo}

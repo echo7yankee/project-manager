@@ -23,3 +23,7 @@
 .accountInfoItemButton:hover {
     text-decoration: underline;
 }
+
+.accountInfo {
+    height: 3.5rem;
+}

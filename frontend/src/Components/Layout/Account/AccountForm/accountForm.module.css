@@ -1,0 +1,28 @@
+.accountForm {
+    display: flex;
+    align-items: center;
+}
+
+.accountForm input {
+    padding:.5rem .4rem;
+    font-size: 1.2rem;
+    border: 1px solid var(--grey-color-3);
+    border-radius: 3px;
+}
+
+.accountForm input::placeholder {
+    font-size: 1.2rem;
+}
+
+.accountForm div {
+    margin-left: 2rem;
+}
+
+.accountForm div button {
+    font-size: 1.2rem;
+    color: var(--red-color-1);
+}
+
+.accountForm div button:hover {
+    text-decoration: underline;
+}

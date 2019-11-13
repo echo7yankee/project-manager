@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+//style
+import style from './accountForm.module.css';
+
 interface IAccountForm {
-    inputValue: string
+    inputValue: string;
+    setEditable: () => void;
 }
 
 export const AccountForm = (props: IAccountForm): JSX.Element => {
@@ -17,12 +21,14 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
         setTerm(e.target.value)
     };
 
-    console.log(term)
-
     return (
         <div>
-            <form>
+            <form className={style.accountForm}>
                 <input type='text' ref={inputRef} value={term} onChange={handleChange} />
+                <div>
+                    <button type='submit'>Save</button>
+                    <button type='button' onClick={props.setEditable}>Cancel</button>
+                </div>
             </form>
         </div>
     )
