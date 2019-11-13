@@ -1,0 +1,11 @@
+.settingsMainPageHeader {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.accountSubtitle {
+    width: 15rem;
+    font-size: 1.2rem;
+    color: var(--grey-color-3);
+}

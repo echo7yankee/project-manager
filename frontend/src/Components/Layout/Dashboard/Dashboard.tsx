@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import React from 'react';
 
 //jwt
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 //react router
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route } from 'react-router-dom';
 
 //Components
-import { Navbar } from "../Navbar/Navbar";
+import { Navbar } from '../Navbar/Navbar';
 
 //redux
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../../Redux/actions/user';
+import { useSelector } from 'react-redux';
 
 //Components
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -19,10 +18,7 @@ import { Tasks } from '../TasksContent/Tasks';
 
 export const Dashboard = ({ history }): JSX.Element => {
   //redux
-  const dispatch = useDispatch();
   const authenticated = useSelector(state => state.auth.authenticated);
-  const userDetails = useSelector(state => state.user.user);
-
   //token
   let decodedToken;
   let userId;
@@ -32,12 +28,6 @@ export const Dashboard = ({ history }): JSX.Element => {
     decodedToken = jwt.decode(token);
     userId = decodedToken.params && decodedToken.params.id;
   }
-
-  useEffect(() => {
-    dispatch(getUser(userId));
-  }, [dispatch, userId]);
-
-  console.log(userDetails);
 
   if (!authenticated) {
     return <Redirect to='/register' />;
