@@ -9,3 +9,17 @@
     font-size: 1.2rem;
     color: var(--grey-color-3);
 }
+
+.accountInfoItemSpan {
+    font-size: 1.2rem;
+}
+
+.accountInfoItemButton {
+    font-size: 1.2rem;
+    color: var(--red-color-3);
+    margin-left: 2rem;
+}
+
+.accountInfoItemButton:hover {
+    text-decoration: underline;
+}

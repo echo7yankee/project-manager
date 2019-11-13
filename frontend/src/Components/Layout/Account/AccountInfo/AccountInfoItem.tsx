@@ -5,6 +5,7 @@ import style from '../account.module.css';
 
 interface IAccountInfoItem {
     subtitle: string
+    subtitleUserInfo: string
 }
 
 export const AccountInfoItem = (props: IAccountInfoItem): JSX.Element => {
@@ -14,7 +15,8 @@ export const AccountInfoItem = (props: IAccountInfoItem): JSX.Element => {
                 {props.subtitle}
             </div>
             <div>
-                stuff
+                <span className={style.accountInfoItemSpan}>{props.subtitleUserInfo}</span>
+                <button className={style.accountInfoItemButton} >Edit</button>
             </div>
         </div>
     )

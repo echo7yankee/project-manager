@@ -38,7 +38,6 @@ export const Account = (): JSX.Element => {
     const name: string = 'Name';
     const email: string = 'email';
 
-
     return (
         <div>
             <div>
@@ -47,8 +46,8 @@ export const Account = (): JSX.Element => {
                 </h1>
             </div>
             <div>
-                <AccountInfoItem subtitle={name} />
-                <AccountInfoItem subtitle={email} />
+                <AccountInfoItem subtitle={name} subtitleUserInfo={`${userDetails.firstName} ${userDetails.lastName}`} />
+                <AccountInfoItem subtitle={email} subtitleUserInfo={userDetails.email} />
             </div>
         </div>
     )
