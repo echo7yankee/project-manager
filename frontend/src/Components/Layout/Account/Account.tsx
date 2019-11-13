@@ -11,7 +11,7 @@ import { getUser } from '../../../Redux/actions/user';
 import style from './account.module.css';
 
 //components
-import { AccountInfoItem } from './AccountInfo/AccountInfoItem';
+import { AccountInfo } from './AccountInfo/AccountInfo';
 
 export const Account = (): JSX.Element => {
 
@@ -22,14 +22,12 @@ export const Account = (): JSX.Element => {
     //token
     let decodedToken;
     let userId;
-    const token = localStorage.FBIdToken;
+    const token: string = localStorage.FBIdToken;
 
     if (token) {
         decodedToken = jwt.decode(token);
         userId = decodedToken.params && decodedToken.params.id;
     }
-
-    console.log(userDetails)
 
     useEffect(() => {
         dispatch(getUser(userId));
@@ -46,8 +44,12 @@ export const Account = (): JSX.Element => {
                 </h1>
             </div>
             <div>
-                <AccountInfoItem subtitle={name} subtitleUserInfo={`${userDetails.firstName} ${userDetails.lastName}`} />
-                <AccountInfoItem subtitle={email} subtitleUserInfo={userDetails.email} />
+                <AccountInfo
+                    subtitle={name}
+                    subtitleUserInfo={`${userDetails.firstName}  ${userDetails.lastName}`} />
+                <AccountInfo
+                    subtitle={email}
+                    subtitleUserInfo={userDetails.email} />
             </div>
         </div>
     )

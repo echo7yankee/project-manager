@@ -4,20 +4,16 @@ import React from 'react';
 import style from '../account.module.css';
 
 interface IAccountInfoItem {
-    subtitle: string
-    subtitleUserInfo: string
+    subtitle: string;
+    subtitleUserInfo: string;
+    setEditable: () => void;
 }
 
 export const AccountInfoItem = (props: IAccountInfoItem): JSX.Element => {
     return (
-        <div className='dflex mt-2'>
-            <div className={style.accountSubtitle}>
-                {props.subtitle}
-            </div>
-            <div>
-                <span className={style.accountInfoItemSpan}>{props.subtitleUserInfo}</span>
-                <button className={style.accountInfoItemButton} >Edit</button>
-            </div>
+        <div>
+            <span className={style.accountInfoItemSpan}>{props.subtitleUserInfo}</span>
+            <button className={style.accountInfoItemButton} onClick={props.setEditable}>Edit</button>
         </div>
-    )
+    );
 }
