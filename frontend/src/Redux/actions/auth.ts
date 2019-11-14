@@ -65,7 +65,6 @@ export function loginUser(credentials: LoginCredentials, history) {
 
 export function updateUser(id, newUser) {
     return async (dispatch) => {
-        console.log(id)
         try {
             dispatch({
                 type: SET_AUTH_LOADING,

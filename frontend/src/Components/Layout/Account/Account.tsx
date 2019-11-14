@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+//assets
+import spinner from '../../../assets/gifs/spinner.gif';
+
 //jwt
 import jwt from 'jsonwebtoken';
 
@@ -18,6 +21,7 @@ export const Account = (): JSX.Element => {
     //redux
     const dispatch = useDispatch();
     const userDetails = useSelector(state => state.user.user);
+    const isLoading = useSelector(state => state.user.isLoading);
 
     //token
     let decodedToken;
@@ -34,13 +38,18 @@ export const Account = (): JSX.Element => {
     }, [dispatch, userId]);
 
     return (
-        <div>
+        <>
             <div>
-                <h1 className={style.settingsMainPageHeader}>
-                    Personal Information
+                <div>
+                    <h1 className={style.settingsMainPageHeader}>
+                        Personal Information
                 </h1>
+                </div>
+                {userDetails.email && <AccountPersonalInformation userDetails={userDetails} userId={userId} />}
             </div>
-            {userDetails.email && <AccountPersonalInformation userDetails={userDetails} userId={userId} />}
-        </div>
+            {isLoading && <div className='overlay'>
+                <img src={spinner} alt='spinner' />
+            </div>}
+        </>
     )
 }
