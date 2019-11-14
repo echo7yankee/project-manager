@@ -31,5 +31,5 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
                     setEditable={setEditable} />
             }
         </div>
-    )
+    );
 }
