@@ -23,7 +23,7 @@ export const Register = ({ history }): JSX.Element => {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
     }
     const [credentials, setCredentials] = useState<RegisterCredentials>(initCredentials);
     const [errorActive, setErrorActive] = useState<boolean>(false);
@@ -37,16 +37,15 @@ export const Register = ({ history }): JSX.Element => {
     const emailReg =
         /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-
     //destructuring
     const { firstName, lastName, email, password, confirmPassword } = credentials;
 
     const defaultErrors = {
-        firstNameErr: errorActive && !firstName && "Must not be empty",
-        lastNameErr: errorActive && !lastName && "Must not be empty",
-        emailErr: errorActive && !email && "Must not be empty",
-        passwordErr: errorActive && !password && "Must not be empty",
-        confirmPasswordErr: errorActive && !confirmPassword && "Must not be empty",
+        firstNameErr: errorActive && !firstName && 'Must not be empty',
+        lastNameErr: errorActive && !lastName && 'Must not be empty',
+        emailErr: errorActive && !email && 'Must not be empty',
+        passwordErr: errorActive && !password && 'Must not be empty',
+        confirmPasswordErr: errorActive && !confirmPassword && 'Must not be empty',
     }
 
     const { firstNameErr, lastNameErr, emailErr, passwordErr, confirmPasswordErr } = defaultErrors;
@@ -54,7 +53,7 @@ export const Register = ({ history }): JSX.Element => {
     const handleChange = (e: { target: { name: string; value: string; }; }): void => {
         setCredentials({
             ...credentials,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
@@ -78,10 +77,9 @@ export const Register = ({ history }): JSX.Element => {
         return;
     }
 
-    const handleBlur = () => {
+    const handleBlur = (): void => {
         isEmailValid()
     }
-
 
     if (authenticated) { return <Redirect to='/' /> }
 
@@ -118,7 +116,7 @@ export const Register = ({ history }): JSX.Element => {
                     {emailValidError && <p className='error mtb-1'>{emailValidError}</p>}
                 </div>
                 <div className={style.groupControl}>
-                    <input name="password"
+                    <input name='password'
                         type='password'
                         placeholder='Password'
                         value={password} onChange={handleChange} />

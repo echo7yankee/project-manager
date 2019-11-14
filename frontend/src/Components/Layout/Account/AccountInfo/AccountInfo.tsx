@@ -6,8 +6,12 @@ import { AccountForm } from '../AccountForm/AccountForm';
 import { AccountInfoItem } from './AccountInfoItem';
 
 interface IAccountInfo {
-    subtitle: string
-    subtitleUserInfo: string
+    subtitle: string;
+    subtitleUserInfo: string;
+    userDetails;
+    userDetailsName: string;
+    handleChange;
+    userId: string;
 }
 
 export const AccountInfo = (props: IAccountInfo): JSX.Element => {
@@ -16,7 +20,7 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
 
     function setEditable(): void {
         setIsEditable(prevState => !prevState);
-    }
+    };
 
     return (
         <div className={`${style.accountInfo} dflex`}>
@@ -24,7 +28,15 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
                 {props.subtitle}
             </div>
             {isEditable ?
-                <AccountForm inputValue={props.subtitleUserInfo} setEditable={setEditable} /> :
+                <AccountForm
+                    inputValue={props.subtitleUserInfo}
+                    setEditable={setEditable}
+                    userDetails={props.userDetails}
+                    subtitle={props.subtitle}
+                    userDetailsName={props.userDetailsName}
+                    handleChange={props.handleChange}
+                    userId={props.userId}
+                /> :
                 <AccountInfoItem
                     subtitle={props.subtitle}
                     subtitleUserInfo={props.subtitleUserInfo}

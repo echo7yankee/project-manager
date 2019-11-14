@@ -1,8 +1,9 @@
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_ERRORS } from '../types';
 import axios from 'axios';
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED } from '../types';
 
 //ts types
-import { RegisterCredentials, LoginCredentials } from '../../TSTypes/Credentials';
+import { LoginCredentials, RegisterCredentials } from '../../TSTypes/Credentials';
+import { getUser } from './user';
 
 export function registerUser(credentials: RegisterCredentials, history) {
     return async (dispatch) => {
@@ -54,6 +55,31 @@ export function loginUser(credentials: LoginCredentials, history) {
 
         } catch (error) {
             console.log(error.response);
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.response ? error.response.data : null,
+            })
+        }
+    }
+}
+
+export function updateUser(id, newUser) {
+    return async (dispatch) => {
+        console.log(id)
+        try {
+            dispatch({
+                type: SET_AUTH_LOADING,
+            })
+            await axios.put(`/user/update/${id}`, newUser);
+
+            dispatch({
+                type: SET_AUTHENTICATED,
+            })
+
+            dispatch(getUser(id));
+
+        } catch (error) {
+            console.log(error.response)
             dispatch({
                 type: SET_ERRORS,
                 payload: error.response ? error.response.data : null,

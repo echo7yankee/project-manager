@@ -1,4 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+
+//redux
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../../../Redux/actions/auth';
 
 //style
 import style from './accountForm.module.css';
@@ -6,25 +10,37 @@ import style from './accountForm.module.css';
 interface IAccountForm {
     inputValue: string;
     setEditable: () => void;
+    userDetails;
+    subtitle: string;
+    userDetailsName: string;
+    handleChange;
+    userId: string;
 }
 
 export const AccountForm = (props: IAccountForm): JSX.Element => {
 
-    const [term, setTerm] = useState(props.inputValue);
     const inputRef: any = useRef(null);
+
+    //redux
+    const dispatch = useDispatch();
 
     useEffect(() => {
         inputRef.current.focus();
     }, [])
 
-    function handleChange(e) {
-        setTerm(e.target.value)
+    function handleSubmit(e: { preventDefault: () => void; }): void {
+        e.preventDefault();
+        delete props.userDetails.id;
+        delete props.userDetails.role;
+        delete props.userDetails.createdAt;
+        dispatch(updateUser(props.userId, props.userDetails))
+        props.setEditable();
     };
 
     return (
         <div>
-            <form className={style.accountForm}>
-                <input type='text' ref={inputRef} value={term} onChange={handleChange} />
+            <form className={style.accountForm} onSubmit={handleSubmit}>
+                <input name={props.userDetailsName} type='text' ref={inputRef} value={props.inputValue} onChange={props.handleChange} />
                 <div>
                     <button type='submit'>Save</button>
                     <button type='button' onClick={props.setEditable}>Cancel</button>

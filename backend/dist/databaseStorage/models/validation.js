@@ -28,6 +28,20 @@ function registerValidation(data) {
 }
 exports.registerValidation = registerValidation;
 ;
+function updateUserValidation(data) {
+    const schema = {
+        email: joi_1.default.string()
+            .min(6)
+            .email(),
+        firstName: joi_1.default.string()
+            .min(2),
+        lastName: joi_1.default.string()
+            .min(2)
+    };
+    return joi_1.default.validate(data, schema);
+}
+exports.updateUserValidation = updateUserValidation;
+;
 function loginValidation(data) {
     const schema = {
         email: joi_1.default.string()

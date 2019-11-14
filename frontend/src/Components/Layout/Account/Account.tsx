@@ -11,7 +11,7 @@ import { getUser } from '../../../Redux/actions/user';
 import style from './account.module.css';
 
 //components
-import { AccountInfo } from './AccountInfo/AccountInfo';
+import { AccountPersonalInformation } from './AccountPersonalInformation/AccountPersonalInformation';
 
 export const Account = (): JSX.Element => {
 
@@ -33,9 +33,6 @@ export const Account = (): JSX.Element => {
         dispatch(getUser(userId));
     }, [dispatch, userId]);
 
-    const name: string = 'Name';
-    const email: string = 'email';
-
     return (
         <div>
             <div>
@@ -43,14 +40,7 @@ export const Account = (): JSX.Element => {
                     Personal Information
                 </h1>
             </div>
-            <div>
-                <AccountInfo
-                    subtitle={name}
-                    subtitleUserInfo={`${userDetails.firstName}  ${userDetails.lastName}`} />
-                <AccountInfo
-                    subtitle={email}
-                    subtitleUserInfo={userDetails.email} />
-            </div>
+            {userDetails.email && <AccountPersonalInformation userDetails={userDetails} userId={userId} />}
         </div>
     )
 }

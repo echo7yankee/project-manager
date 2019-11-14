@@ -6,6 +6,7 @@ export const getUser = (id) => {
         try {
             const response = await axios.get(`/user/${id}`)
             const { data } = response;
+
             dispatch({
                 type: GET_USER,
                 payload: data,
@@ -14,5 +15,4 @@ export const getUser = (id) => {
             console.log(error);
         }
     };
-}
-
+};
