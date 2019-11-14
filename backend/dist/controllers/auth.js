@@ -4,7 +4,7 @@ const validation_1 = require("../databaseStorage/models/validation");
 const bcryptEncoder_1 = require("../encoder/bcryptEncoder");
 const jwt_1 = require("../token/jwt");
 class Authenticate {
-    constructor(userDao) {
+    constructor(userDao, projectDao) {
         this.createUser = async (req, res) => {
             const { error } = validation_1.registerValidation(req.body);
             if (error) {
@@ -80,7 +80,24 @@ class Authenticate {
                 return res.status(500).json({ error: 'Something went wrong' });
             }
         };
+        this.removeUser = async (req, res) => {
+            try {
+                const { id } = req.params;
+                const deletedUser = await this.userDao.remove(id);
+                await this.projectDao.removeAll({ userId: id });
+                if (deletedUser === null) {
+                    return res.status(400).json({ error: `User with id ${id} does not exist` });
+                }
+                ;
+                return res.status(200).json({ message: `User with id ${id} has been removed` });
+            }
+            catch (error) {
+                console.log(error);
+                return res.status(500).json({ error: 'Something went wrong' });
+            }
+        };
         this.userDao = userDao;
+        this.projectDao = projectDao;
     }
 }
 exports.Authenticate = Authenticate;

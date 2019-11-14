@@ -11,6 +11,7 @@ import { createToken } from '../token/jwt';
 import { Request, Response } from 'express';
 import { RegisterUser, UserDatabase } from '../TSTypes/User';
 import { UserDao } from '../databaseStorage/UserDao';
+import { ProjectDao } from '../databaseStorage/ProjectDao';
 
 type TokenParams = {
   id: string;
@@ -19,8 +20,10 @@ type TokenParams = {
 
 export class Authenticate {
   userDao: UserDao;
-  constructor(userDao) {
+  projectDao: ProjectDao
+  constructor(userDao, projectDao) {
     this.userDao = userDao;
+    this.projectDao = projectDao;
   }
   //REGISTER USER
   public createUser = async (req: Request, res: Response) => {
@@ -132,4 +135,21 @@ export class Authenticate {
       return res.status(500).json({ error: 'Something went wrong' });
     }
   };
+
+  public removeUser = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      const deletedUser: UserDatabase = await this.userDao.remove(id);
+      await this.projectDao.removeAll({ userId: id })
+      if (deletedUser === null) {
+        return res.status(400).json({ error: `User with id ${id} does not exist` });
+      };
+
+      return res.status(200).json({ message: `User with id ${id} has been removed` });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'Something went wrong' });
+    }
+  }
 }
