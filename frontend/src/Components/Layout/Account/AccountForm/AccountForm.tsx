@@ -46,18 +46,31 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
     return (
         <div>
             <form className={style.accountForm} onSubmit={handleSubmit}>
-                <input
-                    name={props.userDetailsName}
-                    type={props.isPassword ? 'password' : 'text'}
-                    ref={inputRef}
-                    value={props.inputValue}
-                    onChange={props.handleChange} />
-                {props.isPassword &&
+                {props.isPassword ?
+                    <>
+                        <input
+                            name={props.userDetailsName}
+                            type='password'
+                            ref={inputRef}
+                            onChange={props.handleChange} />
+
+                        <input
+                            className={style.accountFormPasswordInput}
+                            name='confirmPassword'
+                            type='password'
+                            onChange={props.handleChange} />
+                    </>
+                    :
+
                     <input
                         name={props.userDetailsName}
-                        type='password'
+                        type='text'
+                        ref={inputRef}
                         value={props.inputValue}
-                        onChange={props.handleChange} />}
+                        onChange={props.handleChange} />
+
+                }
+
                 <div>
                     <button type='submit'>Save</button>
                     <button type='button' onClick={props.setEditableFalseCancel}>Cancel</button>

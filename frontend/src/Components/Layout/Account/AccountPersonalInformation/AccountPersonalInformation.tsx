@@ -24,6 +24,8 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
     const email: string = 'Email';
     const password: string = 'Password';
 
+    console.log(userDetails)
+
     return (
         <div>
             <AccountInfo

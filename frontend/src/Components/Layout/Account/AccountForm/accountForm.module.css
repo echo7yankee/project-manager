@@ -26,3 +26,7 @@
 .accountForm div button:hover {
     text-decoration: underline;
 }
+
+.accountFormPasswordInput {
+   margin-left: 1rem !important;
+}
