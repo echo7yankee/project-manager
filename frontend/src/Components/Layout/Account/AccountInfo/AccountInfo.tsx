@@ -9,18 +9,29 @@ interface IAccountInfo {
     subtitle: string;
     subtitleUserInfo: string;
     userDetails;
+    oldUserDetails;
     userDetailsName: string;
     handleChange;
     userId: string;
+    setUserDetails;
 }
 
 export const AccountInfo = (props: IAccountInfo): JSX.Element => {
 
     const [isEditable, setIsEditable] = useState<boolean>(false);
 
-    function setEditable(): void {
-        setIsEditable(prevState => !prevState);
-    };
+    function setEditableTrue(): void {
+        setIsEditable(true);
+    }
+
+    function setEditableFalse(): void {
+        setIsEditable(false);
+    }
+
+    function setEditableFalseCancel(): void {
+        setIsEditable(false);
+        props.setUserDetails(props.oldUserDetails);
+    }
 
     return (
         <div className={`${style.accountInfo} dflex`}>
@@ -30,7 +41,8 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
             {isEditable ?
                 <AccountForm
                     inputValue={props.subtitleUserInfo}
-                    setEditable={setEditable}
+                    setEditableFalse={setEditableFalse}
+                    setEditableFalseCancel={setEditableFalseCancel}
                     userDetails={props.userDetails}
                     subtitle={props.subtitle}
                     userDetailsName={props.userDetailsName}
@@ -40,7 +52,8 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
                 <AccountInfoItem
                     subtitle={props.subtitle}
                     subtitleUserInfo={props.subtitleUserInfo}
-                    setEditable={setEditable} />
+                    setEditable={setEditableTrue}
+                />
             }
         </div>
     );

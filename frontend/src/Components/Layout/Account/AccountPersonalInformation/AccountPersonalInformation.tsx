@@ -29,24 +29,32 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
                 subtitle={firstName}
                 subtitleUserInfo={userDetails.firstName}
                 userDetails={userDetails}
+                oldUserDetails={props.userDetails}
                 userDetailsName='firstName'
                 handleChange={handleChange}
                 userId={props.userId}
+                setUserDetails={setUserdetails}
             />
             <AccountInfo
                 subtitle={lastName}
                 subtitleUserInfo={userDetails.lastName}
                 userDetails={userDetails}
+                oldUserDetails={props.userDetails}
                 userDetailsName='lastName'
                 handleChange={handleChange}
-                userId={props.userId} />
+                userId={props.userId}
+                setUserDetails={setUserdetails}
+            />
             <AccountInfo
                 subtitle={email}
                 subtitleUserInfo={userDetails.email}
                 userDetails={userDetails}
+                oldUserDetails={props.userDetails}
                 userDetailsName='email'
                 handleChange={handleChange}
-                userId={props.userId} />
+                userId={props.userId}
+                setUserDetails={setUserdetails}
+            />
         </div>
     )
 };

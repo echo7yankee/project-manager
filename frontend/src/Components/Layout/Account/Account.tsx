@@ -21,6 +21,7 @@ export const Account = (): JSX.Element => {
     //redux
     const dispatch = useDispatch();
     const userDetails = useSelector(state => state.user.user);
+    const errors = useSelector(state => state.auth.errors);
     const isLoading = useSelector(state => state.user.isLoading);
 
     //token
@@ -46,10 +47,14 @@ export const Account = (): JSX.Element => {
                 </h1>
                 </div>
                 {userDetails.email && <AccountPersonalInformation userDetails={userDetails} userId={userId} />}
+
+                {errors.error && <div className='set-center'>
+                    <p className='error'>{errors.error}</p>
+                </div>}
             </div>
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}
         </>
     )
-}
+};

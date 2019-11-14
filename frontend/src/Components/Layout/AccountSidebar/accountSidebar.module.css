@@ -1,3 +1,28 @@
 .accountSidebar {
     flex: 0 0 25%;
 }
+
+.accountSidebarItem {
+    width: 100%;
+    list-style: none;
+}
+
+.accountSidebarItem:hover {
+    background-color: var(--white-color);
+}
+
+.accountSidebarItem a:link,.accountSidebarItem a:visited {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--grey-color-2);
+    padding:.8rem .8rem;
+    transition: background-color .2s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.accountSidebarItem a span:last-child {
+    margin-left: .8rem;
+}

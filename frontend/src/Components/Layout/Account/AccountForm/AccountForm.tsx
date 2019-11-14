@@ -9,7 +9,8 @@ import style from './accountForm.module.css';
 
 interface IAccountForm {
     inputValue: string;
-    setEditable: () => void;
+    setEditableFalse: () => void;
+    setEditableFalseCancel: () => void;
     userDetails;
     subtitle: string;
     userDetailsName: string;
@@ -20,6 +21,7 @@ interface IAccountForm {
 export const AccountForm = (props: IAccountForm): JSX.Element => {
 
     const inputRef: any = useRef(null);
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     //redux
     const dispatch = useDispatch();
@@ -33,8 +35,11 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
         delete props.userDetails.id;
         delete props.userDetails.role;
         delete props.userDetails.createdAt;
+
+        console.log(emailRegex.test(props.userDetails.email));
+
         dispatch(updateUser(props.userId, props.userDetails))
-        props.setEditable();
+        props.setEditableFalse();
     };
 
     return (
@@ -43,7 +48,7 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
                 <input name={props.userDetailsName} type='text' ref={inputRef} value={props.inputValue} onChange={props.handleChange} />
                 <div>
                     <button type='submit'>Save</button>
-                    <button type='button' onClick={props.setEditable}>Cancel</button>
+                    <button type='button' onClick={props.setEditableFalseCancel}>Cancel</button>
                 </div>
             </form>
         </div>

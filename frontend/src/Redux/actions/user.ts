@@ -7,7 +7,7 @@ export const getUser = (id) => {
 
             dispatch({
                 type: GET_USER_LOADING,
-            })
+            });
 
             const response = await axios.get(`/user/${id}`)
             const { data } = response;
