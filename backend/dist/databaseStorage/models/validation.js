@@ -38,11 +38,9 @@ function updateUserValidation(data) {
         lastName: joi_1.default.string()
             .min(2),
         password: joi_1.default.string()
-            .min(6)
-            .required(),
+            .min(6),
         confirmPassword: joi_1.default.any()
             .valid(joi_1.default.ref('password'))
-            .required(),
     };
     return joi_1.default.validate(data, schema);
 }

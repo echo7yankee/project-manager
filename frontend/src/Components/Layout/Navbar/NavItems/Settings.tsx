@@ -35,7 +35,7 @@ const Settings = ({ history }): JSX.Element => {
     {
       name: 'Settings',
       icon: settingsIcon,
-      action: () => history.push('/account')
+      action: () => history.push('/prefs/account')
     },
     {
       name: 'Theme',

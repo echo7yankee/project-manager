@@ -186,6 +186,10 @@ button {
   background-color: var(--white-color) !important;
 }
 
+.account__sidebar-icon-grey {
+  fill: var(--grey-color-3);
+}
+
 /* mtb */
 .mtb-1 {
   margin: 1rem 0;

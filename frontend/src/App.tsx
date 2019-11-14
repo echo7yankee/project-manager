@@ -16,7 +16,7 @@ export function App(): JSX.Element {
     <Switch>
       <Route path='/register' component={Register} />
       <Route path='/login' component={Login} />
-      <Route path='/account' component={DashboardAccount} />
+      <Route path='/prefs' component={DashboardAccount} />
       <Route path='/' component={Dashboard} />
     </Switch>
   </BrowserRouter>;

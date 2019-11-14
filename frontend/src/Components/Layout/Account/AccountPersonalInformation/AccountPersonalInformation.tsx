@@ -21,7 +21,8 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
 
     const firstName: string = 'First Name';
     const lastName: string = 'Last Name';
-    const email: string = 'email';
+    const email: string = 'Email';
+    const password: string = 'Password';
 
     return (
         <div>
@@ -34,6 +35,7 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
                 handleChange={handleChange}
                 userId={props.userId}
                 setUserDetails={setUserdetails}
+                isPassword={false}
             />
             <AccountInfo
                 subtitle={lastName}
@@ -44,6 +46,7 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
                 handleChange={handleChange}
                 userId={props.userId}
                 setUserDetails={setUserdetails}
+                isPassword={false}
             />
             <AccountInfo
                 subtitle={email}
@@ -54,6 +57,18 @@ export const AccountPersonalInformation = (props: IAccountPersonalInformation): 
                 handleChange={handleChange}
                 userId={props.userId}
                 setUserDetails={setUserdetails}
+                isPassword={false}
+            />
+            <AccountInfo
+                subtitle={password}
+                subtitleUserInfo='*******'
+                userDetails={userDetails}
+                oldUserDetails={props.userDetails}
+                userDetailsName='password'
+                handleChange={handleChange}
+                userId={props.userId}
+                setUserDetails={setUserdetails}
+                isPassword={true}
             />
         </div>
     )

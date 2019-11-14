@@ -14,6 +14,7 @@ interface IAccountInfo {
     handleChange;
     userId: string;
     setUserDetails;
+    isPassword: boolean;
 }
 
 export const AccountInfo = (props: IAccountInfo): JSX.Element => {
@@ -48,6 +49,7 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
                     userDetailsName={props.userDetailsName}
                     handleChange={props.handleChange}
                     userId={props.userId}
+                    isPassword={props.isPassword}
                 /> :
                 <AccountInfoItem
                     subtitle={props.subtitle}

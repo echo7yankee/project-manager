@@ -1,7 +1,7 @@
 import React from 'react';
 
 //style
-import { IoMdPerson } from 'react-icons/io';
+import { IoMdPerson, IoMdSettings } from 'react-icons/io';
 import style from './accountSidebar.module.css';
 
 //react router dom
@@ -12,9 +12,15 @@ export const AccountSidebar = (): JSX.Element => {
         <div className={style.accountSidebar}>
             <ul>
                 <li className={style.accountSidebarItem}>
-                    <NavLink activeClassName='active__account-sidebar-link' to='/account'>
-                        <span><IoMdPerson /></span>
+                    <NavLink activeClassName='active__account-sidebar-link' to='/prefs/account'>
+                        <span><IoMdPerson className='account__sidebar-icon-grey' /></span>
                         <span>Account</span>
+                    </NavLink>
+                </li>
+                <li className={style.accountSidebarItem}>
+                    <NavLink activeClassName='active__account-sidebar-link' to='/prefs/general'>
+                        <span><IoMdSettings className='account__sidebar-icon-grey' /></span>
+                        <span>General</span>
                     </NavLink>
                 </li>
             </ul>

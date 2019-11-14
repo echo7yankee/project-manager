@@ -16,6 +16,7 @@ interface IAccountForm {
     userDetailsName: string;
     handleChange;
     userId: string;
+    isPassword: boolean;
 }
 
 export const AccountForm = (props: IAccountForm): JSX.Element => {
@@ -45,7 +46,18 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
     return (
         <div>
             <form className={style.accountForm} onSubmit={handleSubmit}>
-                <input name={props.userDetailsName} type='text' ref={inputRef} value={props.inputValue} onChange={props.handleChange} />
+                <input
+                    name={props.userDetailsName}
+                    type={props.isPassword ? 'password' : 'text'}
+                    ref={inputRef}
+                    value={props.inputValue}
+                    onChange={props.handleChange} />
+                {props.isPassword &&
+                    <input
+                        name={props.userDetailsName}
+                        type='password'
+                        value={props.inputValue}
+                        onChange={props.handleChange} />}
                 <div>
                     <button type='submit'>Save</button>
                     <button type='button' onClick={props.setEditableFalseCancel}>Cancel</button>

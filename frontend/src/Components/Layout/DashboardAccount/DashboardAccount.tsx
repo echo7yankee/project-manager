@@ -12,6 +12,7 @@ import style from './dashboard.module.css'
 //components
 import { Account } from '../Account/Account';
 import { AccountSidebar } from '../AccountSidebar/AccountSidebar';
+import { General } from '../General/General';
 import { NavbarAccount } from '../NavbarAccount/NavbarAccount';
 
 export const DashboardAccount = (): JSX.Element => {
@@ -29,7 +30,8 @@ export const DashboardAccount = (): JSX.Element => {
                 <div className='container container-dashboard'>
                     <AccountSidebar />
                     <div className={style.settingsMainPage}>
-                        <Route path='/account' component={Account} />
+                        <Route path='/prefs/account' component={Account} />
+                        <Route path='/prefs/general' component={General} />
                     </div>
                 </div>
             </div>
