@@ -35,7 +35,13 @@ export function updateUserValidation(data) {
         firstName: Joi.string()
             .min(2),
         lastName: Joi.string()
-            .min(2)
+            .min(2),
+        password: Joi.string()
+            .min(6)
+            .required(),
+        confirmPassword: Joi.any()
+            .valid(Joi.ref('password'))
+            .required(),
     };
 
     return Joi.validate(data, schema);
