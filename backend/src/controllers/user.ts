@@ -1,6 +1,6 @@
 
 //ts types
-import { Role } from '../TSTypes/Role';
+//import { Role } from '../TSTypes/Role';
 import { Request, Response } from 'express';
 import { UserDatabase, UserDetails } from '../TSTypes/User';
 
@@ -10,23 +10,23 @@ import { UserDao } from '../databaseStorage/UserDao';
 
 export class User {
     private userDao: UserDao;
-    private roleDao: RoleDao;
-    constructor(userDao: UserDao, roleDao: RoleDao) {
+    //private roleDao: RoleDao;
+    constructor(userDao: UserDao, _roleDao: RoleDao) {
         this.userDao = userDao;
-        this.roleDao = roleDao;
+        //this.roleDao = roleDao;
     }
     public getUserDetails = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
             const user: UserDatabase = await this.userDao.findById(id);
-            const role: Role = await this.roleDao.findById(user.role);
+            //const role: Role = await this.roleDao.findById(user.role);
 
             const userDetails: UserDetails = {
                 id: id,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                role: role.role,
+                role: user.role,
                 createdAt: user.date,
             };
             return res.status(200).json(userDetails);

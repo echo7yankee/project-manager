@@ -17,7 +17,7 @@ class Authenticate {
                 return res.status(400).json({ error: 'Email already exists' });
             }
             const { hashedPassword, hashedConfirmPassword } = await bcryptEncoder_1.encryptPassword(req.body.password, req.body.confirmPassword);
-            const newUser = Object.assign({}, req.body, { confirmPassword: hashedConfirmPassword, password: hashedPassword });
+            const newUser = Object.assign({}, req.body, { role: 'Sw programmer', confirmPassword: hashedConfirmPassword, password: hashedPassword });
             try {
                 const user = await this.userDao.add(newUser);
                 const tokenParams = { id: user._id, userRole: user.role };

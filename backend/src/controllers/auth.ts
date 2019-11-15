@@ -53,6 +53,7 @@ export class Authenticate {
     //Register user
     const newUser: RegisterUser = {
       ...req.body,
+      role: 'Sw programmer',
       confirmPassword: hashedConfirmPassword,
       password: hashedPassword,
     };
