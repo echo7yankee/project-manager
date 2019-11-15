@@ -1,12 +1,19 @@
 import React from 'react'
 
 //style
-import style from './toast.module.css'
+import style from './toast.module.css';
 
-export const Toast = ({ showToast, text }) => {
+interface IToast {
+    showToast: boolean;
+    text: string;
+    backgroundColor: string;
+}
+
+export const Toast = (props: IToast) => {
     return (
-        <div className={showToast ? style.toastContainerShow : style.toastContainer}>
-            <span>{text}</span>
+        <div style={{ backgroundColor: props.backgroundColor }}
+            className={props.showToast ? style.toastContainerShow : style.toastContainer}>
+            <span>{props.text}</span>
         </div>
     )
 }

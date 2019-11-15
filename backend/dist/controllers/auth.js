@@ -33,7 +33,17 @@ class Authenticate {
             try {
                 const { id } = req.params;
                 const { error } = validation_1.updateUserValidation(req.body);
-                console.log('Body', req.body);
+                console.log(req.body);
+                if (req.body.password) {
+                    const { hashedPassword, hashedConfirmPassword } = await bcryptEncoder_1.encryptPassword(req.body.password, req.body.confirmPassword);
+                    const updatedUser = Object.assign({}, req.body, { confirmPassword: hashedConfirmPassword, password: hashedPassword });
+                    if (error) {
+                        const errorMessage = error.details.pop().message;
+                        const pureErrorMessage = errorMessage.replace(/\"/g, '');
+                        return res.status(400).json({ error: pureErrorMessage });
+                    }
+                    return await await this.userDao.update(id, updatedUser);
+                }
                 if (error) {
                     const errorMessage = error.details.pop().message;
                     const pureErrorMessage = errorMessage.replace(/\"/g, '');

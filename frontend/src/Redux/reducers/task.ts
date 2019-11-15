@@ -49,25 +49,25 @@ export function taskReducer(state, action) {
       return {
         ...state,
         showToast: true,
-        toastText: "Task added",
+        toastText: 'Task added',
         errors: {}
       };
     case SET_SHOW_TOAST_REMOVE:
       return {
         ...state,
         showToast: true,
-        toastText: "Task removed"
+        toastText: 'Task removed',
       };
     case SET_SHOW_TOAST_EDIT:
       return {
         ...state,
         showToast: true,
-        toastText: "Task updated"
+        toastText: 'Task updated',
       };
     case UNSET_SHOW_TOAST:
       return {
         ...state,
-        showToast: false
+        showToast: false,
       };
 
     default:

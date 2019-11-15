@@ -77,7 +77,28 @@ export class Authenticate {
       const { id } = req.params;
       const { error } = updateUserValidation(req.body);
 
-      console.log('Body', req.body);
+      console.log(req.body);
+
+      if (req.body.password) {
+        const { hashedPassword, hashedConfirmPassword } = await encryptPassword(
+          req.body.password,
+          req.body.confirmPassword
+        );
+
+        const updatedUser: RegisterUser = {
+          ...req.body,
+          confirmPassword: hashedConfirmPassword,
+          password: hashedPassword,
+        };
+
+        if (error) {
+          const errorMessage: string = error.details.pop().message;
+          const pureErrorMessage: string = errorMessage.replace(/\"/g, '');
+          return res.status(400).json({ error: pureErrorMessage });
+        }
+
+        return await await this.userDao.update(id, updatedUser);
+      }
 
       //Check if form has errors
       if (error) {

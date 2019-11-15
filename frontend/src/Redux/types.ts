@@ -4,6 +4,8 @@ export const SET_AUTHENTICATED: string = 'SET_AUTHENTICATED';
 export const SET_UNAUTHENTICATED: string = 'SET_UNAUTHENTICATED';
 export const SET_ERRORS: string = 'SET_ERRORS';
 export const UNSET_ERRORS: string = 'UNSET_ERRORS';
+export const SET_TOAST_UPDATE_AUTH: string = 'SET_TOAST_UPDATE_AUTH';
+export const UNSET_TOAST_UPDATE_AUTH: string = 'UNSET_TOAST_UPDATE_AUTH';
 //user
 export const GET_USER: string = 'GET_USER';
 export const GET_USER_LOADING: string = 'GET_USER_LOADING';

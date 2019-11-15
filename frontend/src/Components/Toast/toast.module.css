@@ -1,5 +1,5 @@
 .toastContainer,.toastContainerShow {
-    background-color: var(--grey-color-2);
+    /* background-color: var(--grey-color-2); */
     width: 25rem;
     position: fixed;
     bottom: 0;

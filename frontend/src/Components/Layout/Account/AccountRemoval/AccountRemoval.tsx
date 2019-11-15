@@ -30,6 +30,7 @@ export const AccountRemoval = (props: IAccountRemovel): JSX.Element => {
 
     function closeModal(): void {
         setModal(false);
+        setPassword('');
     }
 
     function removeUserRequest(e: { preventDefault: () => void; }): void {

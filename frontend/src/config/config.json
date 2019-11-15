@@ -1,3 +1,4 @@
 {
-    "timeOutForToasterInSeconds":2000
+    "timeOutForToasterInSeconds": 2000,
+    "timeOutForErrorsInSeconds": 3000
 }

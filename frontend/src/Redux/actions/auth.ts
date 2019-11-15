@@ -1,6 +1,6 @@
 import axios from 'axios';
 import configData from '../../config/config.json';
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED, UNSET_ERRORS } from '../types';
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED, UNSET_ERRORS, SET_TOAST_UPDATE_AUTH, UNSET_TOAST_UPDATE_AUTH } from '../types';
 
 //ts types
 import { LoginCredentials, RegisterCredentials } from '../../TSTypes/Credentials';
@@ -31,6 +31,11 @@ export function registerUser(credentials: RegisterCredentials, history) {
                 type: SET_ERRORS,
                 payload: error.response ? error.response.data : null
             })
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_ERRORS,
+                });
+            }, configData.timeOutForToasterInSeconds);
         }
     }
 }
@@ -60,6 +65,11 @@ export function loginUser(credentials: LoginCredentials, history) {
                 type: SET_ERRORS,
                 payload: error.response ? error.response.data : null,
             })
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_ERRORS,
+                });
+            }, configData.timeOutForToasterInSeconds);
         }
     }
 }
@@ -70,11 +80,18 @@ export function updateUser(id, newUser) {
             dispatch({
                 type: SET_AUTH_LOADING,
             })
+
             await axios.put(`/user/update/${id}`, newUser);
 
             dispatch({
-                type: SET_AUTHENTICATED,
+                type: SET_TOAST_UPDATE_AUTH,
             })
+
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_TOAST_UPDATE_AUTH,
+                });
+            }, configData.timeOutForToasterInSeconds);
 
             dispatch(getUser(id));
 
@@ -83,7 +100,12 @@ export function updateUser(id, newUser) {
             dispatch({
                 type: SET_ERRORS,
                 payload: error.response ? error.response.data : null,
-            })
+            });
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_ERRORS,
+                });
+            }, configData.timeOutForErrorsInSeconds);
         }
     }
 }
@@ -117,7 +139,7 @@ export function removeUser(id: string, password: { password: string }) {
                 dispatch({
                     type: UNSET_ERRORS,
                 });
-            }, configData.timeOutForToasterInSeconds);
+            }, configData.timeOutForErrorsInSeconds);
         }
     };
 }

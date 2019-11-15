@@ -152,7 +152,7 @@ export const Tasks = ({ history: { location } }): JSX.Element => {
                     />}
                 {errors.error && <Error textError={errors.error} />}
                 <TasksHistory projectId={projectId} tasks={tasks} />
-                <Toast showToast={showToast} text={toastText} />
+                <Toast showToast={showToast} text={toastText} backgroundColor='#383838' />
             </div>
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />

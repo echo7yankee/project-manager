@@ -14,6 +14,7 @@ import { getUser } from '../../../Redux/actions/user';
 import style from './account.module.css';
 
 //components
+import { Toast } from '../../Toast/Toast';
 import { AccountPersonalInformation } from './AccountPersonalInformation/AccountPersonalInformation';
 import { AccountRemoval } from './AccountRemoval/AccountRemoval';
 
@@ -22,8 +23,10 @@ export const Account = (): JSX.Element => {
     //redux
     const dispatch = useDispatch();
     const userDetails = useSelector(state => state.user.user);
-    const errors = useSelector(state => state.auth.errors);
-    const isLoading = useSelector(state => state.user.isLoading);
+    const errors: { error: string } = useSelector(state => state.auth.errors);
+    const isLoading: boolean = useSelector(state => state.user.isLoading);
+    const showToast: boolean = useSelector(state => state.auth.showToast);
+    const toastText: string = useSelector(state => state.auth.toastText);
 
     //token
     let decodedToken;
@@ -54,6 +57,8 @@ export const Account = (): JSX.Element => {
                 </div>}
             </div>
             <AccountRemoval userId={userId} />
+            {/* Bellow the comment the elements are css position fixed */}
+            <Toast showToast={showToast} text={toastText} backgroundColor='#0ba80b' />
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}
