@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED } from '../types';
+import configData from '../../config/config.json';
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED, UNSET_ERRORS } from '../types';
 
 //ts types
 import { LoginCredentials, RegisterCredentials } from '../../TSTypes/Credentials';
@@ -112,6 +113,11 @@ export function removeUser(id: string, password: { password: string }) {
                 type: SET_ERRORS,
                 payload: error.response.data,
             })
+            setTimeout(() => {
+                dispatch({
+                    type: UNSET_ERRORS,
+                });
+            }, configData.timeOutForToasterInSeconds);
         }
     };
 }

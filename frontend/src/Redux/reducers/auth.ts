@@ -1,4 +1,4 @@
-import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED } from '../types'
+import { SET_AUTH_LOADING, SET_AUTHENTICATED, SET_ERRORS, SET_UNAUTHENTICATED, UNSET_ERRORS } from '../types'
 
 //ts types
 import { IAuth } from '../../TSTypes/reducers/auth';
@@ -32,6 +32,11 @@ export function authReducer(state, action) {
                 ...state,
                 errors: action.payload,
                 isLoading: false
+            }
+        case UNSET_ERRORS:
+            return {
+                ...state,
+                errors: {}
             }
         case SET_UNAUTHENTICATED:
             return initState;

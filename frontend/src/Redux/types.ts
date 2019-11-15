@@ -3,6 +3,7 @@ export const SET_AUTH_LOADING: string = 'SET_AUTH_LOADING';
 export const SET_AUTHENTICATED: string = 'SET_AUTHENTICATED';
 export const SET_UNAUTHENTICATED: string = 'SET_UNAUTHENTICATED';
 export const SET_ERRORS: string = 'SET_ERRORS';
+export const UNSET_ERRORS: string = 'UNSET_ERRORS';
 //user
 export const GET_USER: string = 'GET_USER';
 export const GET_USER_LOADING: string = 'GET_USER_LOADING';

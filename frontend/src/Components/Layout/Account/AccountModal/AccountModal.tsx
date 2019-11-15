@@ -58,7 +58,7 @@ export const AccountModal = (props: IAccountModal): JSX.Element => {
                         </div>
                     </form>
                     {props.errors.errorPw && <div className='set-center'>
-                        <p className='error' style={{ fontSize: '1.3rem' }}>
+                        <p className='error mt-2' style={{ fontSize: '1.3rem' }}>
                             {props.errors.errorPw}
                         </p>
                     </div>}
