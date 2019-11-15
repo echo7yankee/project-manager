@@ -1,0 +1,20 @@
+.accountRemovalContainer {
+   border-top: 1px solid #e2e2e2;
+   margin-top: 2.5rem;
+   padding-top: 1.5rem;
+}
+
+.accountRemovalContainer button {
+    margin-top: 2.5rem;
+    border: 1px solid var(--red-color-1);
+    color: var(--red-color-1);
+    border-radius: 3px;
+    padding: 1rem 1.3rem;
+    font-size: 1.3rem;
+    transition: background-color .1s ease-in-out, color .1s ease-in-out;
+}
+
+.accountRemovalContainer button:hover {
+    background-color: var(--red-color-3);
+    color: var(--white-color);
+}

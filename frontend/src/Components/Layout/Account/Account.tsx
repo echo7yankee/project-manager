@@ -15,6 +15,7 @@ import style from './account.module.css';
 
 //components
 import { AccountPersonalInformation } from './AccountPersonalInformation/AccountPersonalInformation';
+import { AccountRemoval } from './AccountRemoval/AccountRemoval';
 
 export const Account = (): JSX.Element => {
 
@@ -52,6 +53,7 @@ export const Account = (): JSX.Element => {
                     <p className='error'>{errors.error}</p>
                 </div>}
             </div>
+            <AccountRemoval />
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}
