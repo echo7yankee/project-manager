@@ -52,8 +52,6 @@ export const Tasks = ({ history: { location } }): JSX.Element => {
         userId = decodedToken.params && decodedToken.params.id;
     }
 
-    console.log(userId);
-
     useEffect(() => {
         dispatch(getTasks(projectId));
     }, [dispatch, projectId]);

@@ -84,6 +84,10 @@ export function updateUser(id, newUser) {
             await axios.put(`/user/update/${id}`, newUser);
 
             dispatch({
+                type: SET_AUTHENTICATED,
+            })
+
+            dispatch({
                 type: SET_TOAST_UPDATE_AUTH,
             })
 
