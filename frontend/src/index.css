@@ -98,8 +98,8 @@ button {
 .error {
   padding: .4rem .3rem;
   border-radius: 3px;
-  color: var(--red-color-1);
-  background-color: var(--red-color-2);
+  color: var(--red-color-1) !important;
+  background-color: var(--red-color-2) !important;
   font-size: 1.3rem;
   width: max-content;
   margin: .7rem 0;

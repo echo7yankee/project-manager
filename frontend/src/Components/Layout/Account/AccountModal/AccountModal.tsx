@@ -12,7 +12,7 @@ interface IAccountModal {
     isLoading: boolean;
     handleChange: (e: { preventDefault: () => void; target: { value: SetStateAction<string>; }; }) => void;
     inputValue: string;
-    errors: { error: string }
+    errors: { errorPw: string }
 }
 
 export const AccountModal = (props: IAccountModal): JSX.Element => {
@@ -57,9 +57,9 @@ export const AccountModal = (props: IAccountModal): JSX.Element => {
                             </button>
                         </div>
                     </form>
-                    {props.errors.error && <div className='set-center'>
+                    {props.errors.errorPw && <div className='set-center'>
                         <p className='error' style={{ fontSize: '1.3rem' }}>
-                            {props.errors.error}
+                            {props.errors.errorPw}
                         </p>
                     </div>}
                 </div>

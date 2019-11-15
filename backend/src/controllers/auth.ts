@@ -153,7 +153,7 @@ export class Authenticate {
       );
 
       if (!validPassword) {
-        return res.status(400).json({ error: 'Password incorrect' });
+        return res.status(400).json({ errorPw: 'Password incorrect' });
       }
 
       const deletedUser: UserDatabase = await this.userDao.remove(id);
