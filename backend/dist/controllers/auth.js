@@ -4,7 +4,7 @@ const validation_1 = require("../databaseStorage/models/validation");
 const bcryptEncoder_1 = require("../encoder/bcryptEncoder");
 const jwt_1 = require("../token/jwt");
 class Authenticate {
-    constructor(userDao, projectDao) {
+    constructor(userDao, projectDao, taskDao) {
         this.createUser = async (req, res) => {
             const { error } = validation_1.registerValidation(req.body);
             if (error) {
@@ -85,6 +85,7 @@ class Authenticate {
                 const { id } = req.params;
                 const deletedUser = await this.userDao.remove(id);
                 await this.projectDao.removeAll({ userId: id });
+                await this.taskDao.removeAll({ userId: id });
                 if (deletedUser === null) {
                     return res.status(400).json({ error: `User with id ${id} does not exist` });
                 }
@@ -98,6 +99,7 @@ class Authenticate {
         };
         this.userDao = userDao;
         this.projectDao = projectDao;
+        this.taskDao = taskDao;
     }
 }
 exports.Authenticate = Authenticate;

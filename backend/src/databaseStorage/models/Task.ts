@@ -26,6 +26,9 @@ export const taskSchema = new Schema({
     },
     schedule: {
         type: Number,
+    },
+    userId: {
+        type: String,
     }
 });
 

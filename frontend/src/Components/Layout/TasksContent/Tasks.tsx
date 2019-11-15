@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+//jwt
+import jwt from 'jsonwebtoken';
+
+//asset
 import spinner from '../../../assets/gifs/spinner.gif';
 
 //style
@@ -18,7 +23,7 @@ import { Toast } from '../../Toast/Toast';
 import { Task } from './Task';
 import { TasksHistory } from './TaskHistory/TasksHistory';
 
-export const Tasks = ({ history: { location } }) => {
+export const Tasks = ({ history: { location } }): JSX.Element => {
     const [toggleTaskForm, setToggleTaskForm] = useState(false);
     const [taskValue, setTaskValue] = useState('');
     const [dropdown, setDropdown] = useState(false);
@@ -36,6 +41,18 @@ export const Tasks = ({ history: { location } }) => {
     const errors = useSelector(state => state.task.errors);
 
     const dispatch = useDispatch();
+
+    //token
+    let decodedToken;
+    let userId;
+    const token = localStorage.FBIdToken;
+
+    if (token) {
+        decodedToken = jwt.decode(token);
+        userId = decodedToken.params && decodedToken.params.id;
+    }
+
+    console.log(userId);
 
     useEffect(() => {
         dispatch(getTasks(projectId));
@@ -70,6 +87,7 @@ export const Tasks = ({ history: { location } }) => {
             projectName,
             completed: false,
             archived: isArchived,
+            userId
         }
         dispatch(createTask(projectId, newTask));
         setTaskValue('');
@@ -82,7 +100,6 @@ export const Tasks = ({ history: { location } }) => {
         }
         setSelectedDay(date)
     }
-
 
     const dropdownItems = [{
         name: 'Show completed tasks',

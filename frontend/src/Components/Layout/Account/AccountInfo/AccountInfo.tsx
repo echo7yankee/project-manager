@@ -45,6 +45,7 @@ export const AccountInfo = (props: IAccountInfo): JSX.Element => {
                     setEditableFalse={setEditableFalse}
                     setEditableFalseCancel={setEditableFalseCancel}
                     userDetails={props.userDetails}
+                    oldUserDetails={props.oldUserDetails}
                     subtitle={props.subtitle}
                     userDetailsName={props.userDetailsName}
                     handleChange={props.handleChange}

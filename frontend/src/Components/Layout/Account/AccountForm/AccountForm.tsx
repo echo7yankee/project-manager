@@ -12,6 +12,7 @@ interface IAccountForm {
     setEditableFalse: () => void;
     setEditableFalseCancel: () => void;
     userDetails;
+    oldUserDetails;
     subtitle: string;
     userDetailsName: string;
     handleChange;
@@ -22,7 +23,7 @@ interface IAccountForm {
 export const AccountForm = (props: IAccountForm): JSX.Element => {
 
     const inputRef: any = useRef(null);
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     //redux
     const dispatch = useDispatch();
@@ -36,8 +37,6 @@ export const AccountForm = (props: IAccountForm): JSX.Element => {
         delete props.userDetails.id;
         delete props.userDetails.role;
         delete props.userDetails.createdAt;
-
-        console.log(emailRegex.test(props.userDetails.email));
 
         dispatch(updateUser(props.userId, props.userDetails))
         props.setEditableFalse();

@@ -30,6 +30,9 @@ exports.taskSchema = new Schema({
     },
     schedule: {
         type: Number,
+    },
+    userId: {
+        type: String,
     }
 });
 exports.Task = mongoose_1.default.model('Task', exports.taskSchema);

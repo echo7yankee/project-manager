@@ -38,6 +38,7 @@ class Task {
                         completed: task.completed,
                         date: task.date,
                         schedule: task.schedule,
+                        userId: task.userId,
                         id: task._id,
                     };
                 });
@@ -62,6 +63,7 @@ class Task {
                         archived: task.archived,
                         completed: task.completed,
                         date: task.date,
+                        userId: task.userId,
                         schedule: task.schedule,
                         id: task._id,
                     };

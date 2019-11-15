@@ -48,7 +48,7 @@ export class Task {
 
             const tasks: ITaskDatabase[] = await this.taskDao.find({ projectId })
             if (tasks === null) {
-                return res.status(404).json({ error: "Tasks don't exist" })
+                return res.status(404).json({ error: "Tasks don't exist" });
             }
 
             const newTasks: ITask[] = tasks.map((task) => {
@@ -60,6 +60,7 @@ export class Task {
                     completed: task.completed,
                     date: task.date,
                     schedule: task.schedule,
+                    userId: task.userId,
                     id: task._id,
                 };
             });
@@ -88,6 +89,7 @@ export class Task {
                     archived: task.archived,
                     completed: task.completed,
                     date: task.date,
+                    userId: task.userId,
                     schedule: task.schedule,
                     id: task._id,
                 };

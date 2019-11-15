@@ -12,6 +12,7 @@ import { Request, Response } from 'express';
 import { RegisterUser, UserDatabase } from '../TSTypes/User';
 import { UserDao } from '../databaseStorage/UserDao';
 import { ProjectDao } from '../databaseStorage/ProjectDao';
+import { TaskDao } from '../databaseStorage/TaskDao';
 
 type TokenParams = {
   id: string;
@@ -20,10 +21,12 @@ type TokenParams = {
 
 export class Authenticate {
   userDao: UserDao;
-  projectDao: ProjectDao
-  constructor(userDao, projectDao) {
+  projectDao: ProjectDao;
+  taskDao: TaskDao;
+  constructor(userDao, projectDao, taskDao) {
     this.userDao = userDao;
     this.projectDao = projectDao;
+    this.taskDao = taskDao;
   }
   //REGISTER USER
   public createUser = async (req: Request, res: Response) => {
@@ -142,6 +145,7 @@ export class Authenticate {
 
       const deletedUser: UserDatabase = await this.userDao.remove(id);
       await this.projectDao.removeAll({ userId: id })
+      await this.taskDao.removeAll({ userId: id });
       if (deletedUser === null) {
         return res.status(400).json({ error: `User with id ${id} does not exist` });
       };

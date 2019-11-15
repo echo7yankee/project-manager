@@ -6,6 +6,7 @@ export type ITaskDatabase = {
     completed: boolean,
     schedule: number,
     date: Date,
+    userId: string;
     _id: string
 }
 

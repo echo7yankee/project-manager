@@ -2,10 +2,10 @@ import { Router } from 'express';
 
 import { Authenticate } from '../controllers/auth';
 //Dao
-import { userDao, projectDao } from '../databaseStorage/daos';
+import { userDao, projectDao, taskDao } from '../databaseStorage/daos';
 
 export const authRouter: Router = Router();
-const authenticate: Authenticate = new Authenticate(userDao, projectDao);
+const authenticate: Authenticate = new Authenticate(userDao, projectDao, taskDao);
 
 authRouter.post('/register', authenticate.createUser);
 authRouter.post('/login', authenticate.loginUser);
