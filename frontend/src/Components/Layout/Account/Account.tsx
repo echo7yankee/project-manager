@@ -53,7 +53,7 @@ export const Account = (): JSX.Element => {
                     <p className='error'>{errors.error}</p>
                 </div>}
             </div>
-            <AccountRemoval />
+            <AccountRemoval userId={userId} />
             {isLoading && <div className='overlay'>
                 <img src={spinner} alt='spinner' />
             </div>}

@@ -54,7 +54,7 @@ export class Authenticate {
     const newUser: RegisterUser = {
       ...req.body,
       confirmPassword: hashedConfirmPassword,
-      password: hashedPassword
+      password: hashedPassword,
     };
 
     try {

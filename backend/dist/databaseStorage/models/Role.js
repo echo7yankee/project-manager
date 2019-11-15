@@ -8,7 +8,6 @@ const Schema = mongoose_1.default.Schema;
 const roleSchema = new Schema({
     role: {
         type: String,
-        required: true,
     },
 });
 exports.Role = mongoose_1.default.model('Role', roleSchema);

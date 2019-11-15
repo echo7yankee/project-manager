@@ -1,10 +1,15 @@
 import React from 'react';
 
+//assets
+import spinner from '../../../../assets/gifs/spinner.gif';
+
 //style
 import style from './accountModal.module.css';
 
 interface IAccountModal {
-    closeModal: () => void
+    closeModal: () => void;
+    request: (e: { preventDefault: () => void; }) => void;
+    isLoading: boolean;
 }
 
 export const AccountModal = (props: IAccountModal): JSX.Element => {
@@ -22,7 +27,7 @@ export const AccountModal = (props: IAccountModal): JSX.Element => {
                     </p>
                 </div>
                 <div>
-                    <form>
+                    <form onSubmit={props.request}>
                         <div className={style.accountFormInputGroup}>
                             <label>Current password</label>
                             <input type='password' />
@@ -31,9 +36,12 @@ export const AccountModal = (props: IAccountModal): JSX.Element => {
                             <p>Deleting your account requires your current password as confirmation.</p>
                         </div>
                         <div className={style.accountFormBtnContainer}>
-                            <button type='submit'>
-                                Delete my account
-                            </button>
+                            <div>
+                                <button type='submit'>
+                                    Delete my account
+                                </button>
+                                {props.isLoading && <img src={spinner} alt='spinner' />}
+                            </div>
                             <button type='button' onClick={props.closeModal}>
                                 Cancel
                             </button>

@@ -4,7 +4,6 @@ const Schema: Schema = mongoose.Schema;
 const roleSchema: string = new Schema({
     role: {
         type: String,
-        required: true,
     },
 });
 

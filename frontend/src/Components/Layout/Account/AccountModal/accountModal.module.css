@@ -47,26 +47,41 @@
 
 .accountFormBtnContainer {
     margin-top: 2rem;
+    display: flex;
+    align-items: center;
 }
 
-.accountFormBtnContainer button:first-child {
+.accountFormBtnContainer div {
+    display: flex;
+    align-items: center;
+}
+
+.accountFormBtnContainer div button:first-child {
     padding: .8rem 1rem;
     background-color: var(--red-color-3);
     color: var(--white-color);
     border-radius: 3px;
     font-size: 1.4rem;
     transition:  background-color .1s ease-in-out;
+    margin:0;
+    text-decoration: none;
 }
 
-.accountModal button:first-child:hover {
+.accountFormBtnContainer img {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-left: .6rem;
+}
+
+.accountFormBtnContainer button:first-child:hover {
     background-color: var(--red-color-1);
 }
 
-.accountFormBtnContainer button:last-child {
+.accountFormBtnContainer button {
     margin-left: 1.5rem;
     font-size: 1.4rem;
 }
 
-.accountFormBtnContainer button:last-child:hover {
+.accountFormBtnContainer button:hover {
     text-decoration: underline;
 }

@@ -99,6 +99,20 @@ export function logoutUser() {
     }
 }
 
+export function removeUser(id) {
+    return async (dispatch) => {
+        dispatch({
+            type: SET_AUTH_LOADING,
+        })
+        try {
+            axios.delete(`/user/remove/${id}`);
+            dispatch(logoutUser());
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 const setAuthorizationHeader = token => {
     const FBIdToken = token;
     localStorage.setItem('FBIdToken', FBIdToken);
