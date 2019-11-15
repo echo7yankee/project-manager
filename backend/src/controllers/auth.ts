@@ -144,8 +144,21 @@ export class Authenticate {
     try {
       const { id } = req.params;
 
+      const user = await this.userDao.findById(id);
+
+      //Check if password is correct
+      const validPassword: string = await comparePassword(
+        req.body.password,
+        user.password
+      );
+
+      if (!validPassword) {
+        return res.status(400).json({ error: 'Password incorrect' });
+      }
+
       const deletedUser: UserDatabase = await this.userDao.remove(id);
-      await this.projectDao.removeAll({ userId: id })
+
+      await this.projectDao.removeAll({ userId: id });
       await this.taskDao.removeAll({ userId: id });
       if (deletedUser === null) {
         return res.status(400).json({ error: `User with id ${id} does not exist` });

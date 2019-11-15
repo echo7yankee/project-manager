@@ -17,10 +17,12 @@ interface IAccountRemovel {
 export const AccountRemoval = (props: IAccountRemovel): JSX.Element => {
 
     const [modal, setModal] = useState(false);
+    const [password, setPassword] = useState('');
 
     //dredux
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.auth.isLoading);
+    const errors = useSelector(state => state.auth.errors);
 
     function openModal(): void {
         setModal(true);
@@ -32,16 +34,32 @@ export const AccountRemoval = (props: IAccountRemovel): JSX.Element => {
 
     function removeUserRequest(e: { preventDefault: () => void; }): void {
         e.preventDefault();
-        dispatch(removeUser(props.userId));
+        dispatch(removeUser(props.userId, { password }));
     }
+
+    function handleChange(e: { preventDefault: () => void; target: { value: React.SetStateAction<string>; }; }) {
+        e.preventDefault();
+        setPassword(e.target.value);
+    }
+
     return (
         <>
             <div className={style.accountRemovalContainer}>
-                <button onClick={openModal}>
-                    Delete my todoist account
+                <div>
+                    <button onClick={openModal}>
+                        Delete my todoist account
                 </button>
+                    <span>Requires password</span>
+                </div>
             </div>
-            {modal && <AccountModal closeModal={closeModal} request={removeUserRequest} isLoading={isLoading} />}
+            {modal && <AccountModal
+                closeModal={closeModal}
+                request={removeUserRequest}
+                isLoading={isLoading}
+                handleChange={handleChange}
+                inputValue={password}
+                errors={errors}
+            />}
         </>
     )
 }

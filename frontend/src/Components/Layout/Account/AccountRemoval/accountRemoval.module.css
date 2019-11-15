@@ -18,3 +18,8 @@
     background-color: var(--red-color-3);
     color: var(--white-color);
 }
+
+.accountRemovalContainer span {
+    font-size: 1.2rem;
+    margin-left: .5rem;
+}

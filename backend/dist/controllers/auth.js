@@ -83,6 +83,11 @@ class Authenticate {
         this.removeUser = async (req, res) => {
             try {
                 const { id } = req.params;
+                const user = await this.userDao.findById(id);
+                const validPassword = await bcryptEncoder_1.comparePassword(req.body.password, user.password);
+                if (!validPassword) {
+                    return res.status(400).json({ error: 'Password incorrect' });
+                }
                 const deletedUser = await this.userDao.remove(id);
                 await this.projectDao.removeAll({ userId: id });
                 await this.taskDao.removeAll({ userId: id });

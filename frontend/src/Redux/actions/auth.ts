@@ -90,7 +90,7 @@ export function updateUser(id, newUser) {
 export function logoutUser() {
     return async (dispatch) => {
         try {
-            localStorage.removeItem("FBIdToken");
+            localStorage.removeItem('FBIdToken');
             delete axios.defaults.headers.common.Authorization;
             dispatch({ type: SET_UNAUTHENTICATED });
         } catch (error) {
@@ -99,18 +99,21 @@ export function logoutUser() {
     }
 }
 
-export function removeUser(id) {
+export function removeUser(id: string, password: { password: string }) {
     return async (dispatch) => {
         dispatch({
             type: SET_AUTH_LOADING,
         })
         try {
-            axios.delete(`/user/remove/${id}`);
+            await axios.delete(`/user/remove/${id}`, { data: password });
             dispatch(logoutUser());
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.response.data,
+            })
         }
-    }
+    };
 }
 
 const setAuthorizationHeader = token => {
