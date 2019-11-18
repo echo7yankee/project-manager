@@ -11,10 +11,10 @@ import spinner from '../../../../assets/gifs/spinner.gif';
 import style from './project.module.css';
 
 //components
-import { Modal } from '../../../modal/Modal';
-import { ProjectCreator } from './ProjectCreator';
 import { IProjectsType } from '../../../../TSTypes/reducers/project';
-
+import { Modal } from '../../../modal/Modal';
+import { Today } from '../Today/Today';
+import { ProjectCreator } from './ProjectCreator';
 
 export interface IProjects {
   userId: string;
@@ -62,6 +62,7 @@ export const Projects = (props: IProjects): JSX.Element | null => {
   });
 
   return <div>
+    <Today />
     {projects.length > 0 ? <div>
       <div className={style.projectsTitle}>
         <div onClick={() => setToggleProjects(!toggleProjects)}>

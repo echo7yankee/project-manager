@@ -8,22 +8,22 @@ import style from './accountSidebar.module.css';
 import { NavLink } from 'react-router-dom';
 
 export const AccountSidebar = (): JSX.Element => {
-    return (
-        <div className={style.accountSidebar}>
-            <ul>
-                <li className={style.accountSidebarItem}>
-                    <NavLink activeClassName='active__account-sidebar-link' to='/prefs/account'>
-                        <span><IoMdPerson className='account__sidebar-icon-grey' /></span>
-                        <span>Account</span>
-                    </NavLink>
-                </li>
-                <li className={style.accountSidebarItem}>
-                    <NavLink activeClassName='active__account-sidebar-link' to='/prefs/general'>
-                        <span><IoMdSettings className='account__sidebar-icon-grey' /></span>
-                        <span>General</span>
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-    )
+  return (
+    <div className={style.accountSidebar}>
+      <ul>
+        <li className={style.accountSidebarItem}>
+          <NavLink activeClassName='active__account-sidebar-link' to='/prefs/account'>
+            <span><IoMdPerson className='account__sidebar-icon-grey' /></span>
+            <span>Account</span>
+          </NavLink>
+        </li>
+        <li className={style.accountSidebarItem}>
+          <NavLink activeClassName='active__account-sidebar-link' to='/prefs/theme'>
+            <span><IoMdSettings className='account__sidebar-icon-grey' /></span>
+            <span>Theme</span>
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  )
 };
