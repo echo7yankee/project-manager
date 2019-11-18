@@ -62,6 +62,7 @@ export const Tasks = ({ history: { location } }): JSX.Element => {
 
   function closeForm(): void {
     setToggleTaskForm(false);
+    setTaskValue('');
   }
 
   function openDropdown(): void {
